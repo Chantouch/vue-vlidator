@@ -37,7 +37,6 @@ export default {
   },
   methods: {
     onValidationMessage({ field, rule }) {
-      console.log(rule)
       if (this.$i18n && this.$t) {
         return this.$t(`validation.${rule.name}`, [field, ...rule.args])
       }
@@ -46,6 +45,11 @@ export default {
     createValidator(rules, { watch = true } = {}) {
       const validator = new Validator(rules, {
         onError: (field, rule) => {
+          const fields = field.split('.')
+          if (fields.length > 1) {
+            fields.splice(0, 1)
+          }
+          field = fields.join()
           if (!rule.message) {
             rule.message = this.onValidationMessage({ field, rule })
           }

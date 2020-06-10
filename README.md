@@ -53,7 +53,11 @@ To config your data rules fill validationRules in component computed property
             name: 'required',
             message: this.$t('Please select at least one permission')
           }
-        ]
+        ],
+        'form.name': 'required|max:16|min:5|number',
+        form: {
+          name: 'required|max:16|min:5|number'
+        }
       }
     },
   }
