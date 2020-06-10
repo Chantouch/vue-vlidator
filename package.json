@@ -1,0 +1,44 @@
+{
+      "name": "vue-lidate",
+  "version": "0.1.0",
+  "description": "Vue validator",
+  "scripts": {
+    "build:copy": "npm run build && bash build/copy.sh",
+    "build": "npm run build:module && npm run build:browser",
+    "build:module": "bili --name vue-lidate --format cjs,es --js buble",
+    "build:browser": "bili --name vue-lidate --format umd,umd-min --js buble",
+    "prepublish": "npm run build"
+  },
+  "main": "dist/vue-lidate.cjs.js",
+  "module": "dist/vue-lidate.esm.js",
+  "browser": "dist/vue-lidate.js",
+  "cdn": "dist/vue-lidate.min.js",
+  "unpkg": "dist/vue-lidate.min.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chantouch/vue-lidate.git"
+  },
+  "keywords": [
+    "vue",
+    "validator",
+    "validation",
+    "validate"
+  ],
+  "author": "Chantouch Sek",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Chantouch/vue-lidate/issues"
+  },
+  "homepage": "https://github.com/Chantouch/vue-lidate#readme",
+  "dependencies": {
+    "haye": "^2.0.2",
+    "validator": "^13.0.0"
+  },
+  "devDependencies": {
+    "bili": "^3.1.2",
+    "lodash": "^4.17.11"
+  },
+  "peerDependencies": {
+    "lodash": "*"
+  }
+}
