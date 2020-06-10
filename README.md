@@ -1,4 +1,4 @@
-# Vuelidator
+# Vue lidator
 
 ### This package will help you to validate your data in vue components
 
