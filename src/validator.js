@@ -59,18 +59,33 @@ export class ValidatorItem {
     this.parent = parent
     this.init(rules)
   }
+
   init(rules) {
-    rules = this.checkValidateType(rules)
-    console.log(rules)
+    if (typeof rules === 'string') {
+      rules = parseFromString(rules)
+    } else if (Array.isArray(rules)) {
+      const stringRules = rules
+        .filter((rule) => typeof rule === 'string')
+        .join('|')
+      rules = rules.filter((rule) => typeof rule === 'object')
+      if (stringRules) {
+        rules = rules.concat(parseFromString(stringRules))
+      }
+    } else if (typeof rules === 'object') {
+      // Todo check type is object
+    }
     this.hasRequired = !!rules.find(
       (rule) => rule.required || rule.name === 'required'
     )
+
     this.rules = rules
+
     this.handle = (value) => {
       return this.validate(value)
     }
     return rules
   }
+
   validate(value) {
     if (!this.hasRequired && !checker.isExists(value)) {
       return true
@@ -86,28 +101,5 @@ export class ValidatorItem {
       }
     }
     return true
-  }
-  checkValidateType(rules) {
-    if (typeof rules === 'string') {
-      rules = parseFromString(rules)
-    } else if (Array.isArray(rules)) {
-      const stringRules = rules
-        .filter((rule) => typeof rule === 'string')
-        .join('|')
-      rules = rules.filter((rule) => typeof rule === 'object')
-      if (stringRules) {
-        rules = rules.concat(parseFromString(stringRules))
-      }
-    } else if (typeof rules === 'object') {
-      rules = Object.values(rules)
-      const stringRules = rules
-        .filter((rule) => typeof rule === 'string')
-        .join('|')
-      rules = rules.filter((rule) => typeof rule === 'object')
-      if (stringRules) {
-        rules = rules.concat(parseFromString(stringRules))
-      }
-    }
-    return rules
   }
 }
