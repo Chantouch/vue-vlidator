@@ -35,8 +35,8 @@
     "validator": "^13.0.0"
   },
   "devDependencies": {
-    "bili": "^3.1.2",
-    "lodash": "^4.17.11"
+    "bili": "^3.4.2",
+    "lodash": "^4.17.15"
   },
   "peerDependencies": {
     "lodash": "*"
