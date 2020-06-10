@@ -4,11 +4,9 @@
 
 > This module uses [validator.js](https://github.com/chriso/validator.js) and [haye](https://github.com/poppinss/haye) packages
 
-<p align="center">
-  <a href="https://www.npmjs.org/package/vue-vlidator">
-    <img src="https://img.shields.io/npm/v/vue-vlidator.svg?style=flat-square&logo=npm">
-  </a>
-</p>
+[![Latest Version on NPM](https://img.shields.io/npm/v/vue-vlidator.svg?style=flat-square)](https://npmjs.com/package/vue-vlidator)
+  [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+  [![npm](https://img.shields.io/npm/dt/vue-vlidator.svg?style=flat-square)](https://npmjs.com/package/vue-vlidator)
 
 
 ## Setup
