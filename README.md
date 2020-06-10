@@ -5,8 +5,8 @@
 > This module uses [validator.js](https://github.com/chriso/validator.js) and [haye](https://github.com/poppinss/haye) packages
 
 <p align="center">
-  <a href="https://www.npmjs.org/package/vue-lidator">
-    <img src="https://img.shields.io/npm/v/vue-lidator.svg?style=flat-square&logo=npm">
+  <a href="https://www.npmjs.org/package/vue-vlidator">
+    <img src="https://img.shields.io/npm/v/vue-vlidator.svg?style=flat-square&logo=npm">
   </a>
 </p>
 
