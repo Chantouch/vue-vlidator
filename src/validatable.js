@@ -37,9 +37,8 @@ export default {
     onValidationMessage ({ field, rule }) {
       if (this.$i18n && this.$t) {
         return this.$t(`validators.${rule.name}`, rule.args)
-      } else {
-        return getMessage(rule.name, rule.args)
       }
+      return getMessage(rule.name, rule.args)
     },
     createValidator (rules, { watch = true } = {}) {
       const validator = new Validator(rules, {
@@ -63,9 +62,6 @@ export default {
           let watcher = this.$watch(field, (newVal, oldVal) => {
             validator.validateField(field, newVal)
           })
-          // {
-          //   deep: true //  TODO review
-          // })
           validator.watchers.push(watcher)
         })
       }
