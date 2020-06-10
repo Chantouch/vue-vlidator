@@ -49,11 +49,17 @@ export default {
           this.$set(this, 'isValidationSuccess', false)
           this.$set(this.errors, field, rule.message)
           this.$set(this.successes, field, false)
+          if (typeof this.$errors !== 'undefined') {
+            this.$errors.fill(this.errors)
+          }
         },
         onSuccess: (field) => {
           this.$set(this.errors, field, undefined)
           this.$set(this.successes, field, true)
           this.$set(this, 'isValidationSuccess', validator.isValid)
+          if (typeof this.$errors !== 'undefined') {
+            this.$errors.clear(field)
+          }
         }
       })
       if (watch) {
