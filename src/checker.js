@@ -1,13 +1,13 @@
 import validator from 'validator'
 
-function isExists (value) {
+function isExists(value) {
   if (value === null || value === undefined) {
     return false
   } else if (Array.isArray(value)) {
     return value.length > 0
-  } else if (typeof (value) === 'string') {
+  } else if (typeof value === 'string') {
     return value.trim().length > 0
-  } else if (typeof (value) === 'object') {
+  } else if (typeof value === 'object') {
     return Object.keys(value).length > 0
   } else if (value instanceof Date) {
     return true
@@ -57,12 +57,43 @@ const checker = {
   }
 }
 
-const validatorItems = ['after', 'alpha', 'base64', 'before', 'boolean', 'IP', 'IPRange', 'boolean', 'creditCard', 'currency',
-  'decimal', 'divisibleBy', 'empty', 'isHexColor', 'hexColor', 'hexadecimal',
-  'LatLong', 'lowercase', 'UUID', 'URL', 'uppercase', 'matches', 'PostalCode', 'port', 'JWT', 'JSON', 'hash', 'in', 'email', 'MD5', 'MACAddress']
-validatorItems.forEach(item => {
+const validatorItems = [
+  'after',
+  'alpha',
+  'base64',
+  'before',
+  'boolean',
+  'IP',
+  'IPRange',
+  'boolean',
+  'creditCard',
+  'currency',
+  'decimal',
+  'divisibleBy',
+  'empty',
+  'isHexColor',
+  'hexColor',
+  'hexadecimal',
+  'LatLong',
+  'lowercase',
+  'UUID',
+  'URL',
+  'uppercase',
+  'matches',
+  'PostalCode',
+  'port',
+  'JWT',
+  'JSON',
+  'hash',
+  'in',
+  'email',
+  'MD5',
+  'MACAddress'
+]
+validatorItems.forEach((item) => {
   checker[item.toLowerCase()] = (value, args) => {
-    const name = 'is' + item.charAt(0).toUpperCase() + item.substr(1, item.length - 1)
+    const name =
+      'is' + item.charAt(0).toUpperCase() + item.substr(1, item.length - 1)
     return validator[name](value, args.length ? args[0] : undefined)
   }
 })

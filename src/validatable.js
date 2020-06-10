@@ -1,14 +1,16 @@
+import get from 'lodash/get'
 import Validator from './validator'
 import { getMessage } from './messages'
-import get from 'lodash/get'
 
 export default {
-  created () {
-    if (this.validationRules) {
-      this._validator = this.createValidator(this.validationRules, { watch: true })
+  mounted() {
+    if (Object.keys(this.validationRules).length > 0) {
+      this._validator = this.createValidator(this.validationRules, {
+        watch: true
+      })
     }
   },
-  data () {
+  data() {
     return {
       errors: {},
       successes: {},
@@ -16,7 +18,7 @@ export default {
     }
   },
   computed: {
-    isValid () {
+    isValid() {
       if (!this._validator) {
         return true
       }
@@ -26,28 +28,29 @@ export default {
       }
       return this.isValidationSuccess
     },
-    validationRules () {
-      return null
+    validationRules() {
+      return {}
     },
-    validationData () {
+    validationData() {
       return this.$data
     }
   },
   methods: {
-    onValidationMessage ({ field, rule }) {
+    onValidationMessage({ field, rule }) {
+      console.log(rule)
       if (this.$i18n && this.$t) {
-        return this.$t(`validators.${rule.name}`, rule.args)
+        return this.$t(`validation.${rule.name}`, [field, ...rule.args])
       }
-      return getMessage(rule.name, rule.args)
+      return getMessage(rule.name, [field, ...rule.args])
     },
-    createValidator (rules, { watch = true } = {}) {
+    createValidator(rules, { watch = true } = {}) {
       const validator = new Validator(rules, {
         onError: (field, rule) => {
           if (!rule.message) {
             rule.message = this.onValidationMessage({ field, rule })
           }
           this.$set(this, 'isValidationSuccess', false)
-          this.$set(this.errors, field, rule.message)
+          this.$set(this.errors, field, [rule.message])
           this.$set(this.successes, field, false)
           if (typeof this.$errors !== 'undefined') {
             this.$errors.fill(this.errors)
@@ -64,8 +67,8 @@ export default {
       })
       if (watch) {
         validator.watchers = []
-        validator.fields.forEach(field => {
-          let watcher = this.$watch(field, (newVal, oldVal) => {
+        validator.fields.forEach((field) => {
+          const watcher = this.$watch(field, (newVal, oldVal) => {
             validator.validateField(field, newVal)
           })
           validator.watchers.push(watcher)
@@ -73,8 +76,10 @@ export default {
       }
       return validator
     },
-    validate (rules, data) {
-      const validator = rules ? this.createValidator(rules, { watch: !data }) : this._validator
+    validate(rules, data) {
+      const validator = rules
+        ? this.createValidator(rules, { watch: !data })
+        : this._validator
       // if sent filed name
       if (typeof rules === 'string') {
         validator.validateField(rules, get(this.validationData, rules))

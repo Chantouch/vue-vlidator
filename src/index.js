@@ -3,9 +3,4 @@ import messages from './messages'
 import Validatable from './validatable'
 import checker from './checker'
 
-export {
-  messages,
-  checker,
-  vlidator,
-  Validatable
-}
+export { messages, checker, vlidator, Validatable }
