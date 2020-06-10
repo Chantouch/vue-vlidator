@@ -1,4 +1,4 @@
-# Vue lidator
+# Vue vlidator
 
 ### This package will help you to validate your data in vue components
 
@@ -17,6 +17,10 @@ Install the package from npm
 
 ```npm
 npm install vue-vlidator
+```
+
+```yarn
+yarn add vue-vlidator
 ```
 
 and use in your component
