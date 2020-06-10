@@ -16,13 +16,13 @@
 Install the package from npm
 
 ```npm
-npm install vue-lidator
+npm install vue-vlidator
 ```
 
 and use in your component
 
 ```js
-import { Validatable } from 'vue-lidator'
+import { Validatable } from 'vue-vlidator'
 ...
 
 {
