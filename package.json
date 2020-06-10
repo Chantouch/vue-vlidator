@@ -1,6 +1,6 @@
 {
       "name": "vue-lidate",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "Vue validator",
   "scripts": {
     "build:copy": "npm run build && bash build/copy.sh",

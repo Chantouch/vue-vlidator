@@ -1,12 +1,12 @@
 # Vuelidator
 
-### This package will help you to validate your datas in vue components
+### This package will help you to validate your data in vue components
 
 > This module uses [validator.js](https://github.com/chriso/validator.js) and [haye](https://github.com/poppinss/haye) packages
 
 <p align="center">
-  <a href="https://www.npmjs.org/package/vuelidator">
-    <img src="https://img.shields.io/npm/v/vuelidator.svg?style=flat-square&logo=npm">
+  <a href="https://www.npmjs.org/package/vue-lidator">
+    <img src="https://img.shields.io/npm/v/vue-lidator.svg?style=flat-square&logo=npm">
   </a>
 </p>
 
@@ -16,13 +16,13 @@
 Install the package from npm
 
 ```npm
-npm install vuelidator
+npm install vue-lidator
 ```
 
 and use in your component
 
 ```js
-import { Validatable } from 'vuelidator'
+import { Validatable } from 'vue-lidator'
 ...
 
 {
@@ -36,7 +36,7 @@ import { Validatable } from 'vuelidator'
 Rules can be in string format:
 'required|min:5|alpha'
 
-To config your data rules fill validationRules in component computed propetry
+To config your data rules fill validationRules in component computed property
 
 ```js
   ...
@@ -112,7 +112,7 @@ Validator                   | Description
 ## Messages
 
 The library tries to get messages from i18n plugin by tag `validators.${rule.name}`
-If i18n not instaled, messages will get from default options
+If i18n not installed, messages will get from default options
 
 If you need own message options, just override `onValidationMessage` method
 ```js
@@ -129,7 +129,7 @@ If you need own message options, just override `onValidationMessage` method
 
  - `errors`: objects with error messages by filed name. To show error, just use for instance `v-if="errors.name"`
 
- - `successes`: object with successed flags by filed name
+ - `successes`: object with succeeded flags by filed name
 
 ## Methods added by mixin
 
