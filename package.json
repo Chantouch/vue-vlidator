@@ -1,5 +1,5 @@
 {
-      "name": "vue-lidate",
+  "name": "vue-lidator",
   "version": "0.0.1",
   "description": "Vue validator",
   "scripts": {
