@@ -1,6 +1,6 @@
 {
   "name": "vue-vlidator",
-  "version": "0.0.1-beta-5",
+  "version": "0.0.1-beta-6",
   "description": "Vue validator",
   "scripts": {
     "build:copy": "npm run build && bash build/copy.sh",
@@ -9,7 +9,7 @@
     "build:browser": "bili --name vue-vlidator --format umd,umd-min --js buble",
     "prepublish": "npm run build"
   },
-  "main": "dist/vue-vlidator.cjs.js",
+  "main": "dist/vue-vlidator.es.js",
   "module": "dist/vue-vlidator.esm.js",
   "browser": "dist/vue-vlidator.js",
   "cdn": "dist/vue-vlidator.min.js",
