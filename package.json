@@ -1,22 +1,22 @@
 {
   "name": "vue-vlidator",
-  "version": "0.0.1-beta-2",
+  "version": "0.0.1-beta-3",
   "description": "Vue validator",
   "scripts": {
     "build:copy": "npm run build && bash build/copy.sh",
     "build": "npm run build:module && npm run build:browser",
-    "build:module": "bili --name vue-lidate --format cjs,es --js buble",
-    "build:browser": "bili --name vue-lidate --format umd,umd-min --js buble",
+    "build:module": "bili --name vue-vlidator --format cjs,es --js buble",
+    "build:browser": "bili --name vue-vlidator --format umd,umd-min --js buble",
     "prepublish": "npm run build"
   },
-  "main": "dist/vue-lidate.cjs.js",
-  "module": "dist/vue-lidate.esm.js",
-  "browser": "dist/vue-lidate.js",
-  "cdn": "dist/vue-lidate.min.js",
-  "unpkg": "dist/vue-lidate.min.js",
+  "main": "dist/vue-vlidator.cjs.js",
+  "module": "dist/vue-vlidator.esm.js",
+  "browser": "dist/vue-vlidator.js",
+  "cdn": "dist/vue-vlidator.min.js",
+  "unpkg": "dist/vue-vlidator.min.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Chantouch/vue-lidate.git"
+    "url": "git+https://github.com/Chantouch/vue-vlidator.git"
   },
   "keywords": [
     "vue",
@@ -27,9 +27,9 @@
   "author": "Chantouch Sek",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Chantouch/vue-lidate/issues"
+    "url": "https://github.com/Chantouch/vue-vlidator/issues"
   },
-  "homepage": "https://github.com/Chantouch/vue-lidate#readme",
+  "homepage": "https://github.com/Chantouch/vue-vlidator#readme",
   "dependencies": {
     "haye": "^2.0.2",
     "validator": "^13.0.0"
