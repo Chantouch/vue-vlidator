@@ -1,6 +1,6 @@
 {
   "name": "vue-vlidator",
-  "version": "0.0.1-beta-7",
+  "version": "0.0.1-beta-8",
   "description": "Vue validator",
   "scripts": {
     "build:copy": "npm run build && bash build/copy.sh",
@@ -22,7 +22,9 @@
     "vue",
     "validator",
     "validation",
-    "validate"
+    "validate",
+    "form",
+    "client-validation"
   ],
   "author": "Chantouch Sek",
   "license": "MIT",

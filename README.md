@@ -151,3 +151,9 @@ If you need own message options, just override `onValidationMessage` method
 ```js
   this.validate(rules, data)
 ```
+
+## Bonus
+
+If you already installed [laravel-vue-form-validator](https://www.npmjs.com/package/laravel-vue-form-validator) packages
+
+this also already worked together.
