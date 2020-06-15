@@ -1,5 +1,5 @@
 import get from 'lodash/get'
-import toUpper from 'lodash/toUpper'
+import upperFirst from 'lodash/upperFirst'
 import Validator from './validator'
 import { getMessage, getFieldName } from './messages'
 
@@ -41,7 +41,7 @@ export default {
       if (this.$i18n && this.$t) {
         const fieldName = `validation.attributes.${field}`
         field = field.replace('_', ' ')
-        field = toUpper(field)
+        field = upperFirst(field)
         field = this.$te(fieldName) ? this.$t(fieldName) : field
         return this.$t(`validation.${rule.name}`, [field, ...rule.args])
       }

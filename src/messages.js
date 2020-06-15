@@ -1,4 +1,4 @@
-import toUpper from 'lodash/toUpper'
+import upperFirst from 'lodash/upperFirst'
 
 const messages = {
   alpha: 'The {0} field must contain only letters',
@@ -43,7 +43,7 @@ export function getFieldName(field = '') {
     return fields[field]
   }
   field = field.replace('_', ' ')
-  field = toUpper(field)
+  field = upperFirst(field)
   return field
 }
 
