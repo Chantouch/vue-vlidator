@@ -1,14 +1,19 @@
 {
   "name": "vue-vlidator",
-  "version": "0.0.1-beta-14",
+  "version": "0.0.1-beta-20",
   "description": "Vue validator",
   "scripts": {
     "build:copy": "npm run build && bash build/copy.sh",
-    "build": "npm run build:module",
-    "build:module": "bili --format cjs --format esm",
+    "build": "npm run build:module && npm run build:browser",
+    "build:module": "bili --name index --format cjs,es --js buble",
+    "build:browser": "bili --name index --format umd,umd-min --js buble",
     "prepublish": "npm run build"
   },
   "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "browser": "dist/index.js",
+  "cdn": "dist/index.min.js",
+  "unpkg": "dist/index.min.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Chantouch/vue-vlidator.git"
@@ -29,10 +34,10 @@
   "homepage": "https://github.com/Chantouch/vue-vlidator#readme",
   "dependencies": {
     "haye": "^2.0.2",
-    "validator": "^13.1.1"
+    "validator": "^13.0.0"
   },
   "devDependencies": {
-    "bili": "^5.0.2",
+    "bili": "^3.4.2",
     "lodash": "^4.17.15"
   },
   "peerDependencies": {
