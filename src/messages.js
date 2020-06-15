@@ -1,4 +1,4 @@
-import camelCase from 'lodash/camelCase'
+import toUpper from 'lodash/toUpper'
 
 const messages = {
   alpha: 'The {0} field must contain only letters',
@@ -38,8 +38,13 @@ const format = function(message, args) {
 export function getMessage(rule, args) {
   return format(messages[rule], args)
 }
-export function getFieldName(field) {
-  return typeof fields[field] !== 'undefined' ? fields[field] : camelCase(field)
+export function getFieldName(field = '') {
+  if (fields[field] !== 'undefined') {
+    return fields[field]
+  }
+  field = field.replace('_', ' ')
+  field = toUpper(field)
+  return field
 }
 
 export default messages

@@ -1,5 +1,5 @@
 import get from 'lodash/get'
-import camelCase from 'lodash/camelCase'
+import toUpper from 'lodash/toUpper'
 import Validator from './validator'
 import { getMessage, getFieldName } from './messages'
 
@@ -40,7 +40,9 @@ export default {
     onValidationMessage({ field, rule }) {
       if (this.$i18n && this.$t) {
         const fieldName = `validation.attributes.${field}`
-        field = this.$te(fieldName) ? this.$t(fieldName) : camelCase(field)
+        field = field.replace('_', ' ')
+        field = toUpper(field)
+        field = this.$te(fieldName) ? this.$t(fieldName) : field
         return this.$t(`validation.${rule.name}`, [field, ...rule.args])
       }
       field = getFieldName(field)
