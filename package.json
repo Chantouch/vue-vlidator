@@ -9,7 +9,7 @@
     "build:browser": "bili --format umd,umd-min --module-name vue-vlidator",
     "prepublish": "npm run build"
   },
-  "main": "dist/index.min.js",
+  "main": "dist/index.es.min.js",
   "module": "dist/index.es.min.js",
   "browser": "dist/index.umd.min.js",
   "cdn": "dist/vue-vlidator.min.js",
