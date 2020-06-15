@@ -121,8 +121,16 @@ If i18n not installed, messages will get from default options
 If you need own message options, just override `onValidationMessage` method
 ```js
   methods: {
-    onValidationMessage ({ field, rule }) {
-      return this.$i18n ? this.$t(`validator.${rule.name}`, rule.args) : rule.name
+    onValidationMessage({ field, rule }) {
+      if (this.$i18n && this.$t) {
+        const fieldName = `validation.attributes.${field}`
+        field = field.replace('_', ' ')
+        field = upperFirst(field)
+        field = this.$te(fieldName) ? this.$t(fieldName) : field
+        return this.$t(`validation.${rule.name}`, [field, ...rule.args])
+      }
+      field = getFieldName(field)
+      return getMessage(rule.name, [field, ...rule.args])
     },
     ...
 ```
