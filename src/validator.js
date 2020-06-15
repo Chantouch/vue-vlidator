@@ -1,5 +1,8 @@
 import haye from 'haye/dist/haye.es'
 import get from 'lodash/get'
+import isObject from 'lodash/isObject'
+import isString from 'lodash/isString'
+import isArray from 'lodash/isArray'
 import checker from './checker'
 
 const parseFromString = (rules) => {
@@ -61,9 +64,14 @@ export class ValidatorItem {
   }
 
   init(rules) {
-    if (typeof rules === 'string') {
+    if (isObject(rules)) {
+      // Todo check object type
+      rules = []
+    }
+    if (isString(rules)) {
       rules = parseFromString(rules)
-    } else if (Array.isArray(rules)) {
+    }
+    if (isArray(rules)) {
       const stringRules = rules
         .filter((rule) => typeof rule === 'string')
         .join('|')
@@ -71,15 +79,11 @@ export class ValidatorItem {
       if (stringRules) {
         rules = rules.concat(parseFromString(stringRules))
       }
-    } else if (typeof rules === 'object') {
-      // Todo check type is object
     }
     this.hasRequired = !!rules.find(
       (rule) => rule.required || rule.name === 'required'
     )
-
     this.rules = rules
-
     this.handle = (value) => {
       return this.validate(value)
     }
@@ -95,6 +99,9 @@ export class ValidatorItem {
       if (!validatorFn) {
         console.warn('no validator', rule)
         continue
+      }
+      if (isObject(value)) {
+        value = null
       }
       if (!validatorFn(value, rule.args)) {
         return rule
