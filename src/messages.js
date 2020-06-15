@@ -1,3 +1,5 @@
+import camelCase from 'lodash/camelCase'
+
 const messages = {
   alpha: 'The {0} field must contain only letters',
   alpha_numeric: 'The {0} field must contain only letters and numbers',
@@ -24,7 +26,7 @@ const messages = {
   uuid: 'The {0} field is invalid uuid',
   regex: 'The {0} field is not valid value'
 }
-
+const fields = { name: 'Name' }
 const format = function(message, args) {
   if (!message) {
     return ''
@@ -35,6 +37,9 @@ const format = function(message, args) {
 }
 export function getMessage(rule, args) {
   return format(messages[rule], args)
+}
+export function getFieldName(field) {
+  return typeof fields[field] !== 'undefined' ? fields[field] : camelCase(field)
 }
 
 export default messages

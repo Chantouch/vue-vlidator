@@ -1,6 +1,7 @@
 import get from 'lodash/get'
+import camelCase from 'lodash/camelCase'
 import Validator from './validator'
-import { getMessage } from './messages'
+import { getMessage, getFieldName } from './messages'
 
 export default {
   mounted() {
@@ -38,8 +39,11 @@ export default {
   methods: {
     onValidationMessage({ field, rule }) {
       if (this.$i18n && this.$t) {
+        const fieldName = `validation.attributes.${field}`
+        field = this.$te(fieldName) ? this.$t(fieldName) : camelCase(field)
         return this.$t(`validation.${rule.name}`, [field, ...rule.args])
       }
+      field = getFieldName(field)
       return getMessage(rule.name, [field, ...rule.args])
     },
     createValidator(rules, { watch = true } = {}) {

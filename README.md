@@ -122,7 +122,7 @@ If you need own message options, just override `onValidationMessage` method
 ```js
   methods: {
     onValidationMessage ({ field, rule }) {
-      return this.$i18n ? this.$t(`validators.${rule.name}`, rule.args) : rule.name
+      return this.$i18n ? this.$t(`validator.${rule.name}`, rule.args) : rule.name
     },
     ...
 ```
