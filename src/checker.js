@@ -51,7 +51,6 @@ const checker = {
     return validator.isMobilePhone(value, args[0])
   },
   regex: (value, args) => {
-    console.log(args[0], args[1])
     const regexp = new RegExp(args[0], args[1])
     return regexp.test(value)
   }

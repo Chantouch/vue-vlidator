@@ -1,5 +1,6 @@
 import get from 'lodash/get'
 import upperFirst from 'lodash/upperFirst'
+import isUndefined from 'lodash/isUndefined'
 import Validator from './validator'
 import { getMessage, getFieldName } from './messages'
 
@@ -51,11 +52,6 @@ export default {
     createValidator(rules, { watch = true } = {}) {
       const validator = new Validator(rules, {
         onError: (field, rule) => {
-          const fields = field.split('.')
-          if (fields.length > 1) {
-            fields.splice(0, 1)
-          }
-          field = fields.join()
           if (!rule.message) {
             rule.message = this.onValidationMessage({ field, rule })
           }
@@ -63,7 +59,28 @@ export default {
           this.$set(this.errors, field, [rule.message])
           this.$set(this.successes, field, false)
           if (typeof this.$errors !== 'undefined') {
-            this.$errors.fill(this.errors)
+            const errors = {}
+            for (const error in this.errors) {
+              if (this.errors.hasOwnProperty(error)) {
+                const errs = error.split('.')
+                const [field1, field2] = errs
+                const msg = isUndefined(this.errors[error])
+                  ? ['']
+                  : this.errors[error]
+                if (errs.length > 1) {
+                  Object.assign(errors, {
+                    [field2]: [
+                      upperFirst(msg[0].replace(`${upperFirst(field1)}.`, ''))
+                    ]
+                  })
+                } else {
+                  Object.assign(errors, {
+                    [field1]: this.errors[error]
+                  })
+                }
+              }
+            }
+            this.$errors.fill(errors)
           }
         },
         onSuccess: (field) => {

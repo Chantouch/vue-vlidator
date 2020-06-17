@@ -32,6 +32,7 @@ export default class Validator {
 
   validateField(field, value, silent) {
     const res = this.rules[field].validate(value)
+    console.log(field)
     if (res !== true) {
       this.errors[field] = res
       !silent && this.options.onError(field, res)
