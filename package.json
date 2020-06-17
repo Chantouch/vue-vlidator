@@ -1,6 +1,6 @@
 {
   "name": "vue-vlidator",
-  "version": "0.0.1-beta-21",
+  "version": "0.0.1-beta-22",
   "description": "Vue validator",
   "scripts": {
     "build:copy": "npm run build && bash build/copy.sh",
