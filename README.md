@@ -3,7 +3,8 @@
 [![Build Status](https://travis-ci.org/skaterdav85/validatorjs.png?branch=master)](https://travis-ci.org/skaterdav85/validatorjs)
 
 The validatorjs library makes data validation in JavaScript very easy in both the browser and Node.js.
-This library was inspired by the [Laravel framework's Validator](http://laravel.com/docs/validation).
+This library was inspired by the [Laravel framework's Validator](http://laravel.com/docs/validation) and 
+[ValidatorJs](https://github.com/skaterdav85/validatorjs)
 
 ## Why use validatorjs?
 
@@ -593,11 +594,10 @@ Released under the MIT license
 
 ### Credits
 
-validatorjs created by David Tang
-validatorjs maintained by Mike Erickson and Contributors
+validatorjs re-write by Chantouch Sek
 
-E-Mail: [codedungeon@gmail.com](mailto:codedungeon@gmail.com)
+E-Mail: [chantouchsek.cs83@gmail.com](mailto:chantouchsek.cs93@gmail.com)
 
-Twitter: [@codedungeon](http://twitter.com/codedungeon)
+Twitter [@DevidCs83](https://twitter.com/DevidCs83)
 
-Website: [codedungeon.io](http://codedungeon.io)
+Website: [bookingkh.com](https://bookingkh.com)
