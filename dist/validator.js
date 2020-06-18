@@ -1,4 +1,4 @@
-/*! validatorjs - v3.17.0 -  - 2020-06-16 */
+/*! validatorjs - v3.17.0 -  - 2020-06-18 */
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.Validator = f()}})(function(){var define,module,exports;return (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 "use strict";
 
@@ -560,11 +560,9 @@ AsyncResolvers.prototype = {
     if (!this.firing) {
       return;
     }
-
     if (this.isAllResolved()) {
       this.onResolvedAll(this.failed.length === 0);
     }
-
   },
 
   /**
@@ -816,7 +814,6 @@ Errors.prototype = {
     if (this.has(attribute)) {
       return this.errors[attribute];
     }
-
     return [];
   },
 
@@ -824,13 +821,12 @@ Errors.prototype = {
    * Returns the first error message for an attribute, false otherwise
    *
    * @param  {string} attribute A key in the data object being validated
-   * @return {string|false} First error message or false
+   * @return {string|boolean} First error message or false
    */
   first: function(attribute) {
     if (this.has(attribute)) {
       return this.errors[attribute][0];
     }
-
     return false;
   },
 
@@ -850,11 +846,7 @@ Errors.prototype = {
    * @return {boolean}
    */
   has: function(attribute) {
-    if (this.errors.hasOwnProperty(attribute)) {
-      return true;
-    }
-
-    return false;
+    return this.errors.hasOwnProperty(attribute);
   }
 };
 
@@ -865,9 +857,9 @@ var Messages = require('./messages');
 
 require('./lang/en');
 
-var require_method = require;
+const require_method = require;
 
-var container = {
+const container = {
 
   messages: {},
 
@@ -878,7 +870,7 @@ var container = {
    * @param {object} rawMessages
    * @return {void}
    */
-  _set: function(lang, rawMessages) {
+  _set: function (lang, rawMessages) {
     this.messages[lang] = rawMessages;
   },
 
@@ -890,7 +882,7 @@ var container = {
    * @param {string|object} message
    * @return {void}
    */
-  _setRuleMessage: function(lang, attribute, message) {
+  _setRuleMessage: function (lang, attribute, message) {
     this._load(lang);
     if (message === undefined) {
       message = this.messages[lang].def;
@@ -905,12 +897,13 @@ var container = {
    * @param  {string} lang
    * @return {void}
    */
-  _load: function(lang) {
+  _load: function (lang) {
     if (!this.messages[lang]) {
       try {
         var rawMessages = require_method('./lang/' + lang);
         this._set(lang, rawMessages);
-      } catch (e) {}
+      } catch (e) {
+      }
     }
   },
 
@@ -920,7 +913,7 @@ var container = {
    * @param  {string} lang
    * @return {object}
    */
-  _get: function(lang) {
+  _get: function (lang) {
     this._load(lang);
     return this.messages[lang];
   },
@@ -931,7 +924,7 @@ var container = {
    * @param  {string} lang
    * @return {Messages}
    */
-  _make: function(lang) {
+  _make: function (lang) {
     this._load(lang);
     return new Messages(lang, this.messages[lang]);
   }
@@ -1025,7 +1018,7 @@ Messages.prototype = {
   /**
    * Set the attribute formatter.
    *
-   * @param {fuction} func
+   * @param {function} func
    * @return {void}
    */
   _setAttributeFormatter: function(func) {
@@ -1859,13 +1852,13 @@ module.exports = manager;
 
 },{"date-fns/isValid":3,"date-fns/parseISO":4}],13:[function(require,module,exports){
 const Rules = require('./rules');
-var Lang = require('./lang');
-var Errors = require('./errors');
-var Attributes = require('./attributes');
-var AsyncResolvers = require('./async');
+const Lang = require('./lang');
+const Errors = require('./errors');
+const Attributes = require('./attributes');
+const AsyncResolvers = require('./async');
 
-var Validator = function (input, rules, customMessages) {
-  var lang = Validator.getDefaultLang();
+const Validator = function (input, rules, customMessages) {
+  const lang = Validator.getDefaultLang();
   this.input = input || {};
 
   this.messages = Lang._make(lang);
