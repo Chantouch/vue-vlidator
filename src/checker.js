@@ -3,7 +3,7 @@ import isArray from 'lodash/isArray'
 import isString from 'lodash/isString'
 import isObject from 'lodash/isObject'
 
-function isExists(value) {
+const isExists = (value) => {
   if (value === null || value === undefined || value === '') {
     return false
   }
@@ -62,6 +62,9 @@ const checker = {
   },
   in_array: (value, args) => {
     return validator.isIn(value, args)
+  },
+  array: (value, args) => {
+    return isArray(value)
   }
 }
 

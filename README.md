@@ -109,6 +109,7 @@ Validator                   | Description
 **uuid**                    | check if the string is a UUID (version 3, 4 or 5).
 **uppercase**               | check if the string is uppercase.
 **matches**                 | check if string matches the pattern.<br/><br/>Either `matches('foo', /foo/i)` or `matches('foo', 'foo', 'i')`.
+**array**                   | check if string is an array.
 
 ## Messages
 

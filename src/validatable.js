@@ -1,12 +1,11 @@
 import get from 'lodash/get'
-import upperFirst from 'lodash/upperFirst'
-import isUndefined from 'lodash/isUndefined'
+// import upperFirst from 'lodash/upperFirst'
 import Validator from './validator'
 import { getMessage, getFieldName } from './messages'
 
 export default {
-  mounted() {
-    if (Object.keys(this.validationRules).length > 0) {
+  created() {
+    if (this.validationRules) {
       this._validator = this.createValidator(this.validationRules)
     }
   },
@@ -29,7 +28,7 @@ export default {
       return this.isValidationSuccess
     },
     validationRules() {
-      return {}
+      return null
     },
     validationData() {
       return this.$data
@@ -39,8 +38,6 @@ export default {
     onValidationMessage({ field, rule }) {
       if (this.$i18n && this.$t) {
         const fieldName = `validation.attributes.${field}`
-        field = field.replace('_', ' ')
-        field = upperFirst(field)
         field = this.$te(fieldName) ? this.$t(fieldName) : field
         return this.$t(`validation.${rule.name}`, [field, ...rule.args])
       }
@@ -57,28 +54,7 @@ export default {
           this.$set(this.errors, field, [rule.message])
           this.$set(this.successes, field, false)
           if (typeof this.$errors !== 'undefined') {
-            const errors = {}
-            for (const error in this.errors) {
-              if (this.errors.hasOwnProperty(error)) {
-                const errs = error.split('.')
-                const [field1, field2] = errs
-                const msg = isUndefined(this.errors[error])
-                  ? ['']
-                  : this.errors[error]
-                if (errs.length > 1) {
-                  Object.assign(errors, {
-                    [field2]: [
-                      upperFirst(msg[0].replace(`${upperFirst(field1)}.`, ''))
-                    ]
-                  })
-                } else {
-                  Object.assign(errors, {
-                    [field1]: this.errors[error]
-                  })
-                }
-              }
-            }
-            this.$errors.fill(errors)
+            this.$errors.fill(this.errors)
           }
         },
         onSuccess: (field) => {
@@ -107,7 +83,7 @@ export default {
         : this._validator
       // if sent filed name
       if (typeof rules === 'string') {
-        validator.validateField(rules, get(this.validationData, rules))
+        validator.validateField(rules, get(this.validationData, rules), false)
       }
       if (validator instanceof Validator) {
         return validator.validate(data || this.validationData)

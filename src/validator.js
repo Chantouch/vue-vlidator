@@ -4,6 +4,7 @@ import isObject from 'lodash/isObject'
 import isString from 'lodash/isString'
 import isArray from 'lodash/isArray'
 import checker from './checker'
+import { flattenObject } from './flatten'
 
 const parseFromString = (rules) => {
   return haye.fromPipe(rules).toArray()
@@ -30,8 +31,14 @@ export default class Validator {
     })
   }
 
-  validateField(field, value, silent) {
+  validateField(field, value, silent = false) {
     const res = this.rules[field].validate(value)
+    const [f1, f2] = field.split('.')
+    if (f2 !== undefined) {
+      field = f2
+    } else {
+      field = f1
+    }
     if (res !== true) {
       this.errors[field] = res
       !silent && this.options.onError(field, res)
@@ -65,8 +72,8 @@ export class ValidatorItem {
 
   init(rules) {
     if (isObject(rules)) {
-      // Todo check object type
-      rules = []
+      rules = Object.values(flattenObject(rules))[0]
+      rules = parseFromString(rules)
     }
     if (isString(rules)) {
       rules = parseFromString(rules)
@@ -90,8 +97,14 @@ export class ValidatorItem {
     return rules
   }
 
+  /**
+   * Validate value
+   * @param {any|void} value
+   * @returns {boolean|*}
+   */
   validate(value) {
-    if (!this.hasRequired && !checker.isExists(value)) {
+    const isExists = checker.isExists(value)
+    if (!this.hasRequired && !isExists) {
       return true
     }
     for (const rule of this.rules) {
@@ -101,7 +114,7 @@ export class ValidatorItem {
         continue
       }
       if (isObject(value)) {
-        value = null
+        // value = null
       }
       if (!validatorFn(value, rule.args)) {
         return rule
