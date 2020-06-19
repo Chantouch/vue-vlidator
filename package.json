@@ -51,6 +51,7 @@
     "rimraf": "3.0.0"
   },
   "scripts": {
+    "dev": "vue-cli-service serve",
     "pre-commit": "npm run lint:spec && npm run lint && npm run test",
     "build": "rimraf dist && grunt dist",
     "lint": "eslint \"./src/**/*.js\"",
