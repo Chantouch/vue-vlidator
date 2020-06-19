@@ -7,9 +7,7 @@ import { getMessage, getFieldName } from './messages'
 export default {
   mounted() {
     if (Object.keys(this.validationRules).length > 0) {
-      this._validator = this.createValidator(this.validationRules, {
-        watch: true
-      })
+      this._validator = this.createValidator(this.validationRules)
     }
   },
   data() {

@@ -1,19 +1,25 @@
 import validator from 'validator'
+import isArray from 'lodash/isArray'
+import isString from 'lodash/isString'
+import isObject from 'lodash/isObject'
 
 function isExists(value) {
-  if (value === null || value === undefined) {
+  if (value === null || value === undefined || value === '') {
     return false
-  } else if (Array.isArray(value)) {
+  }
+  if (isArray(value)) {
     return value.length > 0
-  } else if (typeof value === 'string') {
+  }
+  if (isString(value)) {
     return value.trim().length > 0
-  } else if (typeof value === 'object') {
+  }
+  if (isObject(value)) {
     return Object.keys(value).length > 0
-  } else if (value instanceof Date) {
-    return true
-  } else {
+  }
+  if (value instanceof Date) {
     return true
   }
+  return true
 }
 
 const checker = {
@@ -53,6 +59,9 @@ const checker = {
   regex: (value, args) => {
     const regexp = new RegExp(args[0], args[1])
     return regexp.test(value)
+  },
+  in_array: (value, args) => {
+    return validator.isIn(value, args)
   }
 }
 
