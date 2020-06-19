@@ -20,7 +20,7 @@ import 'core-js/es7/array';
  * http://rc.vuejs.org/guide/
  */
 import Vue from 'vue';
-import VueMaterial from 'vue-material';
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
 /* ============
  * Vue Router
  * ============
@@ -36,6 +36,8 @@ import routes from './routes';
 Vue.config.performance = true;
 Vue.config.debug = process.env.NODE_ENV !== 'production';
 Vue.config.productionTip = true;
+
+require('./plugins');
 
 Vue.use(VueRouter);
 
@@ -55,7 +57,8 @@ function createRouter () {
   });
 }
 
-Vue.use(VueMaterial);
+Vue.use(BootstrapVue);
+Vue.use(IconsPlugin);
 
 Vue.router = router;
 

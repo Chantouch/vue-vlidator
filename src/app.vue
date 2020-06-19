@@ -1,32 +1,11 @@
 <template>
-    <md-app id="app" md-mode="fixed">
-        <md-app-toolbar class="md-primary">
-            <h3 class="md-title" style="flex: 1">
-                <span class="page-icon">
-                  <img width="32" height="32" src="./assets/logo.png" alt="logo">
-                </span>
-                <span>Vue Vlidator</span>
-            </h3>
-            <md-button class="md-icon-button" @click="menuVisible = !menuVisible">
-                <md-icon>menu</md-icon>
-            </md-button>
-        </md-app-toolbar>
-        <md-app-drawer :md-active.sync="menuVisible" md-right>
-            <md-toolbar class="md-transparent" md-elevation="0">
-                <span class="page-icon">
-                  <img width="32" height="32" src="./assets/logo.png" alt="map">
-                </span><span class="md-headline">Vue Vlidator</span>
-            </md-toolbar>
-            <md-list>
-                <md-list-item @click="goTo(route.name)" v-for="route in routes" :key="route.name">
-                    <span class="md-list-item-text" v-text="route.label"></span>
-                </md-list-item>
-            </md-list>
-        </md-app-drawer>
-        <md-app-content>
-            <router-view/>
-        </md-app-content>
-    </md-app>
+    <div id="app">
+        <transition name="page" mode="out-in">
+            <b-container>
+                <router-view/>
+            </b-container>
+        </transition>
+    </div>
 </template>
 
 <script>
@@ -54,7 +33,9 @@
 </script>
 
 <style lang="scss">
-    @import "~vue-material/dist/vue-material.min.css";
+    @import '~bootstrap/scss/bootstrap';
+    @import '~bootstrap-vue/src/index';
+
     html, body, #app {
         width: 100%;
         height: 100%;

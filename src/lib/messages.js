@@ -136,3 +136,5 @@ class Messages {
     return message;
   }
 }
+
+export default Messages;

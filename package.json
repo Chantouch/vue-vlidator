@@ -29,6 +29,8 @@
   },
   "devDependencies": {
     "@vue/cli-service": "^4.4.4",
+    "bootstrap": "^4.5.0",
+    "bootstrap-vue": "^2.15.0",
     "browserify": "^13.0.1",
     "chai": "~3.5.0",
     "eslint": "5.8.0",
@@ -48,14 +50,13 @@
     "karma-mocha-reporter": "2.2.5",
     "mocha": "~2.5.3",
     "mocha-better-spec-reporter": "github:mikeerickson/mocha-better-spec-reporter",
+    "node-sass": "^4.14.1",
     "pump": "3.0.0",
     "puppeteer": "1.9.0",
     "rimraf": "3.0.0",
-    "vue-router": "^3.3.4",
-    "vue-template-compiler": "^2.6.11",
-    "node-sass": "^4.14.1",
     "sass-loader": "^8.0.2",
-    "vue-material": "1.0.0-beta-14"
+    "vue-router": "^3.3.4",
+    "vue-template-compiler": "^2.6.11"
   },
   "scripts": {
     "dev": "vue-cli-service serve",
