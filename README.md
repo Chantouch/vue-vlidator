@@ -1,12 +1,10 @@
-# validatorjs
+# vue-vlidator
 
-[![Build Status](https://travis-ci.org/skaterdav85/validatorjs.png?branch=master)](https://travis-ci.org/skaterdav85/validatorjs)
-
-The validatorjs library makes data validation in JavaScript very easy in both the browser and Node.js.
+The vue-vlidator library makes data validation in JavaScript very easy in both the browser and Node.js.
 This library was inspired by the [Laravel framework's Validator](http://laravel.com/docs/validation) and 
 [ValidatorJs](https://github.com/skaterdav85/validatorjs)
 
-## Why use validatorjs?
+## Why use vue-vlidator?
 
 * Not dependent on any libraries.
 * Works in both the browser and Node.
@@ -19,13 +17,13 @@ This library was inspired by the [Laravel framework's Validator](http://laravel.
 ### Using npm
 
 ```bash
-npm install validatorjs
+npm install vue-vlidator
 ```
 
 ### Using yarn
 
 ```bash
-yarn add validatorjs
+yarn add vue-vlidator
 ```
 
 ### Browser

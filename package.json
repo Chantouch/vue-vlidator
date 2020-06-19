@@ -1,5 +1,5 @@
 {
-  "name": "validatorjs",
+  "name": "vue-vlidator",
   "description": "Validation library inspired by Laravel's Validator",
   "version": "0.0.1-beta-0",
   "author": "Chantouch Sek <chantouchsek.cs83@gmail.com>",
