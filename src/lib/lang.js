@@ -1,4 +1,5 @@
 import Messages from './messages';
+
 require('../lang/en');
 
 export const Lang = {
@@ -13,6 +14,7 @@ export const Lang = {
   _set (lang, rawMessages) {
     this.messages[lang] = rawMessages;
   },
+
   /**
    * Set message for given language's rule.
    *
@@ -26,8 +28,10 @@ export const Lang = {
     if (message === undefined) {
       message = this.messages[lang].def;
     }
+
     this.messages[lang][attribute] = message;
   },
+
   /**
    * Load messages (if not already loaded)
    *
@@ -40,10 +44,10 @@ export const Lang = {
         const rawMessages = require('../lang/' + lang);
         this._set(lang, rawMessages);
       } catch (e) {
-        console.log(e);
       }
     }
   },
+
   /**
    * Get raw messages for language
    *
@@ -54,6 +58,7 @@ export const Lang = {
     this._load(lang);
     return this.messages[lang];
   },
+
   /**
    * Make messages for given language
    *

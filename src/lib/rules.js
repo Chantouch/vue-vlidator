@@ -297,8 +297,8 @@ const rules = {
     return /^[0-9a-f]+$/i.test(val);
   }
 };
-let missedRuleValidator = () => {
-  throw new Error('Validator `' + this.name + '` is not defined!');
+let missedRuleValidator = (name = null) => {
+  throw new Error('Validator `' + name + '` is not defined!');
 };
 let missedRuleMessage;
 
@@ -347,7 +347,7 @@ class Rules {
    * @return {boolean|undefined}
    */
   _apply(inputValue, ruleValue, attribute, callback = null) {
-    const fn = this.isMissed() ? missedRuleValidator : this.fn;
+    const fn = this.isMissed() ? missedRuleValidator(this.name) : this.fn;
     return fn.apply(this, [inputValue, ruleValue, attribute, callback]);
   }
 

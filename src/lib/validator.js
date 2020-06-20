@@ -2,19 +2,19 @@ import Errors from './errors';
 import Rules from './rules';
 import Lang from './lang';
 import Attributes from './attributes';
-import AsyncResolvers from './async';
+import AsyncResolvers  from './async';
 
 const numericRules = ['integer', 'numeric'];
 
 class Validator {
   /**
-   * Validator's constructor
+   * The constructor of validator
    * @param input
-   * @param {any|Object} rules
-   * @param {any|Object} customMessages
+   * @param {Object} rules
+   * @param {Object} customMessages
    * @param {string} locale
    */
-  constructor (input, rules, customMessages, locale = 'en') {
+  constructor (input, rules = {}, customMessages = {}, locale = 'en') {
     this.input = input || {};
     this.messages = Lang._make(locale);
     this.messages._setCustom(customMessages);
@@ -31,7 +31,7 @@ class Validator {
    *
    * @type {string}
    */
-  get lang () {
+  get lang() {
     return this.locale;
   }
 
@@ -40,7 +40,7 @@ class Validator {
    *
    * @type {string}
    */
-  set lang (lang) {
+  set lang(lang) {
     this.locale = lang;
   }
 
@@ -49,7 +49,7 @@ class Validator {
    *
    * @type {function}
    */
-  attributeFormatter () {
+  attributeFormatter() {
     return Attributes.formatter;
   }
 
@@ -84,7 +84,6 @@ class Validator {
     }
     return this.errorCount === 0;
   }
-
   /**
    * Run async validator
    *
@@ -134,7 +133,6 @@ class Validator {
     asyncResolvers.enableFiring();
     asyncResolvers.fire();
   }
-
   /**
    * Add failure and error message for given rule
    *
@@ -146,7 +144,6 @@ class Validator {
     this.errors.add(rule.attribute, msg);
     this.errorCount++;
   }
-
   /**
    * Flatten nested object, normalizing { foo: { bar: 1 } } into: { 'foo.bar': 1 }
    *
@@ -155,8 +152,7 @@ class Validator {
    */
   _flattenObject (obj) {
     const flattened = {};
-
-    function recurse (current, property) {
+    function recurse(current, property) {
       if (!property && Object.getOwnPropertyNames(current).length === 0) {
         return;
       }
@@ -173,13 +169,11 @@ class Validator {
         }
       }
     }
-
     if (obj) {
       recurse(obj);
     }
     return flattened;
   }
-
   /**
    * Extract value from nested object using string path with dot notation
    *
@@ -208,7 +202,6 @@ class Validator {
     }
     return copy;
   }
-
   /**
    * Parse rules, normalizing format into: { attribute: [{ name: 'age', value: 3 }] }
    *
@@ -224,7 +217,6 @@ class Validator {
     }
     return parsedRules;
   }
-
   _parseRulesCheck (attribute, rulesArray, parsedRules, wildCardValues) {
     if (attribute.indexOf('*') > -1) {
       this._parsedRulesRecurse(attribute, rulesArray, parsedRules, wildCardValues);
@@ -232,7 +224,6 @@ class Validator {
       this._parseRulesDefault(attribute, rulesArray, parsedRules, wildCardValues);
     }
   }
-
   _parsedRulesRecurse (attribute, rulesArray, parsedRules, wildCardValues) {
     const parentPath = attribute.substr(0, attribute.indexOf('*') - 1);
     const propertyValue = this._objectPath(this.input, parentPath);
@@ -244,7 +235,6 @@ class Validator {
       }
     }
   }
-
   _parseRulesDefault (attribute, rulesArray, parsedRules, wildCardValues) {
     const attributeRules = [];
     if (rulesArray instanceof Array) {
@@ -267,14 +257,13 @@ class Validator {
     }
     parsedRules[attribute] = attributeRules;
   }
-
   _replaceWildCards (path, nums) {
     if (!nums) {
       return path;
     }
     let path2 = path;
     nums.forEach(function (value) {
-      if (Array.isArray(path2)) {
+      if(Array.isArray(path2)){
         path2 = path2[0];
       }
       const pos = path2.indexOf('*');
@@ -283,13 +272,12 @@ class Validator {
       }
       path2 = path2.substr(0, pos) + value + path2.substr(pos + 1);
     });
-    if (Array.isArray(path)) {
+    if(Array.isArray(path)){
       path[0] = path2;
       path2 = path;
     }
     return path2;
   }
-
   _replaceWildCardsMessages (nums) {
     const customMessages = this.messages.customMessages;
     const self = this;
@@ -301,7 +289,6 @@ class Validator {
     });
     this.messages._setCustom(customMessages);
   }
-
   /**
    * Prepare rules if it comes in Array. Check for objects. Need for type validation.
    *
@@ -325,7 +312,6 @@ class Validator {
     }
     return rules;
   }
-
   /**
    * Determines if the attribute is supplied with the original data object.
    *
@@ -335,7 +321,6 @@ class Validator {
   _suppliedWithData (attribute) {
     return this.input.hasOwnProperty(attribute);
   }
-
   /**
    * Extract a rule and a value from a ruleString (i.e. min:3), rule = min, value = 3
    *
@@ -353,7 +338,6 @@ class Validator {
     }
     return rule;
   }
-
   /**
    * Determine if attribute has any of the given rules
    *
@@ -371,7 +355,6 @@ class Validator {
     }
     return false;
   }
-
   /**
    * Determine if attribute has any numeric-based rules.
    *
@@ -381,7 +364,6 @@ class Validator {
   _hasNumericRule (attribute) {
     return this._hasRule(attribute, numericRules);
   }
-
   /**
    * Determine if rule is validatable
    *
@@ -395,7 +377,6 @@ class Validator {
     }
     return this.getRule('required').validate(value);
   }
-
   /**
    * Determine if we should stop validating.
    *
@@ -413,7 +394,6 @@ class Validator {
     }
     return true;
   }
-
   /**
    * Set custom attribute names.
    *
@@ -423,7 +403,6 @@ class Validator {
   setAttributeNames (attributes) {
     this.messages._setAttributeNames(attributes);
   }
-
   /**
    * Set the attribute formatter.
    *
@@ -433,7 +412,6 @@ class Validator {
   setAttributeFormatter (func) {
     this.messages._setAttributeFormatter(func);
   }
-
   /**
    * Get validation rule
    *
@@ -443,7 +421,6 @@ class Validator {
   getRule (name) {
     return Rules.make(name, this);
   }
-
   /**
    * Stop on first error.
    *
@@ -453,36 +430,32 @@ class Validator {
   stopOnError (attributes) {
     this.stopOnAttributes = attributes;
   }
-
   /**
    * Determine if validation passes
    *
    * @param {function} passes
    * @return {void|boolean}
    */
-  passes (passes = null) {
+  passes (passes = undefined) {
     const async = this._checkAsync('passes', passes);
     if (async) {
       return this.checkAsync(passes);
     }
     return this.check();
   }
-
   /**
    * Determine if validation fails
    *
    * @param {function} fails
    * @return {boolean|undefined|void}
    */
-  fails (fails = null) {
+  fails (fails = undefined) {
     const async = this._checkAsync('fails', fails);
     if (async) {
-      return this.checkAsync(function () {
-      }, fails);
+      return this.checkAsync(function () {}, fails);
     }
     return !this.check();
   }
-
   /**
    * Check if validation should be called asynchronously
    *
@@ -497,7 +470,6 @@ class Validator {
     }
     return this.hasAsync || hasCallback;
   }
-
   /**
    * Set messages for language
    *
@@ -509,7 +481,6 @@ class Validator {
     Lang._set(lang, messages);
     return this;
   }
-
   /**
    * Get messages for given language
    *
@@ -519,7 +490,6 @@ class Validator {
   getMessages (lang) {
     return Lang._get(lang);
   }
-
   /**
    * Set default language to use
    *
@@ -529,7 +499,6 @@ class Validator {
   useLang (lang) {
     this.locale = lang;
   }
-
   /**
    * Get default language
    *
@@ -538,7 +507,6 @@ class Validator {
   getDefaultLang () {
     return this.locale;
   }
-
   /**
    * Register custom validation rule
    *
@@ -548,11 +516,10 @@ class Validator {
    * @return {void}
    */
   register (name, fn, message) {
-    const lang = Validator.getDefaultLang();
+    const lang = this.getDefaultLang();
     Rules.register(name, fn);
     Lang._setRuleMessage(lang, name, message);
   }
-
   /**
    * Register custom validation rule
    *
@@ -562,11 +529,10 @@ class Validator {
    * @return {void}
    */
   registerImplicit (name, fn, message) {
-    const lang = Validator.getDefaultLang();
+    const lang = this.getDefaultLang();
     Rules.registerImplicit(name, fn);
     Lang._setRuleMessage(lang, name, message);
   }
-
   /**
    * Register asynchronous validation rule
    *
@@ -576,11 +542,10 @@ class Validator {
    * @return {void}
    */
   registerAsync (name, fn, message) {
-    const lang = Validator.getDefaultLang();
+    const lang = this.getDefaultLang();
     Rules.registerAsync(name, fn);
     Lang._setRuleMessage(lang, name, message);
   }
-
   /**
    * Register asynchronous validation rule
    *
@@ -590,11 +555,10 @@ class Validator {
    * @return {void}
    */
   registerAsyncImplicit (name, fn, message) {
-    const lang = Validator.getDefaultLang();
+    const lang = this.getDefaultLang();
     Rules.registerAsyncImplicit(name, fn);
     Lang._setRuleMessage(lang, name, message);
   }
-
   /**
    * Register validator for missed validation rule
    *

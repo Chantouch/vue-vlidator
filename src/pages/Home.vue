@@ -1,20 +1,14 @@
 <template>
     <b-form @submit.prevent="onSubmit">
-        <div role="group">
-            <label>Name:</label>
-            <b-form-input
-                    id="input-live"
-                    v-model="name"
-                    :state="false"
-                    aria-describedby="input-live-help input-live-feedback"
-                    placeholder="Enter your name"
-                    trim
-            />
-            <b-form-invalid-feedback id="input-live-feedback">
-                Enter at least 3 letters
-            </b-form-invalid-feedback>
-            <b-form-text id="input-live-help">Your full name.</b-form-text>
-        </div>
+        <b-form-group
+                id="fieldset-1"
+                description="Let us know your name."
+                label="Enter your name"
+                label-for="input-1"
+                :state="false"
+        >
+            <b-form-input id="input-1" v-model="name" :state="true" trim></b-form-input>
+        </b-form-group>
         <b-button type="submit" variant="primary">Submit</b-button>
     </b-form>
 </template>
@@ -32,24 +26,20 @@
         errors: {}
       }
     },
-    vlidator: {
-      name: 'size:3',
-      email: 'required|email'
-    },
     methods: {
       onSubmit () {
         let data = {
-          name: this.name,
-          email: this.email,
-          age: this.age
+          name: 'John',
+          email: 'johndoe@gmail.com',
+          age: 17
         };
         let rules = {
-          name: 'required|min:2|number',
+          name: 'required',
           email: 'required|email',
           age: 'min:18'
         };
         let validation = new Validator(data, rules);
-        console.log(validation.passes())
+        validation.passes(); // true
         this.errors = validation.errors.all()
       }
     },
