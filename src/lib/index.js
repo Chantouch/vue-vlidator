@@ -5,13 +5,13 @@ import flatten from './flatten';
 
 class Vlidator {
   install (Vue, options = {}) {
-    const { locale } = options;
+    const { locale = 'en', customMessages = {} } = options;
     Vue.mixin({
       beforeCreate() {
         this.$options.$vlidator = {};
         const input = this.$data || {};
         const rules = {};
-        Vue.util.defineReactive(this.$options, '$vlidator', new Validator(input, rules, locale));
+        Vue.util.defineReactive(this.$options, '$vlidator', new Validator(input, rules, locale, customMessages));
         if (!this.$options.computed) {
           this.$options.computed = {};
         }
@@ -29,7 +29,7 @@ class Vlidator {
             if (validations !== undefined) {
               this_.$watch(path, () => {
                 const input = getData({ rules, data: this_.$data });
-                const validator = new Validator(input, rules, locale);
+                const validator = new Validator(input, rules, locale, customMessages);
                 validator.check();
                 this_.$options.$vlidator = validator;
                 if (!isUndefined(this_.$errors)) {
@@ -45,6 +45,11 @@ class Vlidator {
   }
 }
 
+/**
+ * Get Data
+ * @param {Object} payload
+ * @returns {Object}
+ */
 const getData = (payload = {}) => {
   const input = {};
   const { rules = {}, data = {} } = payload;
