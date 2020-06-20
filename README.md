@@ -121,11 +121,9 @@ If you need own message options, just override `onValidationMessage` method
   methods: {
     onValidationMessage({ field, rule }) {
       if (this.$i18n && this.$t) {
-        const fieldName = `validation.attributes.${field}`
-        field = field.replace('_', ' ')
-        field = upperFirst(field)
-        field = this.$te(fieldName) ? this.$t(fieldName) : field
-        return this.$t(`validation.${rule.name}`, [field, ...rule.args])
+          const fieldName = `validation.attributes.${field}`
+          field = this.$te(fieldName) ? this.$t(fieldName) : field
+          return this.$t(`validation.${rule.name}`, [field, ...rule.args])
       }
       field = getFieldName(field)
       return getMessage(rule.name, [field, ...rule.args])
