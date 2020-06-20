@@ -293,7 +293,7 @@ The field under validation must be after the given date.
 
 #### after_or_equal:date
 
-The field unter validation must be after or equal to the given field
+The field under validation must be after or equal to the given field
 
 #### alpha
 
@@ -322,7 +322,7 @@ The field under validation must be before or equal to the given date.
 
 #### between:min,max
 
-The field under validation must have a size between the given min and max. Strings, numerics, and files are evaluated in the same fashion as the size rule.
+The field under validation must have a size between the given min and max. Strings, numeric, and files are evaluated in the same fashion as the size rule.
 
 #### boolean
 
@@ -549,6 +549,27 @@ returns true if error messages exist for an attribute, undefined otherwise
 
 the number of validation errors
 
+#### .any()
+
+return true if there is any errors exist
+
+#### .fill(errors = {})
+
+fill the errors object, use for custom fill errors
+
+#### .flush()
+
+to clear all errors
+
+#### .clear(attribute)
+
+to clear the given attribute from errors
+
+#### .keydown(event)
+
+to clear the input target.name give provide in form
+- Example: `<input type='text' name='name' v-model='name' />`
+
 ```js
 let validation = new Validator(input, rules);
 validation.errors.first('email'); // returns first error message for email attribute
@@ -593,6 +614,22 @@ validation.errors.first('username'); // returns 'The username is too long. Max l
 ```
 
 You can even provide error messages on a per attribute basis! Just set the message's key to 'validator.attribute'
+
+Attributes can be like below:
+
+```js
+module.exports = {
+    regex: 'The :attribute format is invalid.',
+    attributes: {
+      'form.age': 'អាយុ',
+      name: 'ឈ្មោះ',
+      form: {
+        name: 'ឈ្មោះ',
+        gender: 'Sex'
+      }
+    }
+}
+```
 
 ```js
 let input = { name: '', email: '' };
@@ -645,7 +682,7 @@ Note: by default all _ characters will be replaced with spaces.
 Error messages are in English by default. To include another language in the browser, reference the language file in a script tag and call `Validator.useLang('lang_code')`.
 
 ```html
-<script src="dist/validator.js"></script>
+<script src="dist/vue-vlidator.js"></script>
 <script src="dist/lang/ru.js"></script>
 <script>
   Validator.useLang('es');
@@ -655,7 +692,7 @@ Error messages are in English by default. To include another language in the bro
 In Node, it will automatically pickup on the language source files.
 
 ```js
-let Validator = require('validatorjs');
+let Validator = require('vue-vlidator');
 Validator.useLang('ru');
 ```
 

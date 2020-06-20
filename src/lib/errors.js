@@ -112,7 +112,7 @@ class Errors {
    *
    * @param {KeyboardEvent} event
    */
-  onKeydown (event) {
+  keydown (event) {
     const { name } = event.target;
     if (name) return;
     this.clear(name);
