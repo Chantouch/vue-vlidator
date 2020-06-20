@@ -14,7 +14,7 @@ class Validator {
    * @param {Object} customMessages
    * @param {string} locale
    */
-  constructor (input, rules = {}, customMessages = {}, locale = 'en') {
+  constructor (input, rules = {}, locale = 'en', customMessages = {}) {
     this.input = input || {};
     this.messages = Lang._make(locale);
     this.messages._setCustom(customMessages);

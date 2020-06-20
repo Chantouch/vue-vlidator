@@ -14,8 +14,6 @@
 </template>
 
 <script>
-  import { Validator } from '../lib';
-
   export default {
     name: "HomePage",
     data () {
@@ -26,21 +24,16 @@
         errors: {}
       }
     },
+    vlidator: {
+      rules: {
+        name: 'required|min:4',
+        email: 'required|email',
+        age: 'min:18'
+      }
+    },
     methods: {
       onSubmit () {
-        let data = {
-          name: 'John',
-          email: 'johndoe@gmail.com',
-          age: 17
-        };
-        let rules = {
-          name: 'required',
-          email: 'required|email',
-          age: 'min:18'
-        };
-        let validation = new Validator(data, rules);
-        validation.passes(); // true
-        this.errors = validation.errors.all()
+        console.log(this.$vlidator.passes())
       }
     },
   }

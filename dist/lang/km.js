@@ -1,3 +1,4 @@
+require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"./lang/km":[function(require,module,exports){
 module.exports = {
   accepted: ':attribute ត្រូវតែទទួលយក។',
   after: 'The :attribute must be after :after.',
@@ -26,11 +27,11 @@ module.exports = {
     numeric: 'The :attribute may not be greater than :max.',
     string: 'The :attribute may not be greater than :max characters.'
   },
-  not_in: 'ជ្រើសរើស :attribute មិនត្រឹមត្រូវទេ។',
-  numeric: ':attribute ត្រូវតែជាលេខ។',
+  not_in: 'The selected :attribute is invalid.',
+  numeric: 'The :attribute must be a number.',
   present: 'The :attribute field must be present (but can be empty).',
-  required: ':attribute ត្រូវតែបញ្ចូលជាដាច់ខាត។',
-  required_if: ':attribute ត្រូវការនៅពេលដែល :other គឺ :value.',
+  required: 'The :attribute field is required.',
+  required_if: 'The :attribute field is required when :other is :value.',
   required_unless: 'The :attribute field is required when :other is not :value.',
   required_with: 'The :attribute field is required when :field is not empty.',
   required_with_all: 'The :attribute field is required when :fields are not empty.',
@@ -46,3 +47,5 @@ module.exports = {
   regex: 'The :attribute format is invalid.',
   attributes: {}
 };
+
+},{}]},{},[]);

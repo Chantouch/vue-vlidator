@@ -183,6 +183,13 @@ module.exports = function(grunt) {
         },
         dest: 'dist/lang/ko.js'
       },
+      kmLang: {
+        src: [],
+        options: {
+          require: ['./src/lang/km:./lang/km']
+        },
+        dest: 'dist/lang/km.js'
+      },
       ltLang: {
         src: [],
         options: {
@@ -347,7 +354,7 @@ module.exports = function(grunt) {
 
       dist: {
         files: {
-          'dist/validator.js': 'src/validator.js'
+          'dist/validator.js': 'src/lib/validator.js'
         },
         options: {
           banner:

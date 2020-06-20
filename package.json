@@ -4,7 +4,7 @@
   "version": "0.0.1-beta-0",
   "author": "Chantouch Sek <chantouchsek.cs83@gmail.com>",
   "license": "MIT",
-  "main": "./src/validator.js",
+  "main": "./src/lib/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/Chantouch/validatorjs"
@@ -48,6 +48,7 @@
     "karma-growl-notifications-reporter": "0.0.2",
     "karma-mocha": "~1.1.1",
     "karma-mocha-reporter": "2.2.5",
+    "laravel-vue-form-validator": "^0.0.20-beta",
     "lodash": "^4.17.15",
     "mocha": "~2.5.3",
     "mocha-better-spec-reporter": "github:mikeerickson/mocha-better-spec-reporter",
