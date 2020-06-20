@@ -20,16 +20,37 @@
 </template>
 
 <script>
+  import { Validator } from '../lib';
+
   export default {
-    name: "Home",
+    name: "HomePage",
     data () {
       return {
-        name: null
+        name: 'John',
+        email: 'johndoe@gmail.com',
+        age: 18,
+        errors: {}
       }
     },
+    vlidator: {
+      name: 'size:3',
+      email: 'required|email'
+    },
     methods: {
-      onSubmit() {
-        //
+      onSubmit () {
+        let data = {
+          name: this.name,
+          email: this.email,
+          age: this.age
+        };
+        let rules = {
+          name: 'required|min:2|number',
+          email: 'required|email',
+          age: 'min:18'
+        };
+        let validation = new Validator(data, rules);
+        console.log(validation.passes())
+        this.errors = validation.errors.all()
       }
     },
   }

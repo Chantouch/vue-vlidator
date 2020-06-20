@@ -48,6 +48,7 @@
     "karma-growl-notifications-reporter": "0.0.2",
     "karma-mocha": "~1.1.1",
     "karma-mocha-reporter": "2.2.5",
+    "lodash": "^4.17.15",
     "mocha": "~2.5.3",
     "mocha-better-spec-reporter": "github:mikeerickson/mocha-better-spec-reporter",
     "node-sass": "^4.14.1",
