@@ -739,7 +739,7 @@ Released under the MIT license
 
 ### Credits
 
-validatorjs re-write by Chantouch Sek
+vue-vlidator re-write by Chantouch Sek
 
 E-Mail: [chantouchsek.cs83@gmail.com](mailto:chantouchsek.cs93@gmail.com)
 
