@@ -1,5 +1,6 @@
 import validator from 'validator'
 import isArray from 'lodash/isArray'
+import includes from 'lodash/includes'
 import isString from 'lodash/isString'
 import isObject from 'lodash/isObject'
 
@@ -65,6 +66,10 @@ const checker = {
   },
   array: (value, args) => {
     return isArray(value)
+  },
+  includes: (value, args) => {
+    let values = args || []
+    return includes(values, value)
   }
 }
 
