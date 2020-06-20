@@ -10,19 +10,18 @@ This library was inspired by the [Laravel framework's Validator](http://laravel.
 * Works in both the browser and Node.
 * Readable and declarative validation rules.
 * Error messages with multilingual support.
-* AMD/Require.js and CommonJS/Browserify support.
 
 ## Installation
 
 ### Using npm
 
-```bash
+```npm
 npm install vue-vlidator
 ```
 
 ### Using yarn
 
-```bash
+```yarn
 yarn add vue-vlidator
 ```
 
@@ -47,7 +46,7 @@ import Validator from 'validatorjs';
 ### Basic Usage
 
 ```js
-let validation = new Validator(data, rules [, customErrorMessages]);
+let validation = new Validator(data, rules, [customErrorMessages]);
 ```
 
 __data__ {Object} - The data you want to validate
@@ -433,7 +432,7 @@ returns an object containing all error messages for all failing attributes
 
 #### .has(attribute)
 
-returns true if error messages exist for an attribute, false otherwise
+returns true if error messages exist for an attribute, undefined otherwise
 
 #### .errorCount
 

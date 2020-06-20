@@ -1,14 +1,12 @@
 import Validator from './validator';
-import _get from 'lodash/get';
-import isUndefined from 'lodash/isUndefined';
-import isFunction from 'lodash/isFunction';
+import { isUndefined, isFunction, get } from 'lodash';
 import flatten from './flatten';
 
 class Vlidator {
   install (Vue, options = {}) {
     const { locale = 'en', customMessages = {} } = options;
     Vue.mixin({
-      beforeCreate() {
+      beforeCreate () {
         this.$options.$vlidator = {};
         const input = this.$data || {};
         const rules = {};
@@ -16,7 +14,7 @@ class Vlidator {
         if (!this.$options.computed) {
           this.$options.computed = {};
         }
-        this.$options.computed.$vlidator = function() {
+        this.$options.computed.$vlidator = function () {
           return this.$options.$vlidator;
         };
       },
@@ -26,7 +24,7 @@ class Vlidator {
         if (vlidator && vlidator.rules) {
           const { rules = {} } = vlidator;
           Object.entries(flatten(this_.$data)).forEach(([path, _]) => {
-            let validations = _get(rules, path);
+            let validations = get(rules, path);
             if (validations !== undefined) {
               this_.$watch(path, () => {
                 const input = getData({ rules, data: this_.$data });

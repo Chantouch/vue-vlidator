@@ -62,8 +62,7 @@
           name: 'John',
           email: 'johndoe@gmail.com',
           age: 18
-        },
-        errors: {}
+        }
       }
     },
     vlidator: {
@@ -73,8 +72,7 @@
           email: 'required|email',
           age: 'required|numeric|min:18|max:50'
         }
-      },
-      watch: false
+      }
     },
     methods: {
       onSubmit () {

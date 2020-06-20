@@ -3,7 +3,7 @@ import Rules from './rules';
 import Lang from './lang';
 import Attributes from './attributes';
 import AsyncResolvers  from './async';
-import { isObject, isString, isUndefined, isFunction } from 'lodash';
+import { isObject, isString, isUndefined, isFunction, isNull } from 'lodash';
 
 const numericRules = ['integer', 'numeric'];
 
@@ -195,7 +195,7 @@ class Validator {
     }
     let i = 0, l = keys.length;
     for (; i < l; i++) {
-      if (isObject(copy) && copy !== null && Object.hasOwnProperty.call(copy, keys[i])) {
+      if (isObject(copy) && !isNull(copy) && Object.hasOwnProperty.call(copy, keys[i])) {
         copy = copy[keys[i]];
       } else {
         return;
