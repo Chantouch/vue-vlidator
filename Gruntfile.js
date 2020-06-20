@@ -360,7 +360,7 @@ module.exports = function(grunt) {
             '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= pkg.homepage %> - ' +
             '<%= grunt.template.today(\'yyyy-mm-dd\') %> */',
           browserifyOptions: {
-            standalone: 'Validator'
+            standalone: 'vue-vlidator'
           }
         }
       }
