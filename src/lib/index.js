@@ -1,19 +1,8 @@
-import Validator from './validator';
+class Vlidator {
+  install (Vue, options = {}) {
+    Vue.mixin({});
+  }
+}
 
-const install = (Vue, options = {}) => {
-  Vue.mixin({
-    beforeCreate() {
-      this.$options.vlidator = {};
-      this.$options.$vlidator = {};
-      Vue.util.defineReactive(this.$options, '$vlidator', Validator);
-      if (!this.$options.computed) {
-        this.$options.computed = {};
-      }
-      this.$options.computed.$vlidator = function() {
-        return this.$options.$vlidator;
-      };
-    }
-  });
-};
-
-export default { install, Validator };
+export { default as Validator } from './validator';
+export default new Vlidator();

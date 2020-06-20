@@ -1,9 +1,8 @@
 import Messages from './messages';
+
 require('../lang/en');
 
-const require_method = require;
-
-export const container = {
+export const Lang = {
   messages: {},
   /**
    * Set messages for language
@@ -12,7 +11,7 @@ export const container = {
    * @param {object} rawMessages
    * @return {void}
    */
-  _set: function (lang, rawMessages) {
+  _set (lang, rawMessages) {
     this.messages[lang] = rawMessages;
   },
 
@@ -24,7 +23,7 @@ export const container = {
    * @param {string|object} message
    * @return {void}
    */
-  _setRuleMessage: function (lang, attribute, message) {
+  _setRuleMessage (lang, attribute, message) {
     this._load(lang);
     if (message === undefined) {
       message = this.messages[lang].def;
@@ -39,10 +38,10 @@ export const container = {
    * @param  {string} lang
    * @return {void}
    */
-  _load: function (lang) {
+  _load (lang) {
     if (!this.messages[lang]) {
       try {
-        var rawMessages = require_method('./lang/' + lang);
+        const rawMessages = require('../lang/' + lang);
         this._set(lang, rawMessages);
       } catch (e) {
       }
@@ -55,7 +54,7 @@ export const container = {
    * @param  {string} lang
    * @return {object}
    */
-  _get: function (lang) {
+  _get (lang) {
     this._load(lang);
     return this.messages[lang];
   },
@@ -66,10 +65,10 @@ export const container = {
    * @param  {string} lang
    * @return {Messages}
    */
-  _make: function (lang) {
+  _make (lang) {
     this._load(lang);
     return new Messages(lang, this.messages[lang]);
   }
 };
 
-export default container;
+export default Lang;

@@ -18,7 +18,7 @@ class Validator {
     this.input = input || {};
     this.messages = Lang._make(locale);
     this.messages._setCustom(customMessages);
-    this.setAttributeFormatter(Validator.prototype.attributeFormatter);
+    this.setAttributeFormatter(this.attributeFormatter());
     this.errors = new Errors();
     this.errorCount = 0;
     this.hasAsync = false;
@@ -436,7 +436,7 @@ class Validator {
    * @param {function} passes
    * @return {void|boolean}
    */
-  passes (passes) {
+  passes (passes = undefined) {
     const async = this._checkAsync('passes', passes);
     if (async) {
       return this.checkAsync(passes);
@@ -449,7 +449,7 @@ class Validator {
    * @param {function} fails
    * @return {boolean|undefined|void}
    */
-  fails (fails) {
+  fails (fails = undefined) {
     const async = this._checkAsync('fails', fails);
     if (async) {
       return this.checkAsync(function () {}, fails);
@@ -516,7 +516,7 @@ class Validator {
    * @return {void}
    */
   register (name, fn, message) {
-    const lang = Validator.getDefaultLang();
+    const lang = this.getDefaultLang();
     Rules.register(name, fn);
     Lang._setRuleMessage(lang, name, message);
   }
@@ -529,7 +529,7 @@ class Validator {
    * @return {void}
    */
   registerImplicit (name, fn, message) {
-    const lang = Validator.getDefaultLang();
+    const lang = this.getDefaultLang();
     Rules.registerImplicit(name, fn);
     Lang._setRuleMessage(lang, name, message);
   }
@@ -542,7 +542,7 @@ class Validator {
    * @return {void}
    */
   registerAsync (name, fn, message) {
-    const lang = Validator.getDefaultLang();
+    const lang = this.getDefaultLang();
     Rules.registerAsync(name, fn);
     Lang._setRuleMessage(lang, name, message);
   }
@@ -555,7 +555,7 @@ class Validator {
    * @return {void}
    */
   registerAsyncImplicit (name, fn, message) {
-    const lang = Validator.getDefaultLang();
+    const lang = this.getDefaultLang();
     Rules.registerAsyncImplicit(name, fn);
     Lang._setRuleMessage(lang, name, message);
   }
