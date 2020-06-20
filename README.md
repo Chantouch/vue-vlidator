@@ -735,6 +735,7 @@ Validator.setMessages('en', messages);
 ### License
 
 Copyright &copy; 2020 Chantouch Sek
+
 Released under the MIT license
 
 ### Credits
