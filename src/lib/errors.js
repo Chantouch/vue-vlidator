@@ -107,9 +107,8 @@ class Errors {
    */
   onKeydown (event) {
     const { name } = event.target;
-    if (name) {
-      this.clear(name);
-    }
+    if (name) return;
+    this.clear(name);
   }
 }
 

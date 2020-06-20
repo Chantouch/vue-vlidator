@@ -44,5 +44,7 @@ module.exports = {
   string: 'The :attribute must be a string.',
   url: 'The :attribute format is invalid.',
   regex: 'The :attribute format is invalid.',
-  attributes: {}
+  attributes: {
+    'form.name': 'name'
+  }
 };
