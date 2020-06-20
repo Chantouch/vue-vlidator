@@ -54,13 +54,14 @@
         form: {
           name: 'required|min:4',
           email: 'required|email',
-          age: 'min:18'
+          age: 'required|numeric|min:18|max:50'
         }
-      }
+      },
+      watch: false
     },
     methods: {
       onSubmit () {
-        console.log(this.$vlidator.passes())
+        this.$vlidator.check()
       }
     },
   }

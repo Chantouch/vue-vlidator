@@ -32,8 +32,8 @@ class Vlidator {
                 const validator = new Validator(input, rules, locale);
                 validator.check();
                 this_.$options.$vlidator = validator;
-                const errors = validator.errors.all() || {};
                 if (!isUndefined(this_.$errors)) {
+                  const errors = validator.errors.all() || {};
                   this_.$errors.fill(errors);
                 }
               });
