@@ -74,7 +74,7 @@ Vue.use(Validator, options);
 2. customMessages {Object}
 
 #### Example in Vue component
-```vuejs
+```js
 <template>
     <b-form @submit.prevent="onSubmit">
         <b-form-group
