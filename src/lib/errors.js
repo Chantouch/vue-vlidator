@@ -55,6 +55,13 @@ class Errors {
   }
 
   /**
+   * Determine if we have any errors.
+   */
+  any() {
+    return Object.keys(this.errors).length > 0;
+  }
+
+  /**
    * Determine if there are any error messages for an attribute
    *
    * @param  {string}  attribute A key in the data object being validated

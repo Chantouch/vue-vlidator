@@ -8,7 +8,12 @@
                 :state="$vlidator.errors.has('form.name')"
                 :invalid-feedback="$vlidator.errors.first('form.name')"
         >
-            <b-form-input id="input-1" v-model="form.name" :state="!$vlidator.errors.has('form.name')" trim/>
+            <b-form-input
+                    id="input-1"
+                    v-model="form.name"
+                    :state="!$vlidator.errors.has('form.name')"
+                    trim
+            />
         </b-form-group>
         <b-form-group
                 id="fieldset-2"
@@ -18,8 +23,13 @@
                 :state="$vlidator.errors.has('form.email')"
                 :invalid-feedback="$vlidator.errors.first('form.email')"
         >
-            <b-form-input id="input-2" v-model="form.email" :state="!$vlidator.errors.has('form.email')"
-                          type="email"/>
+            <b-form-input
+                    id="input-2"
+                    v-model="form.email"
+                    :state="!$vlidator.errors.has('form.email')"
+                    type="email"
+                    trim
+            />
         </b-form-group>
         <b-form-group
                 id="fieldset-3"
@@ -29,10 +39,17 @@
                 :state="$vlidator.errors.has('form.age')"
                 :invalid-feedback="$vlidator.errors.first('form.age')"
         >
-            <b-form-input id="input-3" v-model.number="form.age" :state="!$vlidator.errors.has('form.age')"
-                          type="number"/>
+            <b-form-input
+                    id="input-3"
+                    v-model.number="form.age"
+                    :state="!$vlidator.errors.has('form.age')"
+                    type="number"
+                    trim
+            />
         </b-form-group>
-        <b-button type="submit" variant="primary">Submit</b-button>
+        <b-button type="submit" variant="primary" :disabled="$vlidator.errors.any()">
+            Submit
+        </b-button>
     </b-form>
 </template>
 
@@ -61,7 +78,7 @@
     },
     methods: {
       onSubmit () {
-        this.$vlidator.check()
+        alert(JSON.stringify(this.form))
       }
     },
   }

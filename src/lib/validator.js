@@ -3,6 +3,7 @@ import Rules from './rules';
 import Lang from './lang';
 import Attributes from './attributes';
 import AsyncResolvers  from './async';
+import { isObject, isString, isUndefined, isFunction } from 'lodash';
 
 const numericRules = ['integer', 'numeric'];
 
@@ -136,7 +137,7 @@ class Validator {
   /**
    * Add failure and error message for given rule
    *
-   * @param {Rule} rule
+   * @param {Rules} rule
    * @param message
    */
   _addFailure (rule, message = null) {
@@ -194,7 +195,7 @@ class Validator {
     }
     let i = 0, l = keys.length;
     for (; i < l; i++) {
-      if (typeof copy === 'object' && copy !== null && Object.hasOwnProperty.call(copy, keys[i])) {
+      if (isObject(copy) && copy !== null && Object.hasOwnProperty.call(copy, keys[i])) {
         copy = copy[keys[i]];
       } else {
         return;
@@ -240,12 +241,12 @@ class Validator {
     if (rulesArray instanceof Array) {
       rulesArray = this._prepareRulesArray(rulesArray);
     }
-    if (typeof rulesArray === 'string') {
+    if (isString(rulesArray)) {
       rulesArray = rulesArray.split('|');
     }
     let i = 0, len = rulesArray.length, rule;
     for (; i < len; i++) {
-      rule = typeof rulesArray[i] === 'string' ? this._extractRuleAndRuleValue(rulesArray[i]) : rulesArray[i];
+      rule = isString(rulesArray[i]) ? this._extractRuleAndRuleValue(rulesArray[i]) : rulesArray[i];
       if (rule.value) {
         rule.value = this._replaceWildCards(rule.value, wildCardValues);
         this._replaceWildCardsMessages(wildCardValues);
@@ -299,7 +300,7 @@ class Validator {
     const rules = [];
     let i = 0, len = rulesArray.length;
     for (; i < len; i++) {
-      if (typeof rulesArray[i] === 'object') {
+      if (isObject(rulesArray[i])) {
         for (const rule in rulesArray[i]) {
           rules.push({
             name: rule,
@@ -367,7 +368,7 @@ class Validator {
   /**
    * Determine if rule is validatable
    *
-   * @param  {Rule}   rule
+   * @param  {Rules}   rule
    * @param  {any|void}  value
    * @return {boolean}
    */
@@ -386,7 +387,7 @@ class Validator {
    */
   _shouldStopValidating (attribute, rulePassed) {
     const stopOnAttributes = this.stopOnAttributes;
-    if (typeof stopOnAttributes === 'undefined' || stopOnAttributes === false || rulePassed === true) {
+    if (isUndefined(stopOnAttributes) || stopOnAttributes === false || rulePassed === true) {
       return false;
     }
     if (stopOnAttributes instanceof Array) {
@@ -464,7 +465,7 @@ class Validator {
    * @return {boolean}
    */
   _checkAsync (funcName, callback) {
-    const hasCallback = typeof callback === 'function';
+    const hasCallback = isFunction(callback);
     if (this.hasAsync && !hasCallback) {
       throw funcName + ' expects a callback when async rules are being tested.';
     }

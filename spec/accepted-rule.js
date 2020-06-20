@@ -1,9 +1,11 @@
+let Validator;
+let expect;
 if (typeof require !== 'undefined') {
-  var Validator = require('../src/validator.js');
-  var expect = require('chai').expect;
+  Validator = require('../src/lib/validator.js');
+  expect = require('chai').expect;
 } else {
-  var Validator = window.Validator;
-  var expect = window.chai.expect;
+  Validator = window.Validator;
+  expect = window.chai.expect;
 }
 
 describe('accepted validation rule', function() {

@@ -1,4 +1,5 @@
 import Messages from './messages';
+import { isUndefined } from 'lodash';
 
 require('../lang/en');
 
@@ -25,7 +26,7 @@ export const Lang = {
    */
   _setRuleMessage (lang, attribute, message) {
     this._load(lang);
-    if (message === undefined) {
+    if (isUndefined(message)) {
       message = this.messages[lang].def;
     }
 

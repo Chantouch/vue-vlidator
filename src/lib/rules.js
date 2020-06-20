@@ -1,4 +1,5 @@
 import { parseISO, isValid } from 'date-fns';
+import { isNaN, isString, isNumber, isFunction, isUndefined, isBoolean } from 'lodash';
 
 const leapYear = (year) => {
   return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
@@ -8,7 +9,7 @@ const isValidDate = (inDate) => {
     return !isNaN(inDate);
   }
   // reformat if supplied as mm.dd.yyyy (period delimiter)
-  if (typeof inDate === 'string') {
+  if (isString(inDate)) {
     const pos = inDate.indexOf('.');
     if (pos > 0 && pos <= 6) {
       inDate = inDate.replace(/\./g, '-');
@@ -113,7 +114,7 @@ const rules = {
     return true;
   },
   string (val, req, attribute) {
-    return typeof val === 'string';
+    return isString(val);
   },
   sometimes (val) {
     return true;
@@ -146,7 +147,7 @@ const rules = {
   numeric (val) {
     let num;
     num = Number(val); // tries to convert value to a number. useful if value is coming from form element
-    return typeof num === 'number' && !isNaN(num) && typeof val !== 'boolean';
+    return isNumber(num) && !isNaN(num) && !isBoolean(isBoolean);
   },
   array (val) {
     return val instanceof Array;
@@ -179,7 +180,7 @@ const rules = {
     if (val && !(val instanceof Array)) {
       let localValue = val;
       for (i = 0; i < list.length; i++) {
-        if (typeof list[i] === 'string') {
+        if (isString(list[i])) {
           localValue = String(val);
         }
         if (localValue === list[i]) {
@@ -203,7 +204,7 @@ const rules = {
     let returnVal = true;
     for (let i = 0; i < len; i++) {
       let localValue = val;
-      if (typeof list[i] === 'string') {
+      if (isString(list[i])) {
         localValue = String(val);
       }
       if (localValue === list[i]) {
@@ -247,7 +248,7 @@ const rules = {
     return isValidDate(val);
   },
   present (val) {
-    return typeof val !== 'undefined';
+    return !isUndefined(val);
   },
   after (val, req) {
     const val1 = this.validator.input[req];
@@ -320,10 +321,10 @@ class Rules {
    * @param  {function} callback
    * @return {void|boolean}
    */
-  validate(inputValue, ruleValue = null, attribute = '', callback = null) {
+  validate (inputValue, ruleValue = null, attribute = '', callback = null) {
     const _this = this;
     this._setValidatingData(attribute, inputValue, ruleValue);
-    if (typeof callback === 'function') {
+    if (isFunction(callback)) {
       this.callback = callback;
       const handleResponse = function (passes, message) {
         _this.response(passes, message);
@@ -340,13 +341,13 @@ class Rules {
   /**
    * Apply validation function
    *
-   * @param  {mixed} inputValue
-   * @param  {mixed} ruleValue
+   * @param  {any|void} inputValue
+   * @param  {any|void} ruleValue
    * @param  {string} attribute
    * @param  {function} callback
    * @return {boolean|undefined}
    */
-  _apply(inputValue, ruleValue, attribute, callback = null) {
+  _apply (inputValue, ruleValue, attribute, callback = null) {
     const fn = this.isMissed() ? missedRuleValidator(this.name) : this.fn;
     return fn.apply(this, [inputValue, ruleValue, attribute, callback]);
   }
@@ -359,7 +360,7 @@ class Rules {
    * @param {any|void} ruleValue
    * @return {void}
    */
-  _setValidatingData(attribute, inputValue, ruleValue) {
+  _setValidatingData (attribute, inputValue, ruleValue) {
     this.attribute = attribute;
     this.inputValue = inputValue;
     this.ruleValue = ruleValue;
@@ -370,12 +371,12 @@ class Rules {
    *
    * @return {array}
    */
-  getParameters() {
+  getParameters () {
     let value = [];
-    if (typeof this.ruleValue === 'string') {
+    if (isString(this.ruleValue)) {
       value = this.ruleValue.split(',');
     }
-    if (typeof this.ruleValue === 'number') {
+    if (isNumber(this.ruleValue)) {
       value.push(this.ruleValue);
     }
     if (this.ruleValue instanceof Array) {
@@ -387,14 +388,14 @@ class Rules {
   /**
    * Get true size of value
    *
-   * @return {integer|float|mixed|number}
+   * @return {any|integer|float|mixed|number}
    */
-  getSize() {
+  getSize () {
     const value = this.inputValue;
     if (value instanceof Array) {
       return value.length;
     }
-    if (typeof value === 'number') {
+    if (isNumber(value)) {
       return value;
     }
     if (this.validator._hasNumericRule(this.attribute)) {
@@ -408,8 +409,8 @@ class Rules {
    *
    * @return {string}
    */
-  _getValueType() {
-    if (typeof this.inputValue === 'number' || this.validator._hasNumericRule(this.attribute)) {
+  _getValueType () {
+    if (isNumber(this.inputValue) || this.validator._hasNumericRule(this.attribute)) {
       return 'numeric';
     }
     return 'string';
@@ -422,7 +423,7 @@ class Rules {
    * @param  {string|undefined} message Custom error message
    * @return {void}
    */
-  response(passes, message) {
+  response (passes, message) {
     this.passes = passes === undefined || passes === true;
     this._customMessage = message;
     this.callback(this.passes, message);
@@ -434,7 +435,7 @@ class Rules {
    * @param {Validator} validator
    * @return {void}
    */
-  setValidator(validator) {
+  setValidator (validator) {
     this.validator = validator;
   }
 
@@ -443,10 +444,11 @@ class Rules {
    *
    * @return {boolean}
    */
-  isMissed() {
-    return typeof this.fn !== 'function';
+  isMissed () {
+    return !isFunction(this.fn);
   }
-  get customMessage() {
+
+  get customMessage () {
     return this.isMissed() ? missedRuleMessage : this._customMessage;
   }
 }
@@ -483,7 +485,7 @@ export const manager = {
    * @param validator
    * @return {Rules}
    */
-  make(name, validator) {
+  make (name, validator) {
     const async = this.isAsync(name);
     const rule = new Rules(name, rules[name], async);
     rule.setValidator(validator);
@@ -496,7 +498,7 @@ export const manager = {
    * @param  {string}  name
    * @return {boolean}
    */
-  isAsync(name) {
+  isAsync (name) {
     let i = 0, len = this.asyncRules.length;
     for (; i < len; i++) {
       if (this.asyncRules[i] === name) {
@@ -512,7 +514,7 @@ export const manager = {
    * @param {string} name
    * @return {boolean}
    */
-  isImplicit(name) {
+  isImplicit (name) {
     return this.implicitRules.indexOf(name) > -1;
   },
 
@@ -523,7 +525,7 @@ export const manager = {
    * @param  {function} fn
    * @return {void}
    */
-  register(name, fn) {
+  register (name, fn) {
     rules[name] = fn;
   },
 
@@ -534,7 +536,7 @@ export const manager = {
    * @param  {function} fn
    * @return {void}
    */
-  registerImplicit(name, fn) {
+  registerImplicit (name, fn) {
     this.register(name, fn);
     this.implicitRules.push(name);
   },
@@ -546,7 +548,7 @@ export const manager = {
    * @param  {function} fn
    * @return {void}
    */
-  registerAsync(name, fn) {
+  registerAsync (name, fn) {
     this.register(name, fn);
     this.asyncRules.push(name);
   },
@@ -558,12 +560,12 @@ export const manager = {
    * @param  {function} fn
    * @return {void}
    */
-  registerAsyncImplicit(name, fn) {
+  registerAsyncImplicit (name, fn) {
     this.registerImplicit(name, fn);
     this.asyncRules.push(name);
   },
 
-  registerMissedRuleValidator(fn, message) {
+  registerMissedRuleValidator (fn, message) {
     missedRuleValidator = fn;
     missedRuleMessage = message;
   }

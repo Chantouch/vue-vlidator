@@ -50,7 +50,7 @@ export const router = createRouter();
  */
 function createRouter () {
   return new VueRouter({
-    mode: 'hash',
+    mode: 'history',
     linkActiveClass: 'open active',
     scrollBehavior,
     routes

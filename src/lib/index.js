@@ -1,6 +1,7 @@
 import Validator from './validator';
 import _get from 'lodash/get';
 import isUndefined from 'lodash/isUndefined';
+import isFunction from 'lodash/isFunction';
 import flatten from './flatten';
 
 class Vlidator {
@@ -32,7 +33,7 @@ class Vlidator {
                 const validator = new Validator(input, rules, locale, customMessages);
                 validator.check();
                 this_.$options.$vlidator = validator;
-                if (!isUndefined(this_.$errors)) {
+                if (!isUndefined(this_.$errors) && isFunction(this_.$errors.fill)) {
                   const errors = validator.errors.all() || {};
                   this_.$errors.fill(errors);
                 }
