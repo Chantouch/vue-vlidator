@@ -1,12 +1,13 @@
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"./lang/cs":[function(require,module,exports){
+"use strict";
+
 module.exports = {
   accepted: ':attribute musí být přijat.',
   active_url: ':attribute není platnou URL adresou.',
   after: ':attribute musí být datum po :date.',
   after_or_equal: 'The :attribute must be a date after or equal to :date.',
   alpha: ':attribute může obsahovat pouze písmena.',
-  alpha_dash:
-    ':attribute může obsahovat pouze písmena, číslice, pomlčky a podtržítka. České znaky (á, é, í, ó, ú, ů, ž, š, č, ř, ď, ť, ň) nejsou podporovány.',
+  alpha_dash: ':attribute může obsahovat pouze písmena, číslice, pomlčky a podtržítka. České znaky (á, é, í, ó, ú, ů, ž, š, č, ř, ď, ť, ň) nejsou podporovány.',
   alpha_num: ':attribute může obsahovat pouze písmena a číslice.',
   attributes: {},
   array: ':attribute musí být pole.',
@@ -18,7 +19,7 @@ module.exports = {
     string: ':attribute musí být delší než :min a kratší než :max znaků.',
     array: ':attribute musí obsahovat nejméně :min a nesmí obsahovat více než :max prvků.'
   },
-  boolean: ':attribute musí být true nebo false',
+  "boolean": ':attribute musí být true nebo false',
   confirmed: ':attribute nebylo odsouhlaseno.',
   date: ':attribute musí být platné datum.',
   date_format: ':attribute není platný formát data podle :format.',
@@ -44,7 +45,7 @@ module.exports = {
     array: 'The :attribute must have :value items or more.'
   },
   image: ':attribute musí být obrázek.',
-  in: 'Zvolená hodnota pro :attribute je neplatná.',
+  "in": 'Zvolená hodnota pro :attribute je neplatná.',
   in_array: ':attribute není obsažen v :other.',
   integer: ':attribute musí být celé číslo.',
   ip: ':attribute musí být platnou IP adresou.',

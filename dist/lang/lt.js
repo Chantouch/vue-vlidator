@@ -1,4 +1,6 @@
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"./lang/lt":[function(require,module,exports){
+"use strict";
+
 module.exports = {
   accepted: 'Laukas :attribute turi būti priimtas.',
   active_url: 'Laukas :attribute nėra galiojantis internetinis adresas.',
@@ -17,7 +19,7 @@ module.exports = {
     string: 'Simbolių skaičius lauke :attribute turi būti tarp :min ir :max.',
     array: 'Elementų skaičius lauke :attribute turi turėti nuo :min iki :max.'
   },
-  boolean: 'Lauko reikšmė :attribute turi būti \'taip\' arba \'ne\'.',
+  "boolean": 'Lauko reikšmė :attribute turi būti \'taip\' arba \'ne\'.',
   confirmed: 'Lauko :attribute patvirtinimas nesutampa.',
   date: 'Lauko :attribute reikšmė nėra galiojanti data.',
   date_format: 'Lauko :attribute reikšmė neatitinka formato :format.',
@@ -43,7 +45,7 @@ module.exports = {
     array: 'The :attribute must have :value items or more.'
   },
   image: 'Lauko :attribute reikšmė turi būti paveikslėlis.',
-  in: 'Pasirinkta negaliojanti :attribute reikšmė.',
+  "in": 'Pasirinkta negaliojanti :attribute reikšmė.',
   in_array: 'Laukas :attribute neegzistuoja :other lauke.',
   integer: 'Lauko :attribute reikšmė turi būti sveikasis skaičius.',
   ip: 'Lauko :attribute reikšmė turi būti galiojantis IP adresas.',

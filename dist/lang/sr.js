@@ -1,4 +1,6 @@
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"./lang/sr":[function(require,module,exports){
+"use strict";
+
 module.exports = {
   accepted: 'Polje :attribute mora biti prihvaćeno.',
   active_url: 'Polje :attribute nije validan URL.',
@@ -17,7 +19,7 @@ module.exports = {
     string: 'Polje :attribute mora biti između :min - :max karaktera.',
     array: 'Polje :attribute mora biti između :min - :max stavki.'
   },
-  boolean: 'Polje :attribute mora biti tačno ili netačno',
+  "boolean": 'Polje :attribute mora biti tačno ili netačno',
   confirmed: 'Potvrda polja :attribute se ne poklapa.',
   date: 'Polje :attribute nije važeći datum.',
   date_format: 'Polje :attribute ne odgovora prema formatu :format.',
@@ -43,7 +45,7 @@ module.exports = {
     array: 'The :attribute must have :value items or more.'
   },
   image: 'Polje :attribute mora biti slika.',
-  in: 'Odabrano polje :attribute nije validno.',
+  "in": 'Odabrano polje :attribute nije validno.',
   in_array: 'The :attribute field does not exist in :other.',
   integer: 'Polje :attribute mora biti broj.',
   ip: 'Polje :attribute mora biti validna IP adresa.',

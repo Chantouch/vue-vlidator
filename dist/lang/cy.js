@@ -1,4 +1,6 @@
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"./lang/cy":[function(require,module,exports){
+"use strict";
+
 module.exports = {
   accepted: 'Rhaid derbyn :attribute.',
   active_url: 'Nid yw :attribute yn URL dilys.',
@@ -17,7 +19,7 @@ module.exports = {
     string: 'Rhaid i :attribute fod rhwng :min a :max nodyn.',
     array: 'Rhaid i :attribute fod rhwng :min a :max eitem.'
   },
-  boolean: 'Rhaid i\'r maes :attribute fod yn wir neu gau.',
+  "boolean": 'Rhaid i\'r maes :attribute fod yn wir neu gau.',
   confirmed: 'Nid yw\'r cadarnhad :attribute yn gyfwerth.',
   date: 'Nid yw :attribute yn ddyddiad dilys.',
   date_format: 'Nid yw :attribute yn y fformat :format.',
@@ -43,7 +45,7 @@ module.exports = {
     array: 'The :attribute must have :value items or more.'
   },
   image: 'Rhaid i :attribute fod yn lun.',
-  in: 'Nid yw :attribute yn ddilys.',
+  "in": 'Nid yw :attribute yn ddilys.',
   in_array: 'The :attribute field does not exist in :other.',
   integer: 'Rhaid i :attribute fod yn integer.',
   ip: 'Rhaid i :attribute fod yn gyfeiriad IP dilys.',

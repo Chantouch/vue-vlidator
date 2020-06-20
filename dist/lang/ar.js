@@ -1,4 +1,6 @@
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"./lang/ar":[function(require,module,exports){
+"use strict";
+
 module.exports = {
   accepted: 'الصفة :attribute يجب أن تكون مقبولة',
   after: 'الصفة :attribute يجب أن تكون بعد الصفة :after.',
@@ -16,7 +18,7 @@ module.exports = {
   digits: 'الصفة :attribute يجب أن تكون :digits أرقام.',
   digits_between: 'يجب أن يحتوي :attribute بين :min و :max رقمًا/أرقام .',
   different: 'الصفة :attribute و الصفة :different يجب أن تكونا مختلفتين',
-  in: 'الصفة :attribute المختارة، غير صحيحة.',
+  "in": 'الصفة :attribute المختارة، غير صحيحة.',
   integer: 'الصفة :attribute يجب أن تكون عدد صحيح',
   hex: 'حقل الصفة :attribute يجب أن يحتوي على صيغة هكسيديسمل',
   min: {

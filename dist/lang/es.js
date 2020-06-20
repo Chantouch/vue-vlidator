@@ -1,4 +1,6 @@
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"./lang/es":[function(require,module,exports){
+"use strict";
+
 module.exports = {
   accepted: 'El campo :attribute debe ser aceptado.',
   after: 'El campo :attribute debe ser una fecha posterior a :after.',
@@ -12,7 +14,7 @@ module.exports = {
   digits: 'El campo :attribute debe tener :digits dígitos.',
   digits_between: 'El campo :attribute debe tener entre :min y :max dígitos.',
   email: 'El campo :attribute no es un correo válido.',
-  in: 'El campo :attribute es inválido.',
+  "in": 'El campo :attribute es inválido.',
   integer: 'El campo :attribute debe ser un número entero.',
   hex: 'El campo :attribute debe tener formato hexadecimal.',
   max: {

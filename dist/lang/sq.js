@@ -1,4 +1,6 @@
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"./lang/sq":[function(require,module,exports){
+"use strict";
+
 module.exports = {
   accepted: ':attribute duhet të pranohet.',
   active_url: ':attribute nuk është adresë e saktë.',
@@ -17,7 +19,7 @@ module.exports = {
     string: ':attribute duhet të jetë midis :min - :max karaktereve.',
     array: ':attribute duhet të jetë midis :min - :max elementëve.'
   },
-  boolean: 'Fusha :attribute duhet të jetë e vërtetë ose e gabuar',
+  "boolean": 'Fusha :attribute duhet të jetë e vërtetë ose e gabuar',
   confirmed: ':attribute konfirmimi nuk përputhet.',
   date: ':attribute nuk është një datë e saktë.',
   date_format: ':attribute nuk i përshtatet formatit :format.',
@@ -43,7 +45,7 @@ module.exports = {
     array: 'The :attribute must have :value items or more.'
   },
   image: ':attribute duhet të jetë imazh.',
-  in: ':attribute përzgjedhur është i/e pasaktë.',
+  "in": ':attribute përzgjedhur është i/e pasaktë.',
   in_array: 'The :attribute field does not exist in :other.',
   integer: ':attribute duhet të jetë numër i plotë.',
   ip: ':attribute duhet të jetë një IP adresë e saktë.',

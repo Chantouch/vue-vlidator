@@ -1,4 +1,6 @@
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"./lang/pt":[function(require,module,exports){
+"use strict";
+
 module.exports = {
   accepted: 'O campo :attribute deverá ser aceite.',
   active_url: 'O campo :attribute não contém um URL válido.',
@@ -17,7 +19,7 @@ module.exports = {
     string: 'O campo :attribute deverá conter entre :min - :max caracteres.',
     array: 'O campo :attribute deverá conter entre :min - :max elementos.'
   },
-  boolean: 'O campo :attribute deverá conter o valor verdadeiro ou falso.',
+  "boolean": 'O campo :attribute deverá conter o valor verdadeiro ou falso.',
   confirmed: 'A confirmação para o campo :attribute não coincide.',
   date: 'O campo :attribute não contém uma data válida.',
   date_format: 'A data indicada para o campo :attribute não respeita o formato :format.',
@@ -43,7 +45,7 @@ module.exports = {
     array: 'The :attribute must have :value items or more.'
   },
   image: 'O campo :attribute deverá conter uma imagem.',
-  in: 'O campo :attribute não contém um valor válido.',
+  "in": 'O campo :attribute não contém um valor válido.',
   in_array: 'O campo :attribute não existe em :other.',
   integer: 'O campo :attribute deverá conter um número inteiro.',
   ip: 'O campo :attribute deverá conter um IP válido.',
@@ -82,16 +84,12 @@ module.exports = {
   present: 'O campo :attribute deverá estar presente.',
   regex: 'O formato do valor para o campo :attribute é inválido.',
   required: 'É obrigatória a indicação de um valor para o campo :attribute.',
-  required_if:
-    'É obrigatória a indicação de um valor para o campo :attribute quando o valor do campo :other é igual a :value.',
-  required_unless:
-    'É obrigatória a indicação de um valor para o campo :attribute a menos que :other esteja presente em :values.',
+  required_if: 'É obrigatória a indicação de um valor para o campo :attribute quando o valor do campo :other é igual a :value.',
+  required_unless: 'É obrigatória a indicação de um valor para o campo :attribute a menos que :other esteja presente em :values.',
   required_with: 'É obrigatória a indicação de um valor para o campo :attribute quando :values está presente.',
-  required_with_all:
-    'É obrigatória a indicação de um valor para o campo :attribute quando um dos :values está presente.',
+  required_with_all: 'É obrigatória a indicação de um valor para o campo :attribute quando um dos :values está presente.',
   required_without: 'É obrigatória a indicação de um valor para o campo :attribute quando :values não está presente.',
-  required_without_all:
-    'É obrigatória a indicação de um valor para o campo :attribute quando nenhum dos :values está presente.',
+  required_without_all: 'É obrigatória a indicação de um valor para o campo :attribute quando nenhum dos :values está presente.',
   same: 'Os campos :attribute e :other deverão conter valores iguais.',
   size: {
     numeric: 'O campo :attribute deverá conter o valor :size.',

@@ -1,4 +1,6 @@
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"./lang/nb_NO":[function(require,module,exports){
+"use strict";
+
 module.exports = {
   accepted: ':attribute må være akseptert.',
   alpha: ':attribute feltet kan kun inneholde alfabetiske tegn.',
@@ -12,7 +14,7 @@ module.exports = {
   digits: ':attribute må være på :digits siffer.',
   digits_between: ':attribute må være mellom :min og :max siffer.',
   different: ':attribute og :different må være forskjellige.',
-  in: 'Den oppgitte verdien for :attribute er ugyldig.',
+  "in": 'Den oppgitte verdien for :attribute er ugyldig.',
   integer: ':attribute må være et heltall.',
   hex: 'The :attribute should have hexadecimal format',
   min: {

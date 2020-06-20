@@ -1,4 +1,6 @@
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"./lang/pt_BR":[function(require,module,exports){
+"use strict";
+
 module.exports = {
   accepted: 'O campo :attribute deve ser aceito.',
   active_url: 'O campo :attribute deve conter uma URL válida.',
@@ -16,7 +18,7 @@ module.exports = {
     string: 'O campo :attribute deve conter entre :min a :max caracteres.',
     array: 'O campo :attribute deve conter de :min a :max itens.'
   },
-  boolean: 'O campo :attribute deve conter o valor verdadeiro ou falso.',
+  "boolean": 'O campo :attribute deve conter o valor verdadeiro ou falso.',
   confirmed: 'A confirmação para o campo :attribute não coincide.',
   date: 'O campo :attribute não contém uma data válida.',
   date_format: 'A data informada para o campo :attribute não respeita o formato :format.',
@@ -42,7 +44,7 @@ module.exports = {
     array: 'O campo :attribute deve ter :value itens ou mais.'
   },
   image: 'O campo :attribute deve conter uma imagem.',
-  in: 'O campo :attribute não contém um valor válido.',
+  "in": 'O campo :attribute não contém um valor válido.',
   in_array: 'O campo :attribute não existe em :other.',
   integer: 'O campo :attribute deve conter um número inteiro.',
   ip: 'O campo :attribute deve conter um IP válido.',

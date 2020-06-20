@@ -1,4 +1,6 @@
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"./lang/bg":[function(require,module,exports){
+"use strict";
+
 module.exports = {
   accepted: 'Трябва да приемете :attribute.',
   active_url: 'Полето :attribute не е валиден URL адрес.',
@@ -16,7 +18,7 @@ module.exports = {
     string: 'Полето :attribute трябва да бъде между :min и :max знака.',
     array: 'Полето :attribute трябва да има между :min - :max елемента.'
   },
-  boolean: 'Полето :attribute трябва да съдържа Да или Не',
+  "boolean": 'Полето :attribute трябва да съдържа Да или Не',
   confirmed: 'Полето :attribute не е потвърдено.',
   date: 'Полето :attribute не е валидна дата.',
   date_format: 'Полето :attribute не е във формат :format.',
@@ -42,7 +44,7 @@ module.exports = {
     array: 'The :attribute must have :value items or more.'
   },
   image: 'Полето :attribute трябва да бъде изображение.',
-  in: 'Избраното поле :attribute е невалидно.',
+  "in": 'Избраното поле :attribute е невалидно.',
   in_array: 'Полето :attribute не съществува в :other.',
   integer: 'Полето :attribute трябва да бъде цяло число.',
   ip: 'Полето :attribute трябва да бъде IP адрес.',

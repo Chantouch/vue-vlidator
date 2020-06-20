@@ -1,4 +1,6 @@
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"./lang/be":[function(require,module,exports){
+"use strict";
+
 module.exports = {
   accepted: 'Вы павінны прыняць :attribute.',
   active_url: 'Поле :attribute утрымлівае несапраўдны URL.',
@@ -16,7 +18,7 @@ module.exports = {
     string: 'Колькасць сiмвалаў у поле :attribute павінна быць паміж :min і :max.',
     array: 'Колькасць элементаў у поле :attribute павінна быць паміж :min і :max.'
   },
-  boolean: 'Поле :attribute павінна мець значэнне лагічнага тыпу.',
+  "boolean": 'Поле :attribute павінна мець значэнне лагічнага тыпу.',
   confirmed: 'Поле :attribute не супадае з пацвярджэннем.',
   date: 'Поле :attribute не з\'яўляецца датай.',
   date_format: 'Поле :attribute не адпавядае фармату :format.',
@@ -42,7 +44,7 @@ module.exports = {
     array: 'The :attribute must have :value items or more.'
   },
   image: 'Поле :attribute павінна быць малюнкам.',
-  in: 'Выбранае значэнне для :attribute памылкова.',
+  "in": 'Выбранае значэнне для :attribute памылкова.',
   in_array: 'The :attribute field does not exist in :other.',
   integer: 'Поле :attribute павінна быць цэлым лікам.',
   ip: 'Поле :attribute дпавінна быць сапраўдным IP-адрасам.',

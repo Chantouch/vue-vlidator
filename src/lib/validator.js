@@ -4,6 +4,7 @@ import Lang from './lang';
 import Attributes from './attributes';
 import AsyncResolvers  from './async';
 import { isObject, isString, isUndefined, isFunction, isNull } from 'lodash';
+import flatten from './flatten';
 
 const numericRules = ['integer', 'numeric'];
 
@@ -152,28 +153,7 @@ class Validator {
    * @param obj
    */
   _flattenObject (obj) {
-    const flattened = {};
-    function recurse(current, property) {
-      if (!property && Object.getOwnPropertyNames(current).length === 0) {
-        return;
-      }
-      if (Object(current) !== current || Array.isArray(current)) {
-        flattened[property] = current;
-      } else {
-        let isEmpty = true;
-        for (const p in current) {
-          isEmpty = false;
-          recurse(current[p], property ? property + '.' + p : p);
-        }
-        if (isEmpty) {
-          flattened[property] = {};
-        }
-      }
-    }
-    if (obj) {
-      recurse(obj);
-    }
-    return flattened;
+    return flatten(obj);
   }
   /**
    * Extract value from nested object using string path with dot notation

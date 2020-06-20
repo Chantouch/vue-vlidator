@@ -1,4 +1,6 @@
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"./lang/fr":[function(require,module,exports){
+"use strict";
+
 module.exports = {
   accepted: 'Le champ :attribute doit être accepté.',
   alpha: 'Le champ :attribute ne peut contenir que des caractères alphabétiques.',
@@ -11,7 +13,7 @@ module.exports = {
   digits: 'Le champ :attribute doit être composé de :digits chiffres.',
   digits_between: 'Le champ :attribute doit contenir entre :min et :max chiffres.',
   different: 'Les champs :attribute et :different doivent être différents.',
-  in: 'Le champ :attribute est invalide.',
+  "in": 'Le champ :attribute est invalide.',
   integer: 'Le champ :attribute doit être un entier.',
   hex: 'Le champ :attribute doit être au format hexadécimal.',
   min: {

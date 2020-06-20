@@ -1,20 +1,28 @@
 import { isObject, isNaN } from 'lodash';
 
-const flatten = (source, flatKey) => {
-  let newSource = {};
-
-  Object.keys(source).forEach(key => {
-    let value = source[key];
-    let currentFlatKey = flatKey ? `${flatKey}.${key}` : key;
-
-    if (isObject(value)) {
-      newSource = Object.assign(newSource, flatten(value, currentFlatKey));
-    } else {
-      newSource[currentFlatKey] = value;
+const flatten = (obj) => {
+  const flattened = {};
+  function recurse(current, property) {
+    if (!property && Object.getOwnPropertyNames(current).length === 0) {
+      return;
     }
-  });
-
-  return newSource;
+    if (Object(current) !== current || Array.isArray(current)) {
+      flattened[property] = current;
+    } else {
+      let isEmpty = true;
+      for (const p in current) {
+        isEmpty = false;
+        recurse(current[p], property ? property + '.' + p : p);
+      }
+      if (isEmpty) {
+        flattened[property] = {};
+      }
+    }
+  }
+  if (obj) {
+    recurse(obj);
+  }
+  return flattened;
 };
 
 export const unflatten = (data) => {

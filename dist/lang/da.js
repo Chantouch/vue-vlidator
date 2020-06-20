@@ -1,4 +1,6 @@
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"./lang/da":[function(require,module,exports){
+"use strict";
+
 module.exports = {
   accepted: ':attribute skal accepteres.',
   after: ':attribute skal være en dato efter :after.',
@@ -16,7 +18,7 @@ module.exports = {
   digits: ':attribute skal have :digits cifre.',
   digits_between: ':attribute skal have mellem :min og :max cifre.',
   different: ':attribute og :different skal være forskellige.',
-  in: 'Det valgte :attribute er ugyldigt.',
+  "in": 'Det valgte :attribute er ugyldigt.',
   integer: ':attribute skal være et heltal.',
   hex: ':attribute skal have hexadecimalt format',
   min: {

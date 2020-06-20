@@ -1,4 +1,6 @@
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"./lang/ru":[function(require,module,exports){
+"use strict";
+
 module.exports = {
   accepted: 'Вы должны принять :attribute.',
   alpha: 'Поле :attribute может содержать только буквы.',
@@ -11,7 +13,7 @@ module.exports = {
   digits: 'Длина цифрового поля :attribute должна быть :digits.',
   digits_between: 'Длинна цифрового поля :attribute должна быть от :min до :max знаков.',
   different: 'Поля :attribute и :different должны различаться.',
-  in: 'Выбранное значение для :attribute ошибочно.',
+  "in": 'Выбранное значение для :attribute ошибочно.',
   integer: 'Поле :attribute должно быть целым числом.',
   hex: 'Поле :attribute должно иметь шестнадцатеричный формат',
   min: {

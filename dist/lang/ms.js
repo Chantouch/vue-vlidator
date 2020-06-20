@@ -1,4 +1,6 @@
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"./lang/ms":[function(require,module,exports){
+"use strict";
+
 module.exports = {
   accepted: ':attribute mesti diterima pakai.',
   active_url: ':attribute bukan URL yang sah.',
@@ -17,7 +19,7 @@ module.exports = {
     string: ':attribute mesti mengandungi antara :min dan :max aksara.',
     array: ':attribute mesti mengandungi antara :min dan :max perkara.'
   },
-  boolean: ':attribute mesti benar atau salah.',
+  "boolean": ':attribute mesti benar atau salah.',
   confirmed: ':attribute pengesahan yang tidak sepadan.',
   date: ':attribute bukan tarikh yang sah.',
   date_format: ':attribute tidak mengikut format :format.',
@@ -43,7 +45,7 @@ module.exports = {
     array: ':attribute mesti mengandungi :value perkara atau lebih.'
   },
   image: ':attribute mesti imej.',
-  in: ':attribute tidak sah.',
+  "in": ':attribute tidak sah.',
   in_array: ':attribute tidak wujud dalam :other.',
   integer: ':attribute mesti integer.',
   ip: ':attribute mesti alamat IP yang sah.',

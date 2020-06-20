@@ -1,7 +1,9 @@
 import Messages from './messages';
 import { isUndefined } from 'lodash';
 
-require('../lang/en');
+require('./lang/km');
+require('./lang/es');
+require('./lang/el');
 
 export const Lang = {
   messages: {},
@@ -42,9 +44,13 @@ export const Lang = {
   _load (lang) {
     if (!this.messages[lang]) {
       try {
-        const rawMessages = require('../lang/' + lang);
+        const rawMessages = require(`./lang/${lang}`);
         this._set(lang, rawMessages);
       } catch (e) {
+        const rawMessages = require('./lang/en');
+        this._set(lang, rawMessages);
+        // eslint-disable-next-line no-console
+        console.warn(e);
       }
     }
   },

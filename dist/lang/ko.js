@@ -1,4 +1,6 @@
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"./lang/ko":[function(require,module,exports){
+"use strict";
+
 module.exports = {
   accepted: ':attribute을(를) 동의해야 합니다.',
   active_url: ':attribute은(는) 유효한 URL이 아닙니다.',
@@ -17,7 +19,7 @@ module.exports = {
     string: ':attribute은(는) :min에서 :max 문자 사이여야 합니다.',
     array: ':attribute은(는) :min에서 :max 개의 항목이 있어야 합니다.'
   },
-  boolean: ':attribute은(는) true 또는 false 이어야 합니다.',
+  "boolean": ':attribute은(는) true 또는 false 이어야 합니다.',
   confirmed: ':attribute 확인 항목이 일치하지 않습니다.',
   date: ':attribute은(는) 유효한 날짜가 아닙니다.',
   date_format: ':attribute이(가) :format 형식과 일치하지 않습니다.',
@@ -43,7 +45,7 @@ module.exports = {
     array: ':attribute의 항목수는 :value개 보다 같거나 많아야 합니다.'
   },
   image: ':attribute은(는) 이미지여야 합니다.',
-  in: '선택된 :attribute은(는) 유효하지 않습니다.',
+  "in": '선택된 :attribute은(는) 유효하지 않습니다.',
   in_array: ':attribute 필드는 :other에 존재하지 않습니다.',
   integer: ':attribute은(는) 정수여야 합니다.',
   ip: ':attribute은(는) 유효한 IP 주소여야 합니다.',

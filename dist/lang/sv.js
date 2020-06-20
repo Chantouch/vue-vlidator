@@ -1,4 +1,6 @@
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"./lang/sv":[function(require,module,exports){
+"use strict";
+
 module.exports = {
   accepted: ':attribute måste accepteras.',
   active_url: ':attribute är inte en giltig webbadress.',
@@ -16,7 +18,7 @@ module.exports = {
     string: ':attribute måste innehålla :min till :max tecken.',
     array: ':attribute måste innehålla mellan :min - :max objekt.'
   },
-  boolean: ':attribute måste vara sant eller falskt.',
+  "boolean": ':attribute måste vara sant eller falskt.',
   confirmed: ':attribute bekräftelsen matchar inte.',
   date: ':attribute är inte ett giltigt datum.',
   date_format: ':attribute matchar inte formatet :format.',
@@ -42,7 +44,7 @@ module.exports = {
     array: ':attribute måste innehålla lika många eller fler än :value objekt.'
   },
   image: ':attribute måste vara en bild.',
-  in: ':attribute är ogiltigt.',
+  "in": ':attribute är ogiltigt.',
   in_array: ':attribute finns inte i :other.',
   integer: ':attribute måste vara en siffra.',
   ip: ':attribute måste vara en giltig IP-adress.',

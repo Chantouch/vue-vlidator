@@ -1,4 +1,6 @@
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"./lang/ka":[function(require,module,exports){
+"use strict";
+
 module.exports = {
   accepted: ':attribute უნდა იყოს მონიშნული.',
   active_url: ':attribute უნდა იყოს URL მისამართი.',
@@ -17,7 +19,7 @@ module.exports = {
     string: ':attribute უნდა იყოს :min-სა და :max სიმბოლოს შორის.',
     array: ':attribute-ის რაოდენობა უნდა იყოს :min-დან :max-მდე.'
   },
-  boolean: ':attribute უნდა იყოს true, false, 0 ან 1.',
+  "boolean": ':attribute უნდა იყოს true, false, 0 ან 1.',
   confirmed: ':attribute არ ემთხვევა დადასტურებას.',
   date: ':attribute შეიცავს თარიღის არასწორ ფორმატს.',
   date_format: ':attribute არ ემთხვევა თარიღის ფორმატს: :format.',
@@ -43,7 +45,7 @@ module.exports = {
     array: ':attribute უნდა შეიცავდეს მინიმუმ :value ელემენტს.'
   },
   image: ':attribute უნდა იყოს სურათი.',
-  in: 'მითითებული :attribute არასწორია.',
+  "in": 'მითითებული :attribute არასწორია.',
   in_array: ':attribute უნდა არსებობდეს :other-ში.',
   integer: ':attribute უნდა იყოს მთელი რიცხვი.',
   ip: ':attribute უნდა იყოს IP მისამართი.',
