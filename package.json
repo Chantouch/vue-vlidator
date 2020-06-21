@@ -74,6 +74,7 @@
     "dev": "vue-cli-service serve",
     "pre-commit": "npm run lint:spec && npm run lint && npm run test",
     "build": "rimraf dist/* && babel src/lib -d dist",
+    "build:demo": "vue-cli-service build --dest demo",
     "prepublish": "yarn build",
     "lint": "eslint \"./src/**/*.js\"",
     "lint:spec": "eslint \"./spec/**/*.js\" --rule 'no-redeclare: off'",
