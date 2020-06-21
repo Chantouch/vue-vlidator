@@ -6,4 +6,4 @@ scripts/
 karma.conf.js
 Gruntfile.js
 gulpfile.js
-.idea
+.idea/
