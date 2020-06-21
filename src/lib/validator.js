@@ -33,7 +33,7 @@ class Validator {
    *
    * @type {string}
    */
-  get lang() {
+  static getLang() {
     return this.locale;
   }
 
@@ -42,7 +42,7 @@ class Validator {
    *
    * @type {string}
    */
-  set lang(lang) {
+  static setLang(lang) {
     this.locale = lang;
   }
 
@@ -458,7 +458,7 @@ class Validator {
    * @param {object} messages
    * @return {this}
    */
-  setMessages (lang, messages) {
+  static setMessages (lang, messages) {
     Lang._set(lang, messages);
     return this;
   }
@@ -468,7 +468,7 @@ class Validator {
    * @param  {string} lang
    * @return {Messages}
    */
-  getMessages (lang) {
+  static getMessages (lang) {
     return Lang._get(lang);
   }
   /**
@@ -485,7 +485,7 @@ class Validator {
    *
    * @return {string}
    */
-  getDefaultLang () {
+  static getDefaultLang () {
     return this.locale;
   }
   /**
@@ -496,7 +496,7 @@ class Validator {
    * @param  {string}   message
    * @return {void}
    */
-  register (name, fn, message) {
+  static register (name, fn, message) {
     const lang = this.getDefaultLang();
     Rules.register(name, fn);
     Lang._setRuleMessage(lang, name, message);
@@ -509,7 +509,7 @@ class Validator {
    * @param  {string}   message
    * @return {void}
    */
-  registerImplicit (name, fn, message) {
+  static registerImplicit (name, fn, message) {
     const lang = this.getDefaultLang();
     Rules.registerImplicit(name, fn);
     Lang._setRuleMessage(lang, name, message);
@@ -522,7 +522,7 @@ class Validator {
    * @param  {string}   message
    * @return {void}
    */
-  registerAsync (name, fn, message) {
+  static registerAsync (name, fn, message) {
     const lang = this.getDefaultLang();
     Rules.registerAsync(name, fn);
     Lang._setRuleMessage(lang, name, message);
@@ -535,7 +535,7 @@ class Validator {
    * @param  {string}   message
    * @return {void}
    */
-  registerAsyncImplicit (name, fn, message) {
+  static registerAsyncImplicit (name, fn, message) {
     const lang = this.getDefaultLang();
     Rules.registerAsyncImplicit(name, fn);
     Lang._setRuleMessage(lang, name, message);
@@ -547,7 +547,7 @@ class Validator {
    * @param  {string}   message
    * @return {void}
    */
-  registerMissedRuleValidator (fn, message) {
+  static registerMissedRuleValidator (fn, message) {
     Rules.registerMissedRuleValidator(fn, message);
   }
 }

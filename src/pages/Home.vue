@@ -68,7 +68,7 @@
     vlidator: {
       rules: {
         form: {
-          name: 'required|min:4',
+          name: 'required|min:4|password',
           email: 'required|email',
           age: 'required|numeric|min:18|max:50'
         }

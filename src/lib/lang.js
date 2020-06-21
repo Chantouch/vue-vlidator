@@ -1,11 +1,6 @@
 import Messages from './messages';
 import { isUndefined } from 'lodash';
 
-require('./lang/km');
-require('./lang/es');
-require('./lang/el');
-require('./lang/ja');
-
 export const Lang = {
   messages: {},
   /**

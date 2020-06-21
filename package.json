@@ -1,5 +1,5 @@
 {
-  "name": "vue-vlidator",
+  "name": "vue-vlidator2",
   "description": "Validation library inspired by Laravel's Validator",
   "version": "0.0.2",
   "author": "Chantouch Sek <chantouchsek.cs83@gmail.com>",
@@ -31,7 +31,12 @@
     "@babel/core": "^7.10.3",
     "@babel/preset-env": "^7.10.3",
     "@vue/cli-service": "^4.4.4",
+    "babel-cli": "^6.9.0",
+    "babel-plugin-transform-async-to-generator": "^6.16.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.16.0",
     "babel-preset-es2015": "^6.24.1",
+    "babel-preset-minify": "^0.5.1",
     "babelify": "^10.0.0",
     "bootstrap": "^4.5.0",
     "bootstrap-vue": "^2.15.0",
@@ -67,7 +72,7 @@
   "scripts": {
     "dev": "vue-cli-service serve",
     "pre-commit": "npm run lint:spec && npm run lint && npm run test",
-    "build": "rimraf dist && grunt dist",
+    "build": "rimraf dist/* && babel src/lib -d dist",
     "lint": "eslint \"./src/**/*.js\"",
     "lint:spec": "eslint \"./spec/**/*.js\" --rule 'no-redeclare: off'",
     "lint:fix": "eslint \"./src/**/*.js\" --fix",

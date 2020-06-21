@@ -44,5 +44,6 @@ module.exports = {
   string: ':attributeは文字のみで入力してください。',
   url: ':attributeは正しいURIを入力してください。',
   regex: ':attributeの値はパターンにマッチする必要があります。',
+  password: ':attributeパスワードでなければなりません。',
   attributes: {}
 };
