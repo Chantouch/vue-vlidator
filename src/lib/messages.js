@@ -1,4 +1,6 @@
 import Attributes from './attributes';
+import flatten from './flatten';
+import { isObject, isString } from 'lodash';
 
 class Messages {
   constructor (lang, messages = []) {
@@ -45,10 +47,11 @@ class Messages {
    */
   _getAttributeName(attribute) {
     let name = attribute;
+    const attributes = flatten(this.messages.attributes);
     if (this.attributeNames.hasOwnProperty(attribute)) {
       return this.attributeNames[attribute];
-    } else if (this.messages.attributes.hasOwnProperty(attribute)) {
-      name = this.messages.attributes[attribute];
+    } else if (attributes.hasOwnProperty(attribute)) {
+      name = attributes[attribute];
     }
     if (this.attributeFormatter) {
       name = this.attributeFormatter(name);
@@ -68,7 +71,7 @@ class Messages {
   /**
    * Render message
    *
-   * @param  {Rule} rule
+   * @param  {Rules} rule
    * @return {string}
    */
   render(rule) {
@@ -88,7 +91,7 @@ class Messages {
   /**
    * Get the template to use for given rule
    *
-   * @param  {Rule} rule
+   * @param  {Rules} rule
    * @return {string}
    */
   _getTemplate(rule) {
@@ -108,7 +111,7 @@ class Messages {
         break;
       }
     }
-    if (typeof template === 'object') {
+    if (isObject(template)) {
       template = template[rule._getValueType()];
     }
     return template;
@@ -117,7 +120,7 @@ class Messages {
   /**
    * Replace placeholders in the template using the data object
    *
-   * @param  {Rule} rule
+   * @param  {Rules} rule
    * @param  {string} template
    * @param  {object} data
    * @return {string}
@@ -127,7 +130,7 @@ class Messages {
     let attribute;
     data.attribute = this._getAttributeName(rule.attribute);
     data[rule.name] = data[rule.name] || rule.getParameters().join(',');
-    if (typeof template === 'string' && typeof data === 'object') {
+    if (isString(template) && isObject(data)) {
       message = template;
       for (attribute in data) {
         message = message.replace(new RegExp(':' + attribute, 'g'), data[attribute]);

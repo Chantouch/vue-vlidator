@@ -1,6 +1,5 @@
 import Messages from './messages';
-
-require('../lang/en');
+import { isUndefined } from 'lodash';
 
 export const Lang = {
   messages: {},
@@ -25,7 +24,7 @@ export const Lang = {
    */
   _setRuleMessage (lang, attribute, message) {
     this._load(lang);
-    if (message === undefined) {
+    if (isUndefined(message)) {
       message = this.messages[lang].def;
     }
 
@@ -41,9 +40,13 @@ export const Lang = {
   _load (lang) {
     if (!this.messages[lang]) {
       try {
-        const rawMessages = require('../lang/' + lang);
+        const rawMessages = require(`./lang/${lang}`);
         this._set(lang, rawMessages);
       } catch (e) {
+        const rawMessages = require('./lang/en');
+        this._set(lang, rawMessages);
+        // eslint-disable-next-line no-console
+        console.warn(e);
       }
     }
   },

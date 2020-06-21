@@ -10,55 +10,165 @@ This library was inspired by the [Laravel framework's Validator](http://laravel.
 * Works in both the browser and Node.
 * Readable and declarative validation rules.
 * Error messages with multilingual support.
-* AMD/Require.js and CommonJS/Browserify support.
 
 ## Installation
 
 ### Using npm
 
-```bash
+```npm
 npm install vue-vlidator
 ```
 
 ### Using yarn
 
-```bash
+```yarn
 yarn add vue-vlidator
 ```
 
 ### Browser
 
 ```html
-<script src="validator.js"></script>
+<script src="vue-vlidator.js"></script>
 ```
 
 ### Node.js / Browserify
 
 ```js
 // ES5
-let Validator = require('validatorjs');
+let Validator = require('vue-vlidator');
 ```
 
 ```js
 // ES6
-import Validator from 'validatorjs';
+import Validator from 'vue-vlidator';
 ```
 
 ### Basic Usage
 
 ```js
-let validation = new Validator(data, rules [, customErrorMessages]);
+let validation = new Validator(data, rules, locale, [customErrorMessages]);
 ```
 
 __data__ {Object} - The data you want to validate
 
 __rules__ {Object} - Validation rules
 
+__locale__ {string} - Validation locale
+
 __customErrorMessages__ {Object} - Optional custom error messages to return
+
+## Nuxt Support
+- Create file `~/plugings/vue-vlidator.js`
+
+```js
+import Vue from 'vue';
+import Validator from 'vue-vlidator';
+
+const options = { locale: 'km' }
+
+Vue.use(Validator, options);
+```
+
+#### Available options
+1. locale {string}
+2. customMessages {Object}
+
+#### Example in Vue component
+```js
+<template>
+    <b-form @submit.prevent="onSubmit">
+        <b-form-group
+                id="fieldset-1"
+                description="Let us know your name."
+                label="Enter your name"
+                label-for="input-1"
+                :state="$vlidator.errors.has('form.name')"
+                :invalid-feedback="$vlidator.errors.first('form.name')"
+        >
+            <b-form-input
+                    id="input-1"
+                    v-model="form.name"
+                    :state="!$vlidator.errors.has('form.name')"
+                    trim
+            />
+        </b-form-group>
+        <b-form-group
+                id="fieldset-2"
+                description="Let us know your email."
+                label="Enter your email"
+                label-for="input-2"
+                :state="$vlidator.errors.has('form.email')"
+                :invalid-feedback="$vlidator.errors.first('form.email')"
+        >
+            <b-form-input
+                    id="input-2"
+                    v-model="form.email"
+                    :state="!$vlidator.errors.has('form.email')"
+                    type="email"
+                    trim
+            />
+        </b-form-group>
+        <b-form-group
+                id="fieldset-3"
+                description="Let us know your age."
+                label="Enter your age"
+                label-for="input-3"
+                :state="$vlidator.errors.has('form.age')"
+                :invalid-feedback="$vlidator.errors.first('form.age')"
+        >
+            <b-form-input
+                    id="input-3"
+                    v-model.number="form.age"
+                    :state="!$vlidator.errors.has('form.age')"
+                    type="number"
+                    trim
+            />
+        </b-form-group>
+        <b-button type="submit" variant="primary" :disabled="$vlidator.errors.any()">
+            Submit
+        </b-button>
+    </b-form>
+</template>
+
+<script>
+  export default {
+    name: "HomePage",
+    data () {
+      return {
+        form: {
+          name: 'John',
+          email: 'johndoe@gmail.com',
+          age: 18
+        }
+      }
+    },
+    vlidator: {
+      rules: {
+        form: {
+          name: 'required|min:4',
+          email: 'required|email',
+          age: 'required|numeric|min:18|max:50'
+        }
+      }
+    },
+    methods: {
+      onSubmit () {
+        alert(JSON.stringify(this.form))
+      }
+    },
+  }
+</script>
+```
+
+---
+
+## Example for NodeJs
 
 #### Example 1 - Passing Validation
 
 ```js
+import Validator from 'vue-vlidator'
+
 let data = {
   name: 'John',
   email: 'johndoe@gmail.com',
@@ -133,7 +243,7 @@ let nested = {
 
 let flattened = {
   'name': 'required',
-  'bio.age': 'min:18'
+  'bio.age': 'min:18',
   'bio.education.primary': 'string',
   'bio.education.secondary': 'string'
 };
@@ -163,7 +273,7 @@ We could declare our validation rules as follows:
 ```js
 let rules = {
   'users.*.name': 'required',
-  'users.*.bio.age': 'min:18'
+  'users.*.bio.age': 'min:18',
   'users.*.bio.education.primary': 'string',
   'users.*.bio.education.secondary': 'string'
 };
@@ -183,7 +293,7 @@ The field under validation must be after the given date.
 
 #### after_or_equal:date
 
-The field unter validation must be after or equal to the given field
+The field under validation must be after or equal to the given field
 
 #### alpha
 
@@ -212,7 +322,7 @@ The field under validation must be before or equal to the given date.
 
 #### between:min,max
 
-The field under validation must have a size between the given min and max. Strings, numerics, and files are evaluated in the same fashion as the size rule.
+The field under validation must have a size between the given min and max. Strings, numeric, and files are evaluated in the same fashion as the size rule.
 
 #### boolean
 
@@ -433,11 +543,32 @@ returns an object containing all error messages for all failing attributes
 
 #### .has(attribute)
 
-returns true if error messages exist for an attribute, false otherwise
+returns true if error messages exist for an attribute, undefined otherwise
 
 #### .errorCount
 
 the number of validation errors
+
+#### .any()
+
+return true if there is any errors exist
+
+#### .fill(errors = {})
+
+fill the errors object, use for custom fill errors
+
+#### .flush()
+
+to clear all errors
+
+#### .clear(attribute)
+
+to clear the given attribute from errors
+
+#### .keydown(event)
+
+to clear the input target.name give provide in form
+- Example: `<input type='text' name='name' v-model='name' />`
 
 ```js
 let validation = new Validator(input, rules);
@@ -483,6 +614,22 @@ validation.errors.first('username'); // returns 'The username is too long. Max l
 ```
 
 You can even provide error messages on a per attribute basis! Just set the message's key to 'validator.attribute'
+
+Attributes can be like below:
+
+```js
+module.exports = {
+    regex: 'The :attribute format is invalid.',
+    attributes: {
+      'form.age': 'អាយុ',
+      name: 'ឈ្មោះ',
+      form: {
+        name: 'ឈ្មោះ',
+        gender: 'Sex'
+      }
+    }
+}
+```
 
 ```js
 let input = { name: '', email: '' };
@@ -535,7 +682,7 @@ Note: by default all _ characters will be replaced with spaces.
 Error messages are in English by default. To include another language in the browser, reference the language file in a script tag and call `Validator.useLang('lang_code')`.
 
 ```html
-<script src="dist/validator.js"></script>
+<script src="dist/vue-vlidator.js"></script>
 <script src="dist/lang/ru.js"></script>
 <script>
   Validator.useLang('es');
@@ -545,7 +692,7 @@ Error messages are in English by default. To include another language in the bro
 In Node, it will automatically pickup on the language source files.
 
 ```js
-let Validator = require('validatorjs');
+let Validator = require('vue-vlidator');
 Validator.useLang('ru');
 ```
 
@@ -587,12 +734,13 @@ Validator.setMessages('en', messages);
 
 ### License
 
-Copyright &copy; 2012-2019 David Tang
+Copyright &copy; 2020 Chantouch Sek
+
 Released under the MIT license
 
 ### Credits
 
-validatorjs re-write by Chantouch Sek
+vue-vlidator re-write by Chantouch Sek
 
 E-Mail: [chantouchsek.cs83@gmail.com](mailto:chantouchsek.cs93@gmail.com)
 

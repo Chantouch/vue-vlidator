@@ -3,6 +3,8 @@ import Rules from './rules';
 import Lang from './lang';
 import Attributes from './attributes';
 import AsyncResolvers  from './async';
+import { isObject, isString, isUndefined, isFunction, isNull } from 'lodash';
+import flatten from './flatten';
 
 const numericRules = ['integer', 'numeric'];
 
@@ -14,7 +16,7 @@ class Validator {
    * @param {Object} customMessages
    * @param {string} locale
    */
-  constructor (input, rules = {}, customMessages = {}, locale = 'en') {
+  constructor (input, rules = {}, locale = 'en', customMessages = {}) {
     this.input = input || {};
     this.messages = Lang._make(locale);
     this.messages._setCustom(customMessages);
@@ -31,7 +33,7 @@ class Validator {
    *
    * @type {string}
    */
-  get lang() {
+  static getLang() {
     return this.locale;
   }
 
@@ -40,7 +42,7 @@ class Validator {
    *
    * @type {string}
    */
-  set lang(lang) {
+  static setLang(lang) {
     this.locale = lang;
   }
 
@@ -136,7 +138,7 @@ class Validator {
   /**
    * Add failure and error message for given rule
    *
-   * @param {Rule} rule
+   * @param {Rules} rule
    * @param message
    */
   _addFailure (rule, message = null) {
@@ -151,28 +153,7 @@ class Validator {
    * @param obj
    */
   _flattenObject (obj) {
-    const flattened = {};
-    function recurse(current, property) {
-      if (!property && Object.getOwnPropertyNames(current).length === 0) {
-        return;
-      }
-      if (Object(current) !== current || Array.isArray(current)) {
-        flattened[property] = current;
-      } else {
-        let isEmpty = true;
-        for (const p in current) {
-          isEmpty = false;
-          recurse(current[p], property ? property + '.' + p : p);
-        }
-        if (isEmpty) {
-          flattened[property] = {};
-        }
-      }
-    }
-    if (obj) {
-      recurse(obj);
-    }
-    return flattened;
+    return flatten(obj);
   }
   /**
    * Extract value from nested object using string path with dot notation
@@ -194,7 +175,7 @@ class Validator {
     }
     let i = 0, l = keys.length;
     for (; i < l; i++) {
-      if (typeof copy === 'object' && copy !== null && Object.hasOwnProperty.call(copy, keys[i])) {
+      if (isObject(copy) && !isNull(copy) && Object.hasOwnProperty.call(copy, keys[i])) {
         copy = copy[keys[i]];
       } else {
         return;
@@ -240,12 +221,12 @@ class Validator {
     if (rulesArray instanceof Array) {
       rulesArray = this._prepareRulesArray(rulesArray);
     }
-    if (typeof rulesArray === 'string') {
+    if (isString(rulesArray)) {
       rulesArray = rulesArray.split('|');
     }
     let i = 0, len = rulesArray.length, rule;
     for (; i < len; i++) {
-      rule = typeof rulesArray[i] === 'string' ? this._extractRuleAndRuleValue(rulesArray[i]) : rulesArray[i];
+      rule = isString(rulesArray[i]) ? this._extractRuleAndRuleValue(rulesArray[i]) : rulesArray[i];
       if (rule.value) {
         rule.value = this._replaceWildCards(rule.value, wildCardValues);
         this._replaceWildCardsMessages(wildCardValues);
@@ -299,7 +280,7 @@ class Validator {
     const rules = [];
     let i = 0, len = rulesArray.length;
     for (; i < len; i++) {
-      if (typeof rulesArray[i] === 'object') {
+      if (isObject(rulesArray[i])) {
         for (const rule in rulesArray[i]) {
           rules.push({
             name: rule,
@@ -367,7 +348,7 @@ class Validator {
   /**
    * Determine if rule is validatable
    *
-   * @param  {Rule}   rule
+   * @param  {Rules}   rule
    * @param  {any|void}  value
    * @return {boolean}
    */
@@ -386,7 +367,7 @@ class Validator {
    */
   _shouldStopValidating (attribute, rulePassed) {
     const stopOnAttributes = this.stopOnAttributes;
-    if (typeof stopOnAttributes === 'undefined' || stopOnAttributes === false || rulePassed === true) {
+    if (isUndefined(stopOnAttributes) || stopOnAttributes === false || rulePassed === true) {
       return false;
     }
     if (stopOnAttributes instanceof Array) {
@@ -464,7 +445,7 @@ class Validator {
    * @return {boolean}
    */
   _checkAsync (funcName, callback) {
-    const hasCallback = typeof callback === 'function';
+    const hasCallback = isFunction(callback);
     if (this.hasAsync && !hasCallback) {
       throw funcName + ' expects a callback when async rules are being tested.';
     }
@@ -477,7 +458,7 @@ class Validator {
    * @param {object} messages
    * @return {this}
    */
-  setMessages (lang, messages) {
+  static setMessages (lang, messages) {
     Lang._set(lang, messages);
     return this;
   }
@@ -487,7 +468,7 @@ class Validator {
    * @param  {string} lang
    * @return {Messages}
    */
-  getMessages (lang) {
+  static getMessages (lang) {
     return Lang._get(lang);
   }
   /**
@@ -504,7 +485,7 @@ class Validator {
    *
    * @return {string}
    */
-  getDefaultLang () {
+  static getDefaultLang () {
     return this.locale;
   }
   /**
@@ -515,7 +496,7 @@ class Validator {
    * @param  {string}   message
    * @return {void}
    */
-  register (name, fn, message) {
+  static register (name, fn, message) {
     const lang = this.getDefaultLang();
     Rules.register(name, fn);
     Lang._setRuleMessage(lang, name, message);
@@ -528,7 +509,7 @@ class Validator {
    * @param  {string}   message
    * @return {void}
    */
-  registerImplicit (name, fn, message) {
+  static registerImplicit (name, fn, message) {
     const lang = this.getDefaultLang();
     Rules.registerImplicit(name, fn);
     Lang._setRuleMessage(lang, name, message);
@@ -541,7 +522,7 @@ class Validator {
    * @param  {string}   message
    * @return {void}
    */
-  registerAsync (name, fn, message) {
+  static registerAsync (name, fn, message) {
     const lang = this.getDefaultLang();
     Rules.registerAsync(name, fn);
     Lang._setRuleMessage(lang, name, message);
@@ -554,7 +535,7 @@ class Validator {
    * @param  {string}   message
    * @return {void}
    */
-  registerAsyncImplicit (name, fn, message) {
+  static registerAsyncImplicit (name, fn, message) {
     const lang = this.getDefaultLang();
     Rules.registerAsyncImplicit(name, fn);
     Lang._setRuleMessage(lang, name, message);
@@ -566,7 +547,7 @@ class Validator {
    * @param  {string}   message
    * @return {void}
    */
-  registerMissedRuleValidator (fn, message) {
+  static registerMissedRuleValidator (fn, message) {
     Rules.registerMissedRuleValidator(fn, message);
   }
 }
