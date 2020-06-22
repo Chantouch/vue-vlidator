@@ -8,12 +8,15 @@
   "jsnext:main": "src/lib/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Chantouch/validatorjs"
+    "url": "https://github.com/Chantouch/vue-vlidator"
   },
   "bugs": {
-    "url": "https://github.com/Chantouch/validatorjs/issues?labels=bug&milestone=1&page=1&state=open"
+    "url": "https://github.com/Chantouch/vue-vlidator/issues?labels=bug&milestone=1&page=1&state=open"
   },
   "keywords": [
+    "vue",
+    "vue-vlidator",
+    "vue-validator",
     "validatorjs",
     "validator.js",
     "data validation",

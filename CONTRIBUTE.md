@@ -8,7 +8,7 @@ Before making a PR, please open an issue so we can discuss the feature/change.
 Clone the repository:
 
 ```shell
-git clone https://github.com/skaterdav85/validatorjs.git && cd validatorjs
+git clone https://github.com/Chantouch/vue-vlidator.git && cd validatorjs
 ```
 
 Install dependencies:
