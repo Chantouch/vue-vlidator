@@ -10,8 +10,6 @@
     "build:demo": "vue-cli-service build --dest demo",
     "dev": "vue-cli-service serve",
     "lint:fix": "eslint \"./src/**/*.js\" --fix",
-    "lint:spec": "eslint \"./spec/**/*.js\" --rule 'no-redeclare: off'",
-    "pre-commit": "npm run lint:spec && npm run lint && npm run test",
     "prepublish": "yarn build",
     "test": "jest"
   },
