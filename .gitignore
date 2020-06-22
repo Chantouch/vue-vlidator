@@ -10,3 +10,4 @@ RELEASE.md
 sandbox/
 spec/checklist.md
 dist/
+yarn-error.log
