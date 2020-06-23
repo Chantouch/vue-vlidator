@@ -7,13 +7,13 @@ export default ({ app }) => {
     const [pluginOptions] = [<%= serialize(options) %>]
     if (i18n && i18n.locale && !pluginOptions.locale) {
         const lang = require('@/lang/' + i18n.locale)
-        const { attributes = {}, messages } = lang.default ? lang.default : lang
+        const { attributes = {}, messages = {} } = lang.default ? lang.default : lang
         Object.assign(pluginOptions, {
             locale: i18n.locale,
             customAttributes: attributes,
             customMessages: messages
         })
-        console.log(pluginOptions);
+        console.log(lang.default);
     }
     Vue.use(Validator, pluginOptions); // add vue-vlidator as Vue plugin
     app.$vlidator = new Validator(pluginOptions);
