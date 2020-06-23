@@ -82,6 +82,7 @@
     },
     methods: {
       onSubmit () {
+        this.validate()
         alert(JSON.stringify(this.form))
       }
     },

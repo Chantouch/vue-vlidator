@@ -38,20 +38,32 @@ class Vlidator {
             let validations = get(rules, path);
             if (validations !== undefined) {
               this_.$watch(path, () => {
-                const input = getData({ rules, data: this_.$data });
-                Object.assign(defaults, { locale, ...vlidator });
-                const validator = new Validator(input, rules, defaults);
-                validator.check();
-                this_.$options.$vlidator = validator;
-                if (!isUndefined(this_.$errors) && isFunction(this_.$errors.fill)) {
-                  const errors = validator.errors.all() || {};
-                  this_.$errors.fill(errors);
-                }
+                this_.validate({ locale });
               });
             }
           });
         }
-      }
+      },
+      methods: {
+        validate () {
+          const this_ = this;
+          let locale = this_.$vlidator.getDefaultLang();
+          if (this_.$i18n && this_.$t) {
+            locale = this_.$i18n.locale;
+          }
+          const vlidator = this_.$options.vlidator;
+          const { rules = {} } = vlidator;
+          const input = getData({ rules, data: this_.$data });
+          Object.assign(defaults, { locale, ...vlidator });
+          const validator = new Validator(input, rules, defaults);
+          validator.check();
+          this_.$options.$vlidator = validator;
+          if (!isUndefined(this_.$errors) && isFunction(this_.$errors.fill)) {
+            const errors = validator.errors.all() || {};
+            this_.$errors.fill(errors);
+          }
+        }
+      },
     });
   }
 }
