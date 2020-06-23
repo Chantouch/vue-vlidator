@@ -14,6 +14,7 @@
     "test": "jest"
   },
   "main": "dist/index.js",
+  "types": "src/types/index.d.ts",
   "dependencies": {
     "date-fns": "2.0.1",
     "vue": "^2.6.11"

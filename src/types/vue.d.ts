@@ -2,10 +2,10 @@
  * Extends interfaces in Vue.js
  */
 
-import Vlidator from './index';
+import Validator from './';
 
 declare module 'vue/types/vue' {
   interface Vue {
-    $vlidator: Vlidator;
+    $vlidator: Validator;
   }
 }

@@ -3,7 +3,7 @@ import Vue, { PluginFunction } from 'vue';
 
 type AsyncFunction = ((arg0: any) => Promise<any>) | Promise<any>;
 
-export default class VueWait extends ValidatorInstance {
+export default class Validator extends ValidatorInstance {
   constructor(options?: ValidatorOptions);
 
   static install(): PluginFunction<any>;
@@ -29,7 +29,8 @@ export class ValidatorInstance {
    * @returns {boolean}
    * @memberof ValidatorInstance
    */
-  first(attribute: string|string[]): boolean;
+  first(attribute: string|string[]): string;
+  has(attribute: string|string[]): boolean;
 
   /**
    * Sets the progress of the given loader.

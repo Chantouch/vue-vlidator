@@ -20,7 +20,7 @@ Usage:
 
 const { resolve } = require('path');
 
-module.exports = function nuxtVueVlidatorModule (moduleOptions) {
+module.exports = function nuxtVueVlidatorModule (moduleOptions = {}) {
   const options = Object.assign({}, this.options.$vlidator, moduleOptions);
 
   // Register plugin

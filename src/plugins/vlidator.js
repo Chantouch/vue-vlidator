@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Vlidator from '../lib';
+import Validator from '../lib';
 // import Validator from '../../dist';
 
 const customAttributes = {
@@ -8,4 +8,4 @@ const customAttributes = {
   }
 };
 
-Vue.use(Vlidator, { locale: 'en', customAttributes });
+Vue.use(Validator, { locale: 'en', customAttributes });

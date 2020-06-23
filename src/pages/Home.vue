@@ -72,13 +72,7 @@
           email: 'required|email',
           age: 'required|numeric|min:18|max:50'
         }
-      },
-      customAttributes: {
-        form: {
-          name: 'my name'
-        }
-      },
-      locale: 'en'
+      }
     },
     methods: {
       onSubmit () {
