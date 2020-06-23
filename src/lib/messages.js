@@ -48,8 +48,9 @@ class Messages {
   _getAttributeName(attribute) {
     let name = attribute;
     const attributes = flatten(this.messages.attributes);
-    if (this.attributeNames.hasOwnProperty(attribute)) {
-      return this.attributeNames[attribute];
+    const attributeNames = flatten(this.attributeNames);
+    if (attributeNames.hasOwnProperty(attribute)) {
+      return attributeNames[attribute];
     } else if (attributes.hasOwnProperty(attribute)) {
       name = attributes[attribute];
     }

@@ -59,7 +59,7 @@
     data () {
       return {
         form: {
-          name: 'John',
+          name: '',
           email: 'johndoe@gmail.com',
           age: 18
         }
@@ -68,11 +68,17 @@
     vlidator: {
       rules: {
         form: {
-          name: 'required|min:4|password',
+          name: 'required|min:4|string',
           email: 'required|email',
           age: 'required|numeric|min:18|max:50'
         }
-      }
+      },
+      customAttributes: {
+        form: {
+          name: 'my name'
+        }
+      },
+      locale: 'en'
     },
     methods: {
       onSubmit () {

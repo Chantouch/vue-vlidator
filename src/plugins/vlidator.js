@@ -1,5 +1,11 @@
 import Vue from 'vue';
-import Validator from '../lib';
+import Vlidator from '../lib';
 // import Validator from '../../dist';
 
-Vue.use(Validator, { locale: 'en' });
+const customAttributes = {
+  form: {
+    name: 'name'
+  }
+};
+
+Vue.use(Vlidator, { locale: 'en', customAttributes });

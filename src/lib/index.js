@@ -4,13 +4,20 @@ import flatten from './flatten';
 
 class Vlidator {
   install (Vue, options = {}) {
-    const { locale = 'en', customMessages = {} } = options;
+    const defaults = {
+      locale: 'en',
+      input: {},
+      rules: {},
+      customMessages: {},
+      customAttributes: {},
+      ...options
+    };
     Vue.mixin({
       beforeCreate () {
         this.$options.$vlidator = {};
         const input = this.$data || {};
-        const rules = {};
-        Vue.util.defineReactive(this.$options, '$vlidator', new Validator(input, rules, locale, customMessages));
+        const { rules } = defaults;
+        Vue.util.defineReactive(this.$options, '$vlidator', new Validator(input, rules, defaults));
         if (!this.$options.computed) {
           this.$options.computed = {};
         }
@@ -21,6 +28,10 @@ class Vlidator {
       created () {
         const this_ = this;
         const vlidator = this_.$options.vlidator;
+        let locale = this_.$vlidator.getDefaultLang();
+        if (this_.$i18n && this_.$t) {
+          locale = this_.$i18n.locale;
+        }
         if (vlidator && vlidator.rules) {
           const { rules = {} } = vlidator;
           Object.entries(flatten(this_.$data)).forEach(([path, _]) => {
@@ -28,7 +39,8 @@ class Vlidator {
             if (validations !== undefined) {
               this_.$watch(path, () => {
                 const input = getData({ rules, data: this_.$data });
-                const validator = new Validator(input, rules, locale, customMessages);
+                Object.assign(defaults, { locale, ...vlidator });
+                const validator = new Validator(input, rules, defaults);
                 validator.check();
                 this_.$options.$vlidator = validator;
                 if (!isUndefined(this_.$errors) && isFunction(this_.$errors.fill)) {

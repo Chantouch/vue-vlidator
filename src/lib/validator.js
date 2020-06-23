@@ -13,13 +13,14 @@ class Validator {
    * The constructor of validator
    * @param input
    * @param {Object} rules
-   * @param {Object} customMessages
-   * @param {string} locale
+   * @param {Object} options
    */
-  constructor (input, rules = {}, locale = 'en', customMessages = {}) {
+  constructor (input = {}, rules = {}, options = {}) {
+    const { locale = 'en', customMessages = {}, customAttributes = {} } = options;
     this.input = input || {};
     this.messages = Lang._make(locale);
     this.messages._setCustom(customMessages);
+    this.setAttributeNames(customAttributes);
     this.setAttributeFormatter(this.attributeFormatter());
     this.errors = new Errors();
     this.errorCount = 0;
@@ -33,7 +34,7 @@ class Validator {
    *
    * @type {string}
    */
-  static getLang() {
+  getLang() {
     return this.locale;
   }
 
@@ -42,7 +43,7 @@ class Validator {
    *
    * @type {string}
    */
-  static setLang(lang) {
+  setLang(lang) {
     this.locale = lang;
   }
 
@@ -458,7 +459,7 @@ class Validator {
    * @param {object} messages
    * @return {this}
    */
-  static setMessages (lang, messages) {
+  setMessages (lang, messages) {
     Lang._set(lang, messages);
     return this;
   }
@@ -468,7 +469,7 @@ class Validator {
    * @param  {string} lang
    * @return {Messages}
    */
-  static getMessages (lang) {
+  getMessages (lang) {
     return Lang._get(lang);
   }
   /**
@@ -485,7 +486,7 @@ class Validator {
    *
    * @return {string}
    */
-  static getDefaultLang () {
+  getDefaultLang () {
     return this.locale;
   }
   /**
@@ -496,7 +497,7 @@ class Validator {
    * @param  {string}   message
    * @return {void}
    */
-  static register (name, fn, message) {
+  register (name, fn, message) {
     const lang = this.getDefaultLang();
     Rules.register(name, fn);
     Lang._setRuleMessage(lang, name, message);
@@ -509,7 +510,7 @@ class Validator {
    * @param  {string}   message
    * @return {void}
    */
-  static registerImplicit (name, fn, message) {
+  registerImplicit (name, fn, message) {
     const lang = this.getDefaultLang();
     Rules.registerImplicit(name, fn);
     Lang._setRuleMessage(lang, name, message);
@@ -522,7 +523,7 @@ class Validator {
    * @param  {string}   message
    * @return {void}
    */
-  static registerAsync (name, fn, message) {
+  registerAsync (name, fn, message) {
     const lang = this.getDefaultLang();
     Rules.registerAsync(name, fn);
     Lang._setRuleMessage(lang, name, message);
@@ -535,7 +536,7 @@ class Validator {
    * @param  {string}   message
    * @return {void}
    */
-  static registerAsyncImplicit (name, fn, message) {
+  registerAsyncImplicit (name, fn, message) {
     const lang = this.getDefaultLang();
     Rules.registerAsyncImplicit(name, fn);
     Lang._setRuleMessage(lang, name, message);
@@ -547,7 +548,7 @@ class Validator {
    * @param  {string}   message
    * @return {void}
    */
-  static registerMissedRuleValidator (fn, message) {
+  registerMissedRuleValidator (fn, message) {
     Rules.registerMissedRuleValidator(fn, message);
   }
 }

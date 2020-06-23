@@ -6,9 +6,13 @@ module.exports = {
   },
   extends: 'eslint:recommended',
   parserOptions: {
-    ecmaVersion: 2018,
     sourceType: "module",
-    allowImportExportEverywhere: true
+    allowImportExportEverywhere: true,
+    ecmaVersion: 2018,
+    ecmaFeatures: {
+      experimentalObjectRestSpread: true,
+      modules: true
+    }
   },
   rules: {
     'no-empty': 'off',
