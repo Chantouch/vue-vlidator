@@ -642,3 +642,7 @@ const getData = (payload = {}) => {
 };
 
 Validator.install = install;
+
+const validator = new Validator();
+
+export { validator as Validator };

@@ -5,7 +5,7 @@
 import Validator from './';
 
 declare module 'vue/types/vue' {
-  interface Vue {
-    $vlidator: Validator;
-  }
+    interface Vue {
+        $vlidator: Validator;
+    }
 }
