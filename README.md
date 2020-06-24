@@ -63,7 +63,19 @@ __locale__ {string} - Validation locale
 __customErrorMessages__ {Object} - Optional custom error messages to return
 
 ## Nuxt Support
-- Create file `~/plugings/vue-vlidator.js`
+
+Put it on top of `nuxt-i18n`
+
+```js
+  modules: [
+    .........
+    'vue-vlidator/nuxt',
+    'nuxt-i18n',
+    ..........
+  ],
+```
+
+### Vue plugins
 
 ```js
 import Vue from 'vue';
@@ -174,7 +186,7 @@ Vue.use(Validator, options);
 ```js
 import Validator from 'vue-vlidator'
 
-let data = {
+let input = {
   name: 'John',
   email: 'johndoe@gmail.com',
   age: 28
@@ -186,7 +198,7 @@ let rules = {
   age: 'min:18'
 };
 
-let validation = new Validator(data, rules);
+let validation = new Validator({ input, rules, customMessages: {}, customAttributes: {} });
 
 validation.passes(); // true
 validation.fails(); // false
@@ -198,11 +210,14 @@ To apply validation rules to the _data_ object, use the same object key names fo
 
 ```js
 let validation = new Validator({
-  name: 'D',
-  email: 'not an email address.com'
-}, {
-  name: 'size:3',
-  email: 'required|email'
+  input: {
+    name: 'D',
+    email: 'not an email address.com'
+  },
+  rules: {
+    name: 'size:3',
+    email: 'required|email'
+  }
 });
 
 validation.fails(); // true
@@ -218,7 +233,7 @@ validation.errors.get('email'); // returns an array of all email error messages
 Nested objects can also be validated. There are two ways to declare validation rules for nested objects. The first way is to declare the validation rules with a corresponding nested object structure that reflects the data. The second way is to declare validation rules with flattened key names. For example, to validate the following data:
 
 ```js
-let data = {
+let input = {
   name: 'John',
   bio: {
     age: 28,
@@ -450,13 +465,16 @@ For each backward slash that you used in your regex pattern, you must escape eac
 
 ```js
 let validation = new Validator({
-  name: 'Doe',
-  salary: '10,000.00',
-  yearOfBirth: '1980'
-}, {
-  name: 'required|size:3',
-  salary: ['required', 'regex:/^(?!0\\.00)\\d{1,3}(,\\d{3})*(\\.\\d\\d)?$/'],
-  yearOfBirth: ['required', 'regex:/^(19|20)[\\d]{2,2}$/']
+  input: {
+    name: 'Doe',
+    salary: '10,000.00',
+    yearOfBirth: '1980'
+  },
+  rules: {
+    name: 'required|size:3',
+    salary: ['required', 'regex:/^(?!0\\.00)\\d{1,3}(,\\d{3})*(\\.\\d\\d)?$/'],
+    yearOfBirth: ['required', 'regex:/^(19|20)[\\d]{2,2}$/']
+  }
 });
 
 validation.fails(); // false
@@ -468,11 +486,14 @@ validation.passes(); // true
 
 ```js
 let validation = new Validator({
-  age: 30,
-  name: ''
-}, {
-  age: ['required', { 'in': [29, 30] }],
-  name: [{ required_if: ['age', 30] }]
+  input: {
+    age: 30,
+    name: ''
+  },
+  rules: {
+    age: ['required', { 'in': [29, 30] }],
+    name: [{ required_if: ['age', 30] }]
+  }
 });
 
 validation.fails(); // true
@@ -515,9 +536,12 @@ Then call your validator using `checkAsync` passing `fails` and `passes` callbac
 
 ```js
 let validator = new Validator({
-	username: 'test123'
-}, {
-	username: 'required|min:3|username_available'
+	input: {
+	  username: 'test123'
+    },
+    rules: {
+      username: 'required|min:3|username_available'
+    }
 });
 
 function passes() {
@@ -598,7 +622,15 @@ let rules = {
   name : 'required'
 };
 
-let validation = new Validator(input, rules, { required: 'You forgot to give a :attribute' });
+let options = {
+  input,
+  rules,
+  customMessages: {
+    required: 'You forgot to give a :attribute'
+  }
+}
+
+let validation = new Validator(options);
 validation.errors.first('name'); // returns 'You forgot to give a name'
 ```
 
@@ -613,11 +645,17 @@ let rules = {
   username : 'max:16'
 };
 
-let validation = new Validator(input, rules, {
-  max: {
-    string: 'The :attribute is too long. Max length is :max.'
+let options = {
+  input,
+  rules,
+  customMessages: {
+    max: {
+      string: 'The :attribute is too long. Max length is :max.'
+    }
   }
-});
+}
+
+let validation = new Validator(options);
 
 validation.errors.first('username'); // returns 'The username is too long. Max length is 16.'
 ```
@@ -643,10 +681,16 @@ module.exports = {
 ```js
 let input = { name: '', email: '' };
 let rules = { name : 'required', email : 'required' };
-
-let validation = new Validator(input, rules, {
+let customMessages = {
   "required.email": "Without an :attribute we can't reach you!"
-});
+}
+let options = {
+  input,
+  rules,
+  customMessages
+}
+
+let validation = new Validator(options);
 
 validation.errors.first('name'); // returns  'The name field is required.'
 validation.errors.first('email'); // returns 'Without an email we can\'t reach you!'
@@ -657,7 +701,10 @@ validation.errors.first('email'); // returns 'Without an email we can\'t reach y
 To display a custom "friendly" attribute name in error messages, use `.setAttributeNames()`
 
 ```js
-let validator = new Validator({ name: '' }, { name: 'required' });
+let validator = new Validator({
+  input: { name: '' },
+  rules: { name: 'required' }
+});
 validator.setAttributeNames({ name: 'custom_name' });
 if (validator.fails()) {
   validator.errors.first('name'); // "The custom_name field is required."
@@ -675,7 +722,10 @@ Validator.setAttributeFormatter(function(attribute) {
 });
 
 // Or configure formatter for particular instance.
-let validator = new Validator({ first_name: '' }, { first_name: 'required' });
+let validator = new Validator({
+  input: { first_name: '' },
+  rules: { first_name: 'required' }
+});
 validator.setAttributeFormatter(function(attribute) {
   return attribute.replace(/_/g, ' ');
 });
