@@ -51,7 +51,14 @@ import Validator from 'vue-vlidator';
 ### Basic Usage
 
 ```js
-let validation = new Validator(data, rules, locale, [customErrorMessages]);
+let options = {
+  input: {},
+  rules: {},
+  locale: 'km',
+  customMessages: {},
+  customAttributes: {}
+}
+let validation = new Validator(options);
 ```
 
 __data__ {Object} - The data you want to validate
@@ -61,6 +68,8 @@ __rules__ {Object} - Validation rules
 __locale__ {string} - Validation locale
 
 __customErrorMessages__ {Object} - Optional custom error messages to return
+
+__customAttributes__ {Object} - Optional custom error attributes to return
 
 ## Nuxt Support
 
@@ -73,6 +82,7 @@ Put it on top of `nuxt-i18n`
     'nuxt-i18n',
     ..........
   ],
+  vlidator: {...}
 ```
 
 ### Vue plugins
@@ -81,7 +91,7 @@ Put it on top of `nuxt-i18n`
 import Vue from 'vue';
 import Validator from 'vue-vlidator';
 
-const options = { locale: 'km' }
+const options = { locale: 'km', customAttributes: {}, customMessages: {} }
 
 Vue.use(Validator, options);
 ```
@@ -604,7 +614,7 @@ to clear the input target.name give provide in form
 - Example: `<input type='text' name='name' v-model='name' />`
 
 ```js
-let validation = new Validator(input, rules);
+let validation = new Validator({input, rules});
 validation.errors.first('email'); // returns first error message for email attribute
 validator.errors.get('email'); // returns an array of error messages for the email attribute
 ```
