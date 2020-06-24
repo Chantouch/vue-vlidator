@@ -1,5 +1,4 @@
-import Vue, {PluginFunction} from 'vue';
-
+import {PluginFunction} from 'vue';
 
 type AsyncFunction = ((arg0: any) => Promise<any>) | Promise<any>;
 
@@ -10,7 +9,7 @@ export default class Validator extends ValidatorInstance {
 }
 
 /**
- * The vue-wait Instance
+ * The vue-vlidator Instance
  */
 
 export class ValidatorInstance {
@@ -80,7 +79,7 @@ export class ErrorsInstance {
     /**
      * Add error to errors object
      * @return {object}
-     * @param {string} attribute
+     * @param {string|string[]} attribute
      * @param {Array} message
      * @memberOf ErrorsInstance
      */
@@ -89,10 +88,10 @@ export class ErrorsInstance {
     /**
      * Get error message by attribute
      * @return {string}
-     * @param {string} attribute
+     * @param {string|string[]} attribute
      * @memberOf ErrorsInstance
      */
-    get(attribute: string): string
+    get(attribute: string | string[]): string
 
     /**
      * Returns boolean value if some of given loaders exists in page.
@@ -129,7 +128,7 @@ export class ErrorsInstance {
     /**
      * Fill errors object
      * @return {Object}
-     * @param errors
+     * @param {object} errors
      * @memberOf ErrorsInstance
      */
     fill(errors: object): object

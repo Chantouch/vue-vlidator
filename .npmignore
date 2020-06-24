@@ -8,3 +8,5 @@ gulpfile.js
 .idea/
 public/
 demo/
+coverage/
+yarn-error.log

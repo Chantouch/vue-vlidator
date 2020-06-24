@@ -1,6 +1,6 @@
 {
   "name": "vue-vlidator",
-  "version": "0.0.2-beta-3",
+  "version": "0.0.2-beta-4",
   "description": "Validation library inspired by Laravel's Validator",
   "author": "Chantouch Sek <chantouchsek.cs83@gmail.com>",
   "scripts": {
@@ -65,5 +65,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Chantouch/vue-vlidator"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   }
 }
