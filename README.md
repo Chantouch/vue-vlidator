@@ -67,7 +67,7 @@ __rules__ {Object} - Validation rules
 
 __locale__ {string} - Validation locale
 
-__customErrorMessages__ {Object} - Optional custom error messages to return
+__customMessages__ {Object} - Optional custom error messages to return
 
 __customAttributes__ {Object} - Optional custom error attributes to return
 
