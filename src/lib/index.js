@@ -583,7 +583,7 @@ export function install (Vue, options = {}) {
     beforeCreate () {
       this.$options.$vlidator = {};
       const input = this.$data || {};
-      Object.assign(defaults, { input });
+      Object.assign(defaults, { input, rules: {} });
       Vue.util.defineReactive(this.$options, '$vlidator', new Validator(defaults));
       if (!this.$options.computed) {
         this.$options.computed = {};
@@ -597,8 +597,10 @@ export function install (Vue, options = {}) {
       const { watch = true, immediate = false } = defaults;
       const vlidator = this_.$options.vlidator;
       let locale = this_.$options.$vlidator.getDefaultLang();
+      const vlidate = this_.$options.$vlidator;
       if (vlidator && vlidator.rules) {
         const { rules = {} } = vlidator;
+        this_.$options.$vlidator.rules = vlidate._parseRules(rules);
         Object.entries(flatten(this_.$data)).forEach(([path, _]) => {
           let validations = get(rules, path);
           if (validations !== undefined && watch) {

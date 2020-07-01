@@ -1,5 +1,12 @@
 import { parseISO, isValid } from 'date-fns';
-import { isNaN, isString, isNumber, isFunction, isUndefined, isBoolean } from 'lodash';
+import {
+  isNaN,
+  isString,
+  isNumber,
+  isFunction,
+  isUndefined,
+  isBoolean
+} from 'lodash';
 
 const leapYear = (year) => {
   return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
@@ -218,8 +225,13 @@ const rules = {
     return val === 'on' || val === 'yes' || val === 1 || val === '1' || val === true;
   },
   confirmed (val, req, key) {
-    const confirmedKey = key + '_confirmation';
-    return this.validator.input[confirmedKey] === val;
+    const confirmed_key = `${key}_confirmation`;
+    const confirmedKey = `${key}Confirmation`;
+    const val1 = this.validator._flattenObject(this.validator.input);
+    if (val1.hasOwnProperty(confirmed_key)) {
+      return val1[confirmed_key] === val;
+    }
+    return val1[confirmedKey] === val;
   },
   integer (val) {
     return String(parseInt(val, 10)) === String(val);
@@ -319,12 +331,12 @@ class Rules {
    * Validate rule
    *
    * @param  {any|void} inputValue
-   * @param  {any|void} ruleValue
+   * @param  {any|string} ruleValue
    * @param  {string} attribute
    * @param  {function} callback
    * @return {void|boolean}
    */
-  validate (inputValue, ruleValue = null, attribute = '', callback = null) {
+  validate (inputValue, ruleValue = '', attribute = '', callback = null) {
     const _this = this;
     this._setValidatingData(attribute, inputValue, ruleValue);
     if (isFunction(callback)) {

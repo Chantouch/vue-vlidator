@@ -47,6 +47,39 @@
                     trim
             />
         </b-form-group>
+        <b-form-group
+                id="fieldset-4"
+                description="Let us know your email."
+                label="Enter your password"
+                label-for="input-2"
+                :state="$vlidator.errors.has('form.password')"
+                :invalid-feedback="$vlidator.errors.first('form.password')"
+        >
+            <b-form-input
+                    id="input-4"
+                    v-model="form.password"
+                    :state="!$vlidator.errors.has('form.password')"
+                    type="password"
+                    trim
+            />
+        </b-form-group>
+        <b-form-group
+                id="fieldset-5"
+                description="Let us know your password confirmation."
+                label="Enter your password confirmation"
+                label-for="input-2"
+                :state="$vlidator.errors.has('form.passwordConfirmation')"
+                :invalid-feedback="$vlidator.errors.first('form.passwordConfirmation')"
+        >
+            <b-form-input
+                    id="input-5"
+                    v-model="form.passwordConfirmation"
+                    :state="!$vlidator.errors.has('form.passwordConfirmation')"
+                    type="password"
+                    trim
+            />
+        </b-form-group>
+
         <b-button type="submit" variant="primary" :disabled="$vlidator.errors.any()">
             Submit
         </b-button>
@@ -61,7 +94,9 @@
         form: {
           name: '',
           email: 'johndoe@gmail.com',
-          age: 18
+          age: 18,
+          passwordConfirmation: '',
+          password: ''
         }
       }
     },
@@ -70,7 +105,8 @@
         form: {
           name: 'required|min:4|string',
           email: 'required|email',
-          age: 'required|numeric|min:18|max:50'
+          age: 'required|numeric|min:18|max:50',
+          password: 'required|min:3|confirmed'
         }
       }
     },
