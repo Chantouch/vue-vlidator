@@ -1,4 +1,4 @@
-import { isObject, isNaN } from 'lodash';
+import { isNaN } from 'lodash';
 
 const flatten = (obj) => {
   const flattened = {};
@@ -25,7 +25,7 @@ const flatten = (obj) => {
   return flattened;
 };
 
-export const unflatten = (data) => {
+export const unflatten = (data = {}) => {
   const result = {};
   for (const i in data) {
     const keys = i.split('.');

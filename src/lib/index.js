@@ -14,6 +14,7 @@ export default class Validator {
       accessorName: '$vlidator',
       input: {},
       rules: {},
+      fields: {},
       locale: 'en',
       customMessages: {},
       customAttributes: {}
@@ -27,7 +28,8 @@ export default class Validator {
       locale,
       customMessages,
       customAttributes,
-      rules
+      rules,
+      fields
     } = this.options;
     this.input = input;
     this.messages = Lang._make(locale);
@@ -39,6 +41,7 @@ export default class Validator {
     this.hasAsync = false;
     this.rules = this._parseRules(rules);
     this.locale = locale;
+    this.fields = fields;
   }
 
   /**
@@ -572,6 +575,8 @@ export function install (Vue, options = {}) {
     rules: {},
     customMessages: {},
     customAttributes: {},
+    watch: true,
+    immediate: false,
     ...options
   };
   Vue.mixin({
@@ -589,16 +594,17 @@ export function install (Vue, options = {}) {
     },
     created () {
       const this_ = this;
+      const { watch = true, immediate = false } = defaults;
       const vlidator = this_.$options.vlidator;
       let locale = this_.$options.$vlidator.getDefaultLang();
       if (vlidator && vlidator.rules) {
         const { rules = {} } = vlidator;
         Object.entries(flatten(this_.$data)).forEach(([path, _]) => {
           let validations = get(rules, path);
-          if (validations !== undefined) {
-            this_.$watch(path, () => {
-              this_.validate({ locale });
-            });
+          if (validations !== undefined && watch) {
+            this_.$watch(path, (value) => {
+              this_.validate({ locale, value });
+            }, { deep: true, immediate });
           }
         });
       }
@@ -612,7 +618,7 @@ export function install (Vue, options = {}) {
         const input = getData({ rules, data: this_.$data });
         Object.assign(defaults, { locale, ...vlidator, input });
         const validator = new Validator(defaults);
-        validator.check();
+        validator.passes();
         this_.$options.$vlidator = validator;
         if (!isUndefined(this_.$errors) && isFunction(this_.$errors.fill)) {
           const errors = validator.errors.all() || {};
