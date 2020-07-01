@@ -1,5 +1,5 @@
 <template>
-    <b-form @submit.prevent="onSubmit">
+    <b-form @submit.prevent="onSubmit" @keydown="$vlidator.errors.keydown($event)">
         <b-form-group
                 id="fieldset-1"
                 description="Let us know your name."
@@ -13,6 +13,7 @@
                     v-model="form.name"
                     :state="!$vlidator.errors.has('form.name')"
                     trim
+                    name="name"
             />
         </b-form-group>
         <b-form-group
@@ -111,9 +112,14 @@
       }
     },
     methods: {
-      onSubmit () {
-        this.validate()
-        alert(JSON.stringify(this.form))
+      async onSubmit () {
+        try {
+          const { data } = await this.validate()
+          console.log(data)
+          alert(JSON.stringify(this.form))
+        } catch (e) {
+          console.log(e)
+        }
       }
     },
   }

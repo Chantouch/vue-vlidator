@@ -575,8 +575,8 @@ export function install (Vue, options = {}) {
     rules: {},
     customMessages: {},
     customAttributes: {},
-    watch: true,
-    immediate: false,
+    watch: false,
+    immediate: true,
     ...options
   };
   Vue.mixin({
@@ -594,13 +594,11 @@ export function install (Vue, options = {}) {
     },
     created () {
       const this_ = this;
-      const { watch = true, immediate = false } = defaults;
+      const { watch = false, immediate = false } = defaults;
       const vlidator = this_.$options.vlidator;
       let locale = this_.$options.$vlidator.getDefaultLang();
-      const vlidate = this_.$options.$vlidator;
       if (vlidator && vlidator.rules) {
         const { rules = {} } = vlidator;
-        this_.$options.$vlidator.rules = vlidate._parseRules(rules);
         Object.entries(flatten(this_.$data)).forEach(([path, _]) => {
           let validations = get(rules, path);
           if (validations !== undefined && watch) {
@@ -612,7 +610,7 @@ export function install (Vue, options = {}) {
       }
     },
     methods: {
-      validate () {
+      validate (payload = {}) {
         const this_ = this;
         let locale = this_.$options.$vlidator.getDefaultLang();
         const vlidator = this_.$options.vlidator;
@@ -620,12 +618,18 @@ export function install (Vue, options = {}) {
         const input = getData({ rules, data: this_.$data });
         Object.assign(defaults, { locale, ...vlidator, input });
         const validator = new Validator(defaults);
-        validator.passes();
-        this_.$options.$vlidator = validator;
-        if (!isUndefined(this_.$errors) && isFunction(this_.$errors.fill)) {
-          const errors = validator.errors.all() || {};
-          this_.$errors.fill(errors);
-        }
+        return new Promise((resolve, reject) => {
+          if (validator.passes()) {
+            resolve({ data: validator.input });
+          } else {
+            reject(validator.errors.all());
+          }
+          this_.$options.$vlidator = validator;
+          if (!isUndefined(this_.$errors) && isFunction(this_.$errors.fill)) {
+            const errors = validator.errors.all() || {};
+            this_.$errors.fill(errors);
+          }
+        });
       }
     },
   });
