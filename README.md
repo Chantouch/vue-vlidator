@@ -75,6 +75,7 @@ __customAttributes__ {Object} - Optional custom error attributes to return
 
 Put it on top of `nuxt-i18n`
 
+``nuxt.config.js``
 ```js
   export default {
     modules: [
