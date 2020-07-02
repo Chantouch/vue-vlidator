@@ -1,5 +1,5 @@
 <template>
-    <b-form @submit.prevent="onSubmit" @keydown="$vlidator.errors.keydown($event)">
+    <b-form @submit.prevent="onSubmit" @keydown="$vlidator.errors.keydown($event, 'form')">
         <b-form-group
                 id="fieldset-1"
                 description="Let us know your name."
@@ -14,6 +14,7 @@
                     :state="!$vlidator.errors.has('form.name')"
                     trim
                     name="name"
+                    @keydown="$vlidator.errors.clear(['form.name'])"
             />
         </b-form-group>
         <b-form-group
@@ -30,6 +31,7 @@
                     :state="!$vlidator.errors.has('form.email')"
                     type="email"
                     trim
+                    name="email"
             />
         </b-form-group>
         <b-form-group
@@ -62,6 +64,7 @@
                     :state="!$vlidator.errors.has('form.password')"
                     type="password"
                     trim
+                    name="password"
             />
         </b-form-group>
         <b-form-group

@@ -4418,6 +4418,11 @@ escape-string-regexp@^1.0.2, escape-string-regexp@^1.0.5:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
   integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
 
+escape-string-regexp@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-4.0.0.tgz#14ba83a5d373e3d311e5afca29cf5bfad965bf34"
+  integrity sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==
+
 escodegen@^1.11.1, escodegen@^1.9.1:
   version "1.14.2"
   resolved "https://registry.npm.taobao.org/escodegen/download/escodegen-1.14.2.tgz?cache=0&sync_timestamp=1591221934086&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fescodegen%2Fdownload%2Fescodegen-1.14.2.tgz#14ab71bf5026c2aa08173afba22c6f3173284a84"
@@ -6816,14 +6821,15 @@ kleur@^3.0.3:
   resolved "https://registry.npm.taobao.org/kleur/download/kleur-3.0.3.tgz#a79c9ecc86ee1ce3fa6206d1216c501f147fc07e"
   integrity sha1-p5yezIbuHOP6YgbRIWxQHxR/wH4=
 
-laravel-vue-form-validator@^0.0.20-beta:
-  version "0.0.20-beta-0"
-  resolved "https://registry.yarnpkg.com/laravel-vue-form-validator/-/laravel-vue-form-validator-0.0.20-beta-0.tgz#b518d48989f8d2618ca9c5dc014a1b3174528eb9"
-  integrity sha512-q+DU3GdC6a7gFYRMv1a+m8HGNSsb/9UBBwiUUPBkNWpV2xYu0NftPcSXKYNyy0NTjaoSghXzCc3Rq6everBfyA==
+laravel-vue-form-validator@^0.0.20-beta-14:
+  version "0.0.20-beta-14"
+  resolved "https://registry.yarnpkg.com/laravel-vue-form-validator/-/laravel-vue-form-validator-0.0.20-beta-14.tgz#7e112570ffd819722b005d79f11c624d8f1ab9b9"
+  integrity sha512-FCALEbUFQcVYWeiMBmkyrVSHtDFnq4WbKtu1U/BqJIzY4bLGmnhBFvnOj/MhQl9gIH3xP8mlLrTSUfImREhOAA==
   dependencies:
-    prettier "^1.10.2"
+    vue "^2.6.11"
   optionalDependencies:
     axios ">=0.15 <1.0"
+    escape-string-regexp "^4.0.0"
 
 launch-editor-middleware@^2.2.1:
   version "2.2.1"
@@ -8588,7 +8594,7 @@ preserve@^0.2.0:
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
   integrity sha1-gV7R9uvGWSb4ZbMQwHE7yzMVzks=
 
-prettier@^1.10.2, prettier@^1.18.2:
+prettier@^1.18.2:
   version "1.19.1"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.19.1.tgz#f7d7f5ff8a9cd872a7be4ca142095956a60797cb"
   integrity sha512-s7PoyDv/II1ObgQunCbB9PdLmUcBZcnWOcxDh7O0N/UwDEsHyqkW+Qh28jW+mVuCdx7gLB0BotYI1Y6uI9iyew==

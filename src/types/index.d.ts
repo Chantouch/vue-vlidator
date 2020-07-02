@@ -136,9 +136,10 @@ export class ErrorsInstance {
     /**
      * On change keyboard events for the form
      * @param {KeyboardEvent} event
+     * @param {string} prefix
      * @memberOf ErrorsInstance
      */
-    keydown<T extends Function | AsyncFunction>(event: KeyboardEvent): T;
+    keydown<T extends Function | AsyncFunction>(event: KeyboardEvent, prefix: string): T;
 }
 
 export interface ValidatorOptions {

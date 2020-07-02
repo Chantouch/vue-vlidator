@@ -96,14 +96,22 @@ class Errors {
   /**
    * Clear one or all error fields.
    *
-   * @param {String|undefined} attribute
+   * @param {String|undefined|Array} attribute
    */
   clear (attribute) {
     if (!attribute) return this.flush();
     let errors = Object.assign({}, this.errors);
-    Object.keys(errors)
-      .filter(e => e === attribute || e.startsWith(`${attribute}.`) || e.startsWith(`${attribute}[`))
-      .forEach(e => delete errors[e]);
+    if (Array.isArray(attribute)) {
+      attribute.map(field => {
+        Object.keys(errors)
+          .filter(e => e === field || e.startsWith(`${field}.`) || e.startsWith(`${field}[`))
+          .forEach(e => delete errors[e]);
+      });
+    } else {
+      Object.keys(errors)
+        .filter(e => e === attribute || e.startsWith(`${attribute}.`) || e.startsWith(`${attribute}[`))
+        .forEach(e => delete errors[e]);
+    }
     this.fill(errors);
   }
 
@@ -111,11 +119,17 @@ class Errors {
    * Clear errors on keydown.
    *
    * @param {KeyboardEvent} event
+   * @param {string} prefix
    */
-  keydown (event) {
+  keydown (event, prefix = '') {
+    console.log(event);
     const { name } = event.target;
-    if (name) return;
-    this.clear(name);
+    if (!name) return;
+    let name2 = '';
+    if (prefix) {
+      name2 = `${prefix}.${name}`;
+    }
+    this.clear([name, name2]);
   }
 }
 
