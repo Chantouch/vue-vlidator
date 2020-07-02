@@ -117,9 +117,9 @@
     methods: {
       async onSubmit () {
         try {
-          const { data } = await this.validate()
-          console.log(data)
-          alert(JSON.stringify(this.form))
+          const { form } = await this.validate()
+          console.log(form)
+          alert(JSON.stringify(form))
         } catch (e) {
           console.log(e)
         }

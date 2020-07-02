@@ -620,7 +620,7 @@ export function install (Vue, options = {}) {
         const validator = new Validator(defaults);
         return new Promise((resolve, reject) => {
           if (validator.passes()) {
-            resolve({ data: validator.input });
+            resolve(validator.input);
           } else {
             reject(validator.errors.all());
           }
