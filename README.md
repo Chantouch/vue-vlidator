@@ -76,13 +76,13 @@ __customAttributes__ {Object} - Optional custom error attributes to return
 Put it on top of `nuxt-i18n`
 
 ```js
-  modules: [
-    .........
-    'vue-vlidator/nuxt',
-    'nuxt-i18n',
-    ..........
-  ],
-  vlidator: {...}
+  export default {
+    modules: [
+        'vue-vlidator/nuxt',
+        'nuxt-i18n',
+      ],
+    vlidator: {}
+  }
 ```
 
 ### Vue plugins
@@ -101,7 +101,7 @@ Vue.use(Validator, options);
 2. customMessages {Object}
 
 #### Example in Vue component
-```js
+```vue
 <template>
     <b-form @submit.prevent="onSubmit">
         <b-form-group
@@ -179,8 +179,14 @@ Vue.use(Validator, options);
       }
     },
     methods: {
-      onSubmit () {
-        alert(JSON.stringify(this.form))
+      async onSubmit () {
+          try {
+            const { data } = await this.validate()
+            console.log(data)
+            alert(JSON.stringify(this.form))
+          } catch (e) {
+            console.log(e)
+          }
       }
     },
   }
@@ -360,7 +366,7 @@ The field under validation must be a boolean value of the form `true`, `false`, 
 
 #### confirmed
 
-The field under validation must have a matching field of foo_confirmation. For example, if the field under validation is password, a matching password_confirmation field must be present in the input.
+The field under validation must have a matching field of foo_confirmation. For example, if the field under validation is password, a matching password_confirmation | passwordConfirmation field must be present in the input.
 
 #### date
 
