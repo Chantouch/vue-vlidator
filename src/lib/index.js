@@ -691,9 +691,9 @@ export function install(Vue, options = {}) {
     methods: {
       validate(payload = {}) {
         const this_ = this;
-        let locale = null;
+        let locale = this_.$options.$vlidator.getDefaultLang();
         if (this_.$i18n) {
-          locale = this.$i18n.locale;
+          locale = this_.$i18n.locale;
         }
         const vlidator = this_.$options.vlidator;
         const { rules = {} } = vlidator;
