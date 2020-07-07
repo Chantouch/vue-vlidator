@@ -1,5 +1,5 @@
-import Messages from './messages';
 import { isUndefined } from 'lodash';
+import Messages from './messages';
 
 export const Lang = {
   messages: {},
@@ -10,7 +10,7 @@ export const Lang = {
    * @param {object} rawMessages
    * @return {void}
    */
-  _set (lang, rawMessages) {
+  _set(lang, rawMessages) {
     this.messages[lang] = rawMessages;
   },
 
@@ -22,7 +22,7 @@ export const Lang = {
    * @param {string|object} message
    * @return {void}
    */
-  _setRuleMessage (lang, attribute, message) {
+  _setRuleMessage(lang, attribute, message) {
     this._load(lang);
     if (isUndefined(message)) {
       message = this.messages[lang].def;
@@ -37,7 +37,7 @@ export const Lang = {
    * @param  {string} lang
    * @return {void}
    */
-  _load (lang) {
+  _load(lang) {
     if (!this.messages[lang]) {
       try {
         const rawMessages = require(`./lang/${lang}`);
@@ -57,7 +57,7 @@ export const Lang = {
    * @param  {string} lang
    * @return {object}
    */
-  _get (lang) {
+  _get(lang) {
     this._load(lang);
     return this.messages[lang];
   },
@@ -68,7 +68,7 @@ export const Lang = {
    * @param  {string} lang
    * @return {Messages}
    */
-  _make (lang) {
+  _make(lang) {
     this._load(lang);
     return new Messages(lang, this.messages[lang]);
   }

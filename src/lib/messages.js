@@ -1,9 +1,9 @@
+import { isObject, isString } from 'lodash';
 import Attributes from './attributes';
 import flatten from './flatten';
-import { isObject, isString } from 'lodash';
 
 class Messages {
-  constructor (lang, messages = []) {
+  constructor(lang, messages = []) {
     this.lang = lang;
     this.messages = messages;
     this.customMessages = {};
@@ -134,7 +134,10 @@ class Messages {
     if (isString(template) && isObject(data)) {
       message = template;
       for (attribute in data) {
-        message = message.replace(new RegExp(':' + attribute, 'g'), data[attribute]);
+        message = message.replace(
+          new RegExp(':' + attribute, 'g'),
+          data[attribute]
+        );
       }
     }
     return message;

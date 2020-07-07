@@ -29,7 +29,20 @@ const isValidDate = (inDate) => {
   const yr = testDate.getFullYear();
   const mo = testDate.getMonth();
   const day = testDate.getDate();
-  const daysInMonth = [31, leapYear(yr) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  const daysInMonth = [
+    31,
+    leapYear(yr) ? 29 : 28,
+    31,
+    30,
+    31,
+    30,
+    31,
+    31,
+    30,
+    31,
+    30,
+    31
+  ];
   if (yr < 1000) {
     return false;
   }
@@ -46,35 +59,34 @@ const isValidDate = (inDate) => {
 };
 
 const rules = {
-  required (val) {
-    let str;
+  required(val) {
     if (val === undefined || val === null) {
       return false;
     }
-    str = String(val).replace(/\s/g, '');
+    const str = String(val).replace(/\s/g, '');
     return str.length > 0;
   },
-  required_if (val, req, attribute) {
+  required_if(val, req, attribute) {
     req = this.getParameters();
     if (this.validator._objectPath(this.validator.input, req[0]) === req[1]) {
       return this.validator.getRule('required').validate(val);
     }
     return true;
   },
-  required_unless (val, req, attribute) {
+  required_unless(val, req, attribute) {
     req = this.getParameters();
     if (this.validator._objectPath(this.validator.input, req[0]) !== req[1]) {
       return this.validator.getRule('required').validate(val);
     }
     return true;
   },
-  required_with (val, req, attribute) {
+  required_with(val, req, attribute) {
     if (this.validator._objectPath(this.validator.input, req)) {
       return this.validator.getRule('required').validate(val);
     }
     return true;
   },
-  required_with_all (val, req, attribute) {
+  required_with_all(val, req, attribute) {
     req = this.getParameters();
     for (let i = 0; i < req.length; i++) {
       if (!this.validator._objectPath(this.validator.input, req[i])) {
@@ -83,13 +95,13 @@ const rules = {
     }
     return this.validator.getRule('required').validate(val);
   },
-  required_without (val, req, attribute) {
+  required_without(val, req, attribute) {
     if (this.validator._objectPath(this.validator.input, req)) {
       return true;
     }
     return this.validator.getRule('required').validate(val);
   },
-  required_without_all (val, req, attribute) {
+  required_without_all(val, req, attribute) {
     req = this.getParameters();
     for (let i = 0; i < req.length; i++) {
       if (this.validator._objectPath(this.validator.input, req[i])) {
@@ -98,7 +110,7 @@ const rules = {
     }
     return this.validator.getRule('required').validate(val);
   },
-  boolean (val) {
+  boolean(val) {
     return (
       val === true ||
       val === false ||
@@ -112,7 +124,7 @@ const rules = {
   },
   // compares the size of strings
   // with numbers, compares the value
-  size (val, req, attribute) {
+  size(val, req, attribute) {
     if (val) {
       req = parseFloat(req);
       const size = this.getSize();
@@ -120,71 +132,72 @@ const rules = {
     }
     return true;
   },
-  string (val, req, attribute) {
+  string(val, req, attribute) {
     return isString(val);
   },
-  sometimes (val) {
+  sometimes(val) {
     return true;
   },
   /**
    * Compares the size of strings or the value of numbers if there is a truthy value
    */
-  min (val, req, attribute) {
+  min(val, req, attribute) {
     const size = this.getSize();
     return size >= req;
   },
   /**
    * Compares the size of strings or the value of numbers if there is a truthy value
    */
-  max (val, req, attribute) {
+  max(val, req, attribute) {
     const size = this.getSize();
     return size <= req;
   },
-  between (val, req, attribute) {
+  between(val, req, attribute) {
     req = this.getParameters();
     const size = this.getSize();
     const min = parseFloat(req[0], 10);
     const max = parseFloat(req[1], 10);
     return size >= min && size <= max;
   },
-  email (val) {
+  email(val) {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(val);
   },
-  numeric (val) {
-    let num;
-    num = Number(val); // tries to convert value to a number. useful if value is coming from form element
+  numeric(val) {
+    const num = Number(val); // tries to convert value to a number. useful if value is coming from form element
     return isNumber(num) && !isNaN(num) && !isBoolean(isBoolean);
   },
-  array (val) {
-    return val instanceof Array;
+  array(val) {
+    return Array.isArray(val);
   },
-  url (url) {
-    return /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-z]{2,63}\b([-a-zA-Z0-9@:%_\+.~#?&/=]*)/i.test(url);
+  url(url) {
+    return /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-z]{2,63}\b([-a-zA-Z0-9@:%_\+.~#?&/=]*)/i.test(
+      url
+    );
   },
-  alpha (val) {
+  alpha(val) {
     return /^[a-zA-Z]+$/.test(val);
   },
-  alpha_dash (val) {
+  alpha_dash(val) {
     return /^[a-zA-Z0-9_\-]+$/.test(val);
   },
-  alpha_num (val) {
+  alpha_num(val) {
     return /^[a-zA-Z0-9]+$/.test(val);
   },
-  same (val, req) {
+  same(val, req) {
     const val1 = this.validator._flattenObject(this.validator.input)[req];
     return val1 === val;
   },
-  different (val, req) {
+  different(val, req) {
     const val1 = this.validator._flattenObject(this.validator.input)[req];
     return val1 !== val;
   },
-  in (val, req) {
+  in(val, req) {
     let list, i;
     if (val) {
       list = this.getParameters();
     }
-    if (val && !(val instanceof Array)) {
+    if (val && !Array.isArray(val)) {
       let localValue = val;
       for (i = 0; i < list.length; i++) {
         if (isString(list[i])) {
@@ -196,16 +209,16 @@ const rules = {
       }
       return false;
     }
-    if (val && val instanceof Array) {
+    if (val && Array.isArray(val)) {
       for (i = 0; i < val.length; i++) {
-        if (list.indexOf(val[i]) < 0) {
+        if (!list.includes(val[i])) {
           return false;
         }
       }
     }
     return true;
   },
-  not_in (val, req) {
+  not_in(val, req) {
     const list = this.getParameters();
     const len = list.length;
     let returnVal = true;
@@ -221,34 +234,40 @@ const rules = {
     }
     return returnVal;
   },
-  accepted (val) {
-    return val === 'on' || val === 'yes' || val === 1 || val === '1' || val === true;
+  accepted(val) {
+    return (
+      val === 'on' || val === 'yes' || val === 1 || val === '1' || val === true
+    );
   },
-  confirmed (val, req, key) {
-    const confirmed_key = `${key}_confirmation`;
+  confirmed(val, req, key) {
+    const confirmamtionKey = `${key}_confirmation`;
     const confirmedKey = `${key}Confirmation`;
     const val1 = this.validator._flattenObject(this.validator.input);
-    if (val1.hasOwnProperty(confirmed_key)) {
-      return val1[confirmed_key] === val;
+    if (val1.hasOwnProperty(confirmamtionKey)) {
+      return val1[confirmamtionKey] === val;
     }
     return val1[confirmedKey] === val;
   },
-  integer (val) {
+  integer(val) {
     return String(parseInt(val, 10)) === String(val);
   },
-  digits (val, req) {
+  digits(val, req) {
     const numericRule = this.validator.getRule('numeric');
     return numericRule.validate(val) && String(val).length === parseInt(req);
   },
-  digits_between (val) {
+  digits_between(val) {
     const numericRule = this.validator.getRule('numeric');
     const req = this.getParameters();
     const valueDigitsCount = String(val).length;
     const min = parseFloat(req[0], 10);
     const max = parseFloat(req[1], 10);
-    return numericRule.validate(val) && valueDigitsCount >= min && valueDigitsCount <= max;
+    return (
+      numericRule.validate(val) &&
+      valueDigitsCount >= min &&
+      valueDigitsCount <= max
+    );
   },
-  regex (val, req) {
+  regex(val, req) {
     const mod = /[g|i|m]{1,3}$/;
     let flag = req.match(mod);
     flag = flag ? flag[0] : '';
@@ -256,13 +275,13 @@ const rules = {
     req = new RegExp(req, flag);
     return !!req.test(val);
   },
-  date (val, format) {
+  date(val, format) {
     return isValidDate(val);
   },
-  present (val) {
+  present(val) {
     return !isUndefined(val);
   },
-  after (val, req) {
+  after(val, req) {
     const val1 = this.validator.input[req];
     const val2 = val;
     if (!isValidDate(val1)) {
@@ -273,7 +292,7 @@ const rules = {
     }
     return new Date(val1).getTime() < new Date(val2).getTime();
   },
-  after_or_equal (val, req) {
+  after_or_equal(val, req) {
     const val1 = this.validator.input[req];
     const val2 = val;
     if (!isValidDate(val1)) {
@@ -284,7 +303,7 @@ const rules = {
     }
     return new Date(val1).getTime() <= new Date(val2).getTime();
   },
-  before (val, req) {
+  before(val, req) {
     const val1 = this.validator.input[req];
     const val2 = val;
     if (!isValidDate(val1)) {
@@ -295,7 +314,7 @@ const rules = {
     }
     return new Date(val1).getTime() > new Date(val2).getTime();
   },
-  before_or_equal (val, req) {
+  before_or_equal(val, req) {
     const val1 = this.validator.input[req];
     const val2 = val;
     if (!isValidDate(val1)) {
@@ -306,10 +325,10 @@ const rules = {
     }
     return new Date(val1).getTime() >= new Date(val2).getTime();
   },
-  hex (val) {
+  hex(val) {
     return /^[0-9a-f]+$/i.test(val);
   },
-  password (val) {
+  password(val) {
     return /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/.test(val);
   }
 };
@@ -319,7 +338,7 @@ let missedRuleValidator = (name = null) => {
 let missedRuleMessage;
 
 class Rules {
-  constructor (name, fn, async) {
+  constructor(name, fn, async) {
     this.name = name;
     this.fn = fn;
     this.passes = null;
@@ -336,12 +355,12 @@ class Rules {
    * @param  {function} callback
    * @return {void|boolean}
    */
-  validate (inputValue, ruleValue = '', attribute = '', callback = null) {
+  validate(inputValue, ruleValue = '', attribute = '', callback = null) {
     const _this = this;
     this._setValidatingData(attribute, inputValue, ruleValue);
     if (isFunction(callback)) {
       this.callback = callback;
-      const handleResponse = function (passes, message) {
+      const handleResponse = function(passes, message) {
         _this.response(passes, message);
       };
       if (this.async) {
@@ -362,7 +381,7 @@ class Rules {
    * @param  {function} callback
    * @return {boolean|undefined}
    */
-  _apply (inputValue, ruleValue, attribute, callback = null) {
+  _apply(inputValue, ruleValue, attribute, callback = null) {
     const fn = this.isMissed() ? missedRuleValidator(this.name) : this.fn;
     return fn.apply(this, [inputValue, ruleValue, attribute, callback]);
   }
@@ -375,7 +394,7 @@ class Rules {
    * @param {any|void} ruleValue
    * @return {void}
    */
-  _setValidatingData (attribute, inputValue, ruleValue) {
+  _setValidatingData(attribute, inputValue, ruleValue) {
     this.attribute = attribute;
     this.inputValue = inputValue;
     this.ruleValue = ruleValue;
@@ -386,7 +405,7 @@ class Rules {
    *
    * @return {array}
    */
-  getParameters () {
+  getParameters() {
     let value = [];
     if (isString(this.ruleValue)) {
       value = this.ruleValue.split(',');
@@ -394,7 +413,7 @@ class Rules {
     if (isNumber(this.ruleValue)) {
       value.push(this.ruleValue);
     }
-    if (this.ruleValue instanceof Array) {
+    if (Array.isArray(this.ruleValue)) {
       value = this.ruleValue;
     }
     return value;
@@ -405,9 +424,9 @@ class Rules {
    *
    * @return {any|integer|float|mixed|number}
    */
-  getSize () {
+  getSize() {
     const value = this.inputValue;
-    if (value instanceof Array) {
+    if (Array.isArray(value)) {
       return value.length;
     }
     if (isNumber(value)) {
@@ -424,8 +443,11 @@ class Rules {
    *
    * @return {string}
    */
-  _getValueType () {
-    if (isNumber(this.inputValue) || this.validator._hasNumericRule(this.attribute)) {
+  _getValueType() {
+    if (
+      isNumber(this.inputValue) ||
+      this.validator._hasNumericRule(this.attribute)
+    ) {
       return 'numeric';
     }
     return 'string';
@@ -438,7 +460,7 @@ class Rules {
    * @param  {string|undefined} message Custom error message
    * @return {void}
    */
-  response (passes, message) {
+  response(passes, message) {
     this.passes = passes === undefined || passes === true;
     this._customMessage = message;
     this.callback(this.passes, message);
@@ -450,7 +472,7 @@ class Rules {
    * @param {Validator} validator
    * @return {void}
    */
-  setValidator (validator) {
+  setValidator(validator) {
     this.validator = validator;
   }
 
@@ -459,11 +481,11 @@ class Rules {
    *
    * @return {boolean}
    */
-  isMissed () {
+  isMissed() {
     return !isFunction(this.fn);
   }
 
-  get customMessage () {
+  get customMessage() {
     return this.isMissed() ? missedRuleMessage : this._customMessage;
   }
 }
@@ -500,7 +522,7 @@ export const manager = {
    * @param validator
    * @return {Rules}
    */
-  make (name, validator) {
+  make(name, validator) {
     const async = this.isAsync(name);
     const rule = new Rules(name, rules[name], async);
     rule.setValidator(validator);
@@ -513,8 +535,9 @@ export const manager = {
    * @param  {string}  name
    * @return {boolean}
    */
-  isAsync (name) {
-    let i = 0, len = this.asyncRules.length;
+  isAsync(name) {
+    let i = 0;
+    const len = this.asyncRules.length;
     for (; i < len; i++) {
       if (this.asyncRules[i] === name) {
         return true;
@@ -529,8 +552,8 @@ export const manager = {
    * @param {string} name
    * @return {boolean}
    */
-  isImplicit (name) {
-    return this.implicitRules.indexOf(name) > -1;
+  isImplicit(name) {
+    return this.implicitRules.includes(name);
   },
 
   /**
@@ -540,7 +563,7 @@ export const manager = {
    * @param  {function} fn
    * @return {void}
    */
-  register (name, fn) {
+  register(name, fn) {
     rules[name] = fn;
   },
 
@@ -551,7 +574,7 @@ export const manager = {
    * @param  {function} fn
    * @return {void}
    */
-  registerImplicit (name, fn) {
+  registerImplicit(name, fn) {
     this.register(name, fn);
     this.implicitRules.push(name);
   },
@@ -563,7 +586,7 @@ export const manager = {
    * @param  {function} fn
    * @return {void}
    */
-  registerAsync (name, fn) {
+  registerAsync(name, fn) {
     this.register(name, fn);
     this.asyncRules.push(name);
   },
@@ -575,12 +598,12 @@ export const manager = {
    * @param  {function} fn
    * @return {void}
    */
-  registerAsyncImplicit (name, fn) {
+  registerAsyncImplicit(name, fn) {
     this.registerImplicit(name, fn);
     this.asyncRules.push(name);
   },
 
-  registerMissedRuleValidator (fn, message) {
+  registerMissedRuleValidator(fn, message) {
     missedRuleValidator = fn;
     missedRuleMessage = message;
   }

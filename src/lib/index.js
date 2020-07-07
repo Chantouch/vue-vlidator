@@ -1,15 +1,22 @@
+import {
+  isObject,
+  isString,
+  isUndefined,
+  isFunction,
+  isNull,
+  get
+} from 'lodash';
 import Errors from './errors';
 import Rules from './rules';
 import Lang from './lang';
 import Attributes from './attributes';
-import AsyncResolvers  from './async';
-import { isObject, isString, isUndefined, isFunction, isNull, get } from 'lodash';
+import AsyncResolvers from './async';
 import flatten from './flatten';
 
 const numericRules = ['integer', 'numeric'];
 
 export default class Validator {
-  constructor (options = {}) {
+  constructor(options = {}) {
     const defaults = {
       accessorName: '$vlidator',
       input: {},
@@ -76,15 +83,22 @@ export default class Validator {
    *
    * @return {boolean} Whether it passes; true = passes, false = fails
    */
-  check () {
+  check() {
     const self = this;
     for (const attribute in self.rules) {
       const attributeRules = self.rules[attribute];
       const inputValue = self._objectPath(self.input, attribute);
-      if (self._hasRule(attribute, ['sometimes']) && !self._suppliedWithData(attribute)) {
+      if (
+        self._hasRule(attribute, ['sometimes']) &&
+        !self._suppliedWithData(attribute)
+      ) {
         continue;
       }
-      let i = 0, len = attributeRules.length, rule, ruleOptions, rulePassed;
+      let i = 0;
+      const len = attributeRules.length;
+      let rule;
+      let ruleOptions;
+      let rulePassed;
       for (; i < len; i++) {
         ruleOptions = attributeRules[i];
         rule = self.getRule(ruleOptions.name);
@@ -109,14 +123,14 @@ export default class Validator {
    * @param {function} fails
    * @return {void}
    */
-  checkAsync (passes, fails = undefined) {
+  checkAsync(passes, fails = undefined) {
     const _this = this;
-    passes = passes || function () {};
-    fails = fails || function () {};
-    const failsOne = function (rule, message) {
+    passes = passes || function() {};
+    fails = fails || function() {};
+    const failsOne = function(rule, message) {
       _this._addFailure(rule, message);
     };
-    const resolvedAll = function (allPassed) {
+    const resolvedAll = function(allPassed) {
       if (allPassed) {
         passes();
       } else {
@@ -124,10 +138,10 @@ export default class Validator {
       }
     };
     const asyncResolvers = new AsyncResolvers(failsOne, resolvedAll);
-    const validateRule = function (inputValue, ruleOptions, attribute, rule) {
-      return function () {
+    const validateRule = function(inputValue, ruleOptions, attribute, rule) {
+      return function() {
         const resolverIndex = asyncResolvers.add(rule);
-        rule.validate(inputValue, ruleOptions.value, attribute, function () {
+        rule.validate(inputValue, ruleOptions.value, attribute, function() {
           asyncResolvers.resolve(resolverIndex);
         });
       };
@@ -135,10 +149,16 @@ export default class Validator {
     for (const attribute in this.rules) {
       const attributeRules = this.rules[attribute];
       const inputValue = this._objectPath(this.input, attribute);
-      if (this._hasRule(attribute, ['sometimes']) && !this._suppliedWithData(attribute)) {
+      if (
+        this._hasRule(attribute, ['sometimes']) &&
+        !this._suppliedWithData(attribute)
+      ) {
         continue;
       }
-      let i = 0, len = attributeRules.length, rule, ruleOptions;
+      let i = 0;
+      const len = attributeRules.length;
+      let rule;
+      let ruleOptions;
       for (; i < len; i++) {
         ruleOptions = attributeRules[i];
         rule = this.getRule(ruleOptions.name);
@@ -157,7 +177,7 @@ export default class Validator {
    * @param {Rules} rule
    * @param message
    */
-  _addFailure (rule, message = null) {
+  _addFailure(rule, message = null) {
     const msg = this.messages.render(rule);
     this.errors.add(rule.attribute, msg);
     this.errorCount++;
@@ -168,7 +188,7 @@ export default class Validator {
    * @return {object} flattened object
    * @param obj
    */
-  _flattenObject (obj) {
+  _flattenObject(obj) {
     return flatten(obj);
   }
   /**
@@ -178,20 +198,28 @@ export default class Validator {
    * @param  {string} path inside object
    * @return {any|void} value under the path
    */
-  _objectPath (obj, path) {
+  _objectPath(obj, path) {
     if (Object.prototype.hasOwnProperty.call(obj, path)) {
       return obj[path];
     }
-    const keys = path.replace(/\[(\w+)\]/g, '.$1').replace(/^\./, '').split('.');
+    const keys = path
+      .replace(/\[(\w+)\]/g, '.$1')
+      .replace(/^\./, '')
+      .split('.');
     let copy = {};
     for (const attr in obj) {
       if (Object.prototype.hasOwnProperty.call(obj, attr)) {
         copy[attr] = obj[attr];
       }
     }
-    let i = 0, l = keys.length;
+    let i = 0;
+    const l = keys.length;
     for (; i < l; i++) {
-      if (isObject(copy) && !isNull(copy) && Object.hasOwnProperty.call(copy, keys[i])) {
+      if (
+        isObject(copy) &&
+        !isNull(copy) &&
+        Object.hasOwnProperty.call(copy, keys[i])
+      ) {
         copy = copy[keys[i]];
       } else {
         return;
@@ -205,7 +233,7 @@ export default class Validator {
    * @param  {object} rules
    * @return {object}
    */
-  _parseRules (rules) {
+  _parseRules(rules) {
     const parsedRules = {};
     rules = this._flattenObject(rules);
     for (const attribute in rules) {
@@ -214,35 +242,58 @@ export default class Validator {
     }
     return parsedRules;
   }
-  _parseRulesCheck (attribute, rulesArray, parsedRules, wildCardValues) {
-    if (attribute.indexOf('*') > -1) {
-      this._parsedRulesRecurse(attribute, rulesArray, parsedRules, wildCardValues);
+  _parseRulesCheck(attribute, rulesArray, parsedRules, wildCardValues) {
+    if (attribute.includes('*')) {
+      this._parsedRulesRecurse(
+        attribute,
+        rulesArray,
+        parsedRules,
+        wildCardValues
+      );
     } else {
-      this._parseRulesDefault(attribute, rulesArray, parsedRules, wildCardValues);
+      this._parseRulesDefault(
+        attribute,
+        rulesArray,
+        parsedRules,
+        wildCardValues
+      );
     }
   }
-  _parsedRulesRecurse (attribute, rulesArray, parsedRules, wildCardValues) {
+  _parsedRulesRecurse(attribute, rulesArray, parsedRules, wildCardValues) {
     const parentPath = attribute.substr(0, attribute.indexOf('*') - 1);
     const propertyValue = this._objectPath(this.input, parentPath);
     if (propertyValue) {
-      for (let propertyNumber = 0; propertyNumber < propertyValue.length; propertyNumber++) {
+      for (
+        let propertyNumber = 0;
+        propertyNumber < propertyValue.length;
+        propertyNumber++
+      ) {
         const workingValues = wildCardValues ? wildCardValues.slice() : [];
         workingValues.push(propertyNumber);
-        this._parseRulesCheck(attribute.replace('*', propertyNumber), rulesArray, parsedRules, workingValues);
+        this._parseRulesCheck(
+          attribute.replace('*', propertyNumber),
+          rulesArray,
+          parsedRules,
+          workingValues
+        );
       }
     }
   }
-  _parseRulesDefault (attribute, rulesArray, parsedRules, wildCardValues) {
+  _parseRulesDefault(attribute, rulesArray, parsedRules, wildCardValues) {
     const attributeRules = [];
-    if (rulesArray instanceof Array) {
+    if (Array.isArray(rulesArray)) {
       rulesArray = this._prepareRulesArray(rulesArray);
     }
     if (isString(rulesArray)) {
       rulesArray = rulesArray.split('|');
     }
-    let i = 0, len = rulesArray.length, rule;
+    let i = 0;
+    const len = rulesArray.length;
+    let rule;
     for (; i < len; i++) {
-      rule = isString(rulesArray[i]) ? this._extractRuleAndRuleValue(rulesArray[i]) : rulesArray[i];
+      rule = isString(rulesArray[i])
+        ? this._extractRuleAndRuleValue(rulesArray[i])
+        : rulesArray[i];
       if (rule.value) {
         rule.value = this._replaceWildCards(rule.value, wildCardValues);
         this._replaceWildCardsMessages(wildCardValues);
@@ -254,13 +305,13 @@ export default class Validator {
     }
     parsedRules[attribute] = attributeRules;
   }
-  _replaceWildCards (path, nums) {
+  _replaceWildCards(path, nums) {
     if (!nums) {
       return path;
     }
     let path2 = path;
-    nums.forEach(function (value) {
-      if(Array.isArray(path2)){
+    nums.forEach(function(value) {
+      if (Array.isArray(path2)) {
         path2 = path2[0];
       }
       const pos = path2.indexOf('*');
@@ -269,16 +320,16 @@ export default class Validator {
       }
       path2 = path2.substr(0, pos) + value + path2.substr(pos + 1);
     });
-    if(Array.isArray(path)){
+    if (Array.isArray(path)) {
       path[0] = path2;
       path2 = path;
     }
     return path2;
   }
-  _replaceWildCardsMessages (nums) {
+  _replaceWildCardsMessages(nums) {
     const customMessages = this.messages.customMessages;
     const self = this;
-    Object.keys(customMessages).forEach(function (key) {
+    Object.keys(customMessages).forEach(function(key) {
       if (nums) {
         const newKey = self._replaceWildCards(key, nums);
         customMessages[newKey] = customMessages[key];
@@ -292,9 +343,10 @@ export default class Validator {
    * @param  {array} rulesArray
    * @return {array}
    */
-  _prepareRulesArray (rulesArray) {
+  _prepareRulesArray(rulesArray) {
     const rules = [];
-    let i = 0, len = rulesArray.length;
+    let i = 0;
+    const len = rulesArray.length;
     for (; i < len; i++) {
       if (isObject(rulesArray[i])) {
         for (const rule in rulesArray[i]) {
@@ -315,7 +367,7 @@ export default class Validator {
    * @param  {string} attribute
    * @return {boolean}
    */
-  _suppliedWithData (attribute) {
+  _suppliedWithData(attribute) {
     return this.input.hasOwnProperty(attribute);
   }
   /**
@@ -324,11 +376,11 @@ export default class Validator {
    * @param  {string} ruleString min:3
    * @return {object} object containing the name of the rule and value
    */
-  _extractRuleAndRuleValue (ruleString) {
+  _extractRuleAndRuleValue(ruleString) {
     const rule = {};
     let ruleArray;
     rule.name = ruleString;
-    if (ruleString.indexOf(':') >= 0) {
+    if (ruleString.includes(':')) {
       ruleArray = ruleString.split(':');
       rule.name = ruleArray[0];
       rule.value = ruleArray.slice(1).join(':');
@@ -342,11 +394,12 @@ export default class Validator {
    * @param  {Array}   findRules
    * @return {boolean}
    */
-  _hasRule (attribute, findRules = []) {
+  _hasRule(attribute, findRules = []) {
     const rules = this.rules[attribute] || [];
-    let i = 0, len = rules.length;
+    let i = 0;
+    const len = rules.length;
     for (; i < len; i++) {
-      if (findRules.indexOf(rules[i].name) > -1) {
+      if (findRules.includes(rules[i].name)) {
         return true;
       }
     }
@@ -358,7 +411,7 @@ export default class Validator {
    * @param  {string}  attribute
    * @return {Boolean}
    */
-  _hasNumericRule (attribute) {
+  _hasNumericRule(attribute) {
     return this._hasRule(attribute, numericRules);
   }
   /**
@@ -368,7 +421,7 @@ export default class Validator {
    * @param  {any|void}  value
    * @return {boolean}
    */
-  _isValidatable (rule, value = null) {
+  _isValidatable(rule, value = null) {
     if (Rules.isImplicit(rule.name)) {
       return true;
     }
@@ -381,13 +434,17 @@ export default class Validator {
    * @param  {boolean} rulePassed
    * @return {boolean}
    */
-  _shouldStopValidating (attribute, rulePassed) {
+  _shouldStopValidating(attribute, rulePassed) {
     const stopOnAttributes = this.stopOnAttributes;
-    if (isUndefined(stopOnAttributes) || stopOnAttributes === false || rulePassed === true) {
+    if (
+      isUndefined(stopOnAttributes) ||
+      stopOnAttributes === false ||
+      rulePassed === true
+    ) {
       return false;
     }
-    if (stopOnAttributes instanceof Array) {
-      return stopOnAttributes.indexOf(attribute) > -1;
+    if (Array.isArray(stopOnAttributes)) {
+      return stopOnAttributes.includes(attribute);
     }
     return true;
   }
@@ -397,7 +454,7 @@ export default class Validator {
    * @param {object} attributes
    * @return {void}
    */
-  setAttributeNames (attributes) {
+  setAttributeNames(attributes) {
     this.messages._setAttributeNames(attributes);
   }
   /**
@@ -406,7 +463,7 @@ export default class Validator {
    * @param {function} func
    * @return {void}
    */
-  setAttributeFormatter (func) {
+  setAttributeFormatter(func) {
     this.messages._setAttributeFormatter(func);
   }
   /**
@@ -415,7 +472,7 @@ export default class Validator {
    * @param  {string} name
    * @return {Rules}
    */
-  getRule (name) {
+  getRule(name) {
     return Rules.make(name, this);
   }
   /**
@@ -424,7 +481,7 @@ export default class Validator {
    * @return {void}
    * @param attributes
    */
-  stopOnError (attributes) {
+  stopOnError(attributes) {
     this.stopOnAttributes = attributes;
   }
   /**
@@ -433,7 +490,7 @@ export default class Validator {
    * @param {function} passes
    * @return {void|boolean}
    */
-  passes (passes = undefined) {
+  passes(passes = undefined) {
     const async = this._checkAsync('passes', passes);
     if (async) {
       return this.checkAsync(passes);
@@ -446,10 +503,10 @@ export default class Validator {
    * @param {function} fails
    * @return {boolean|undefined|void}
    */
-  fails (fails = undefined) {
+  fails(fails = undefined) {
     const async = this._checkAsync('fails', fails);
     if (async) {
-      return this.checkAsync(function () {}, fails);
+      return this.checkAsync(function() {}, fails);
     }
     return !this.check();
   }
@@ -460,9 +517,10 @@ export default class Validator {
    * @param  {function} callback
    * @return {boolean}
    */
-  _checkAsync (funcName, callback) {
+  _checkAsync(funcName, callback) {
     const hasCallback = isFunction(callback);
     if (this.hasAsync && !hasCallback) {
+      // eslint-disable-next-line no-throw-literal
       throw funcName + ' expects a callback when async rules are being tested.';
     }
     return this.hasAsync || hasCallback;
@@ -474,8 +532,22 @@ export default class Validator {
    * @param {object} messages
    * @return {this}
    */
-  setMessages (lang, messages) {
+  setMessages(lang, messages) {
     Lang._set(lang, messages);
+    return this;
+  }
+
+  /**
+   * Re-set language (locale,attributes,messages)
+   * @param locale
+   * @param attributes
+   * @param messages
+   * @return {this}
+   */
+  makeLang(locale = 'en', attributes = {}, messages = {}) {
+    this.messages = Lang._make(locale);
+    this.setAttributeNames(attributes);
+    this.messages._setCustom(messages);
     return this;
   }
   /**
@@ -484,7 +556,7 @@ export default class Validator {
    * @param  {string} lang
    * @return {Messages}
    */
-  getMessages (lang) {
+  getMessages(lang) {
     return Lang._get(lang);
   }
   /**
@@ -493,7 +565,7 @@ export default class Validator {
    * @param {string} lang
    * @return {void}
    */
-  useLang (lang) {
+  useLang(lang) {
     this.locale = lang;
   }
   /**
@@ -501,7 +573,7 @@ export default class Validator {
    *
    * @return {string}
    */
-  getDefaultLang () {
+  getDefaultLang() {
     return this.locale;
   }
   /**
@@ -512,7 +584,7 @@ export default class Validator {
    * @param  {string}   message
    * @return {void}
    */
-  register (name, fn, message) {
+  register(name, fn, message) {
     const lang = this.getDefaultLang();
     Rules.register(name, fn);
     Lang._setRuleMessage(lang, name, message);
@@ -525,7 +597,7 @@ export default class Validator {
    * @param  {string}   message
    * @return {void}
    */
-  registerImplicit (name, fn, message) {
+  registerImplicit(name, fn, message) {
     const lang = this.getDefaultLang();
     Rules.registerImplicit(name, fn);
     Lang._setRuleMessage(lang, name, message);
@@ -538,7 +610,7 @@ export default class Validator {
    * @param  {string}   message
    * @return {void}
    */
-  registerAsync (name, fn, message) {
+  registerAsync(name, fn, message) {
     const lang = this.getDefaultLang();
     Rules.registerAsync(name, fn);
     Lang._setRuleMessage(lang, name, message);
@@ -551,7 +623,7 @@ export default class Validator {
    * @param  {string}   message
    * @return {void}
    */
-  registerAsyncImplicit (name, fn, message) {
+  registerAsyncImplicit(name, fn, message) {
     const lang = this.getDefaultLang();
     Rules.registerAsyncImplicit(name, fn);
     Lang._setRuleMessage(lang, name, message);
@@ -563,12 +635,12 @@ export default class Validator {
    * @param  {string}   message
    * @return {void}
    */
-  registerMissedRuleValidator (fn, message) {
+  registerMissedRuleValidator(fn, message) {
     Rules.registerMissedRuleValidator(fn, message);
   }
 }
 
-export function install (Vue, options = {}) {
+export function install(Vue, options = {}) {
   const defaults = {
     locale: 'en',
     input: {},
@@ -580,49 +652,59 @@ export function install (Vue, options = {}) {
     ...options
   };
   Vue.mixin({
-    beforeCreate () {
+    beforeCreate() {
       this.$options.$vlidator = {};
       const input = this.$data || {};
       Object.assign(defaults, { input, rules: {} });
-      Vue.util.defineReactive(this.$options, '$vlidator', new Validator(defaults));
+      Vue.util.defineReactive(
+        this.$options,
+        '$vlidator',
+        new Validator(defaults)
+      );
       if (!this.$options.computed) {
         this.$options.computed = {};
       }
-      this.$options.computed.$vlidator = function () {
+      this.$options.computed.$vlidator = function() {
         return this.$options.$vlidator;
       };
     },
-    created () {
+    created() {
       const this_ = this;
       const { watch = false, immediate = false } = defaults;
       const vlidator = this_.$options.vlidator;
-      let locale = this_.$options.$vlidator.getDefaultLang();
       if (vlidator && vlidator.rules) {
         const { rules = {} } = vlidator;
         Object.entries(flatten(this_.$data)).forEach(([path, _]) => {
-          let validations = get(rules, path);
+          const validations = get(rules, path);
           if (validations !== undefined && watch) {
-            this_.$watch(path, (value) => {
-              this_.validate({ locale, value });
-            }, { deep: true, immediate });
+            this_.$watch(
+              path,
+              (value) => {
+                this_.validate({ value });
+              },
+              { deep: true, immediate }
+            );
           }
         });
       }
     },
     methods: {
-      validate (payload = {}) {
+      validate(payload = {}) {
         const this_ = this;
         let locale = null;
-        if (this_.$i18n && this_.$t) {
-          locale = this_.$i18n.locale;
-        } else {
-          locale = this_.$options.$vlidator.getDefaultLang();
+        if (this_.$i18n) {
+          locale = this.$i18n.locale;
         }
         const vlidator = this_.$options.vlidator;
         const { rules = {} } = vlidator;
         const input = getData({ rules, data: this_.$data });
         Object.assign(defaults, { locale, ...vlidator, input });
         const validator = new Validator(defaults);
+        const lang = require('@/lang/' + locale);
+        const { attributes = {}, messages = {} } = lang.default
+          ? lang.default
+          : lang;
+        validator.makeLang(locale, attributes, messages);
         return new Promise((resolve, reject) => {
           if (validator.passes()) {
             resolve(validator.input);
@@ -636,7 +718,7 @@ export function install (Vue, options = {}) {
           }
         });
       }
-    },
+    }
   });
 }
 

@@ -185,7 +185,7 @@ export const replacements = {
     return this._replacePlaceholders(rule, template, {
       same: this._getAttributeName(parameters[0])
     });
-  },
+  }
 };
 
 export const formatter = (attribute) => {

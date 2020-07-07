@@ -16,10 +16,6 @@ export default ({ app }) => {
     } else if (pluginOptions.locale) {
         Object.assign(pluginOptions, { locale: pluginOptions.locale })
     }
-    // onLanguageSwitched called right after a new locale has been set
-    app.i18n.onLanguageSwitched = (oldLocale, newLocale) => {
-        Object.assign(pluginOptions, { locale: newLocale })
-    }
     Vue.use(Validator, pluginOptions); // add vue-vlidator as Vue plugin
     app.$vlidator = new Validator(pluginOptions);
 }

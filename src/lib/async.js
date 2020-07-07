@@ -1,5 +1,5 @@
 class AsyncResolvers {
-  constructor (onFailedOne, onResolvedAll) {
+  constructor(onFailedOne, onResolvedAll) {
     this.onResolvedAll = onResolvedAll;
     this.onFailedOne = onFailedOne;
     this.resolvers = {};
@@ -45,7 +45,7 @@ class AsyncResolvers {
    * @return {boolean}
    */
   isAllResolved() {
-    return (this.passed.length + this.failed.length) === this.resolversCount;
+    return this.passed.length + this.failed.length === this.resolversCount;
   }
 
   /**
@@ -54,7 +54,6 @@ class AsyncResolvers {
    * @return {void}
    */
   fire() {
-
     if (!this.firing) {
       return;
     }
