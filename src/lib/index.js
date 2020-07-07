@@ -612,7 +612,12 @@ export function install (Vue, options = {}) {
     methods: {
       validate (payload = {}) {
         const this_ = this;
-        let locale = this_.$options.$vlidator.getDefaultLang();
+        let locale = null;
+        if (this_.$i18n && this_.$t) {
+          locale = this_.$i18n.locale;
+        } else {
+          locale = this_.$options.$vlidator.getDefaultLang();
+        }
         const vlidator = this_.$options.vlidator;
         const { rules = {} } = vlidator;
         const input = getData({ rules, data: this_.$data });
