@@ -703,7 +703,7 @@ export function install(Vue, options = {}) {
         const input = getData({ rules, data: this_.$data });
         Object.assign(defaults, { locale, ...vlidator, input });
         const validator = new Validator(defaults);
-        const lang = require(`@/${langDir}${locale}`);
+        const lang = require('@/lang/' + locale);
         const { attributes = {}, messages = {} } = lang.default
           ? lang.default
           : lang;

@@ -15,6 +15,7 @@
   },
   "main": "dist/index.js",
   "types": "types/index.d.ts",
+  "jsnext:main": "src/lib/index.js",
   "files": [
     "dist",
     "types",
