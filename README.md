@@ -490,8 +490,7 @@ The field under must be meet the password.
 
 **Note**: When using the ``regex`` pattern, it may be necessary to specify rules in an array instead of using pipe delimiters, especially if the regular expression contains a pipe character.
 For each backward slash that you used in your regex pattern, you must escape each one with another backward slash
-. Note that vlidator uses the standard JavaScript [RegExp](https://developer.mozilla.org/en-US/docs/Web/JavaScript
-/Reference/Global_Objects/RegExp) flavor of regular expressions.
+. Note that vlidator uses the standard JavaScript [RegExp](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp) flavor of regular expressions.
 
 #### Example 3 - Regex validation
 
