@@ -281,25 +281,25 @@ const rules = {
   present(val) {
     return !isUndefined(val);
   },
-  gt: function(val, req)  {
+  gt(val, req)  {
     const val1 = Number(this.validator._objectPath(this.validator.input, req));
     const val2 = Number(val);
 
     return isNaN(val1) || isNaN(val2) || val2 > val1;
   },
-  lt: function(val, req)  {
+  lt(val, req)  {
     const val1 = Number(this.validator._objectPath(this.validator.input, req));
     const val2 = Number(val);
 
     return isNaN(val1) || isNaN(val2) || val2 < val1;
   },
-  gte: function(val, req)  {
+  gte(val, req)  {
     const val1 = Number(this.validator._objectPath(this.validator.input, req));
     const val2 = Number(val);
 
     return isNaN(val1) || isNaN(val2) || val2 >= val1;
   },
-  lte: function(val, req)  {
+  lte(val, req)  {
     const val1 = Number(this.validator._objectPath(this.validator.input, req));
     const val2 = Number(val);
 
@@ -384,7 +384,7 @@ class Rules {
     this._setValidatingData(attribute, inputValue, ruleValue);
     if (isFunction(callback)) {
       this.callback = callback;
-      const handleResponse = function(passes, message) {
+      const handleResponse = (passes, message) => {
         _this.response(passes, message);
       };
       if (this.async) {
