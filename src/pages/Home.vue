@@ -84,7 +84,7 @@
             />
         </b-form-group>
 
-        <b-button type="submit" variant="primary" :disabled="$vlidator.errors.any()">
+        <b-button type="submit" variant="primary">
             Submit
         </b-button>
     </b-form>
@@ -100,7 +100,8 @@
           email: 'johndoe@gmail.com',
           age: 18,
           passwordConfirmation: '',
-          password: ''
+          password: '',
+          rule: 20
         }
       }
     },
@@ -109,7 +110,7 @@
         form: {
           name: 'required|min:4|string',
           email: 'required|email',
-          age: 'required|numeric|min:18|max:50',
+          age: 'required|numeric|min:18|max:50|gte:form.rule',
           password: 'required|min:3|confirmed'
         }
       }
