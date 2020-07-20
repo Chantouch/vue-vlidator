@@ -7,5 +7,11 @@ const customAttributes = {
     name: 'name'
   }
 };
+const options = {
+  locale: 'en',
+  customAttributes,
+  langDir: 'lib/lang/',
+  confirmedReverse: true,
+};
 
-Vue.use(Validator, { locale: 'en', customAttributes, langDir: 'lib/lang/' });
+Vue.use(Validator, options);

@@ -73,7 +73,7 @@ class Messages {
    * Render message
    *
    * @param  {Rules} rule
-   * @return {string}
+   * @return {string|[]}
    */
   render(rule) {
     if (rule.customMessage) {

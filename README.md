@@ -368,6 +368,7 @@ The field under validation must be a boolean value of the form `true`, `false`, 
 #### confirmed
 
 The field under validation must have a matching field of foo_confirmation. For example, if the field under validation is password, a matching password_confirmation | passwordConfirmation field must be present in the input.
+- if you want to show reverse message on `_confirmation` attribute, you need to provide an option called `confirmedReverse`
 
 #### date
 

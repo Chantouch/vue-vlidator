@@ -1,6 +1,6 @@
 {
   "name": "vue-vlidator",
-  "version": "0.0.2-beta.10",
+  "version": "0.0.2-beta.11",
   "description": "Validation library inspired by Laravel's Validator",
   "author": "Chantouch Sek <chantouchsek.cs83@gmail.com>",
   "scripts": {
@@ -23,6 +23,9 @@
   "dependencies": {
     "date-fns": "2.0.1",
     "vue": "^2.6.11"
+  },
+  "optionalDependencies": {
+    "escape-string-regexp": "^4.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.3",

@@ -24,7 +24,8 @@ export default class Validator {
       fields: {},
       locale: 'en',
       customMessages: {},
-      customAttributes: {}
+      customAttributes: {},
+      confirmedReverse: false
     };
     this.options = {
       ...defaults,
@@ -85,13 +86,12 @@ export default class Validator {
    */
   check() {
     const self = this;
-    for (const attribute in self.rules) {
+    const { confirmedReverse = false } = this.options;
+    const confirmed = 'confirmed';
+    for (let attribute in self.rules) {
       const attributeRules = self.rules[attribute];
       const inputValue = self._objectPath(self.input, attribute);
-      if (
-        self._hasRule(attribute, ['sometimes']) &&
-        !self._suppliedWithData(attribute)
-      ) {
+      if (self._hasRule(attribute, ['sometimes']) && !self._suppliedWithData(attribute)) {
         continue;
       }
       let i = 0;
@@ -101,12 +101,17 @@ export default class Validator {
       let rulePassed;
       for (; i < len; i++) {
         ruleOptions = attributeRules[i];
-        rule = self.getRule(ruleOptions.name);
+        const { name } = ruleOptions;
+        rule = self.getRule(name);
         if (!self._isValidatable(rule, inputValue)) {
           continue;
         }
         rulePassed = rule.validate(inputValue, ruleOptions.value, attribute);
         if (!rulePassed) {
+          if (name === confirmed && confirmedReverse) {
+            attribute = `${attribute}_confirmation`;
+            Object.assign(rule, { attribute });
+          }
           self._addFailure(rule);
         }
         if (self._shouldStopValidating(attribute, rulePassed)) {

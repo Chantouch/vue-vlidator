@@ -72,13 +72,13 @@
                 description="Let us know your password confirmation."
                 label="Enter your password confirmation"
                 label-for="input-2"
-                :state="$vlidator.errors.has('form.passwordConfirmation')"
-                :invalid-feedback="$vlidator.errors.first('form.passwordConfirmation')"
+                :state="$vlidator.errors.has(['form.passwordConfirmation', 'form.password_confirmation'])"
+                :invalid-feedback="$vlidator.errors.first(['form.passwordConfirmation', 'form.password_confirmation'])"
         >
             <b-form-input
                     id="input-5"
                     v-model="form.passwordConfirmation"
-                    :state="!$vlidator.errors.has('form.passwordConfirmation')"
+                    :state="!$vlidator.errors.has(['form.passwordConfirmation', 'form.password_confirmation'])"
                     type="password"
                     trim
             />
@@ -118,7 +118,6 @@
       async onSubmit () {
         try {
           const { form } = await this.validate()
-          console.log(form)
           alert(JSON.stringify(form))
         } catch (e) {
           console.log(e)

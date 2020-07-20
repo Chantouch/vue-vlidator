@@ -1,3 +1,5 @@
+import { is, isArray } from './utils';
+
 class Errors {
   constructor(errors = {}) {
     this.errors = errors;
@@ -39,10 +41,15 @@ class Errors {
    * @return {string|boolean} First error message or false
    */
   first(attribute) {
-    if (this.has(attribute)) {
-      return this.errors[attribute][0];
+    if (isArray(attribute)) {
+      for (let i = 0; i < attribute.length; i++) {
+        if (!this.errors.hasOwnProperty(attribute[i])) {
+          continue;
+        }
+        return this.first(attribute[i]);
+      }
     }
-    return undefined;
+    return this.get(attribute)[0];
   }
 
   /**
@@ -68,6 +75,9 @@ class Errors {
    * @return {boolean}
    */
   has(attribute) {
+    if (isArray(attribute)) {
+      return is(Object.keys(this.errors), attribute);
+    }
     let hasError = this.errors.hasOwnProperty(attribute);
     if (!hasError) {
       const errors = Object.keys(this.errors).filter(
@@ -101,7 +111,7 @@ class Errors {
   clear(attribute) {
     if (!attribute) return this.flush();
     const errors = Object.assign({}, this.errors);
-    if (Array.isArray(attribute)) {
+    if (isArray(attribute)) {
       attribute.map((field) => {
         Object.keys(errors)
           .filter(
@@ -132,7 +142,6 @@ class Errors {
    * @param {string} prefix
    */
   keydown(event, prefix = '') {
-    console.log(event);
     const { name } = event.target;
     if (!name) return;
     let name2 = '';
