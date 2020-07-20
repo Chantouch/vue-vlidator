@@ -281,8 +281,32 @@ const rules = {
   present(val) {
     return !isUndefined(val);
   },
+  gt: function(val, req)  {
+    const val1 = Number(this.validator._objectPath(this.validator.input, req));
+    const val2 = Number(val);
+
+    return isNaN(val1) || isNaN(val2) || val2 > val1;
+  },
+  lt: function(val, req)  {
+    const val1 = Number(this.validator._objectPath(this.validator.input, req));
+    const val2 = Number(val);
+
+    return isNaN(val1) || isNaN(val2) || val2 < val1;
+  },
+  gte: function(val, req)  {
+    const val1 = Number(this.validator._objectPath(this.validator.input, req));
+    const val2 = Number(val);
+
+    return isNaN(val1) || isNaN(val2) || val2 >= val1;
+  },
+  lte: function(val, req)  {
+    const val1 = Number(this.validator._objectPath(this.validator.input, req));
+    const val2 = Number(val);
+
+    return isNaN(val1) || isNaN(val2) || val2 <= val1;
+  },
   after(val, req) {
-    const val1 = this.validator.input[req];
+    const val1 = this.validator._objectPath(this.validator.input, req);
     const val2 = val;
     if (!isValidDate(val1)) {
       return false;
@@ -293,7 +317,7 @@ const rules = {
     return new Date(val1).getTime() < new Date(val2).getTime();
   },
   after_or_equal(val, req) {
-    const val1 = this.validator.input[req];
+    const val1 = this.validator._objectPath(this.validator.input, req);
     const val2 = val;
     if (!isValidDate(val1)) {
       return false;
@@ -304,7 +328,7 @@ const rules = {
     return new Date(val1).getTime() <= new Date(val2).getTime();
   },
   before(val, req) {
-    const val1 = this.validator.input[req];
+    const val1 = this.validator._objectPath(this.validator.input, req);
     const val2 = val;
     if (!isValidDate(val1)) {
       return false;
@@ -315,7 +339,7 @@ const rules = {
     return new Date(val1).getTime() > new Date(val2).getTime();
   },
   before_or_equal(val, req) {
-    const val1 = this.validator.input[req];
+    const val1 = this.validator._objectPath(this.validator.input, req);
     const val2 = val;
     if (!isValidDate(val1)) {
       return false;
