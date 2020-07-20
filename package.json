@@ -1,6 +1,6 @@
 {
   "name": "vue-vlidator",
-  "version": "0.0.2-beta.12",
+  "version": "0.0.2-beta.14",
   "description": "Validation library inspired by Laravel's Validator",
   "author": "Chantouch Sek <chantouchsek.cs83@gmail.com>",
   "scripts": {
@@ -15,12 +15,10 @@
   },
   "main": "dist/index.js",
   "types": "types/index.d.ts",
-  "jsnext:main": "src/lib/index.js",
   "files": [
     "dist",
     "types",
-    "nuxt",
-    "src"
+    "nuxt"
   ],
   "dependencies": {
     "date-fns": "2.0.1",
