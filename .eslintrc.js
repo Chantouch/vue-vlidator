@@ -10,7 +10,6 @@ module.exports = {
     allowImportExportEverywhere: true,
     ecmaVersion: 2018,
     ecmaFeatures: {
-      experimentalObjectRestSpread: true,
       modules: true
     }
   },

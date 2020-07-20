@@ -1,4 +1,4 @@
-import {PluginFunction} from 'vue';
+import {PluginFunction} from 'types/vue';
 
 type AsyncFunction = ((arg0: any) => Promise<any>) | Promise<any>;
 

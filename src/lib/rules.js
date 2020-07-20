@@ -240,11 +240,11 @@ const rules = {
     );
   },
   confirmed(val, req, key) {
-    const confirmamtionKey = `${key}_confirmation`;
+    const confirmationKey = `${key}_confirmation`;
     const confirmedKey = `${key}Confirmation`;
     const val1 = this.validator._flattenObject(this.validator.input);
-    if (val1.hasOwnProperty(confirmamtionKey)) {
-      return val1[confirmamtionKey] === val;
+    if (val1.hasOwnProperty(confirmationKey)) {
+      return val1[confirmationKey] === val;
     }
     return val1[confirmedKey] === val;
   },

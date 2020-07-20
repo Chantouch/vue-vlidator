@@ -8,4 +8,4 @@ const customAttributes = {
   }
 };
 
-Vue.use(Validator, { locale: 'en', customAttributes });
+Vue.use(Validator, { locale: 'en', customAttributes, langDir: 'lib/lang/' });

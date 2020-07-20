@@ -649,6 +649,7 @@ export function install(Vue, options = {}) {
     customAttributes: {},
     watch: false,
     immediate: true,
+    langDir: 'lang/',
     ...options
   };
   Vue.mixin({
@@ -656,11 +657,7 @@ export function install(Vue, options = {}) {
       this.$options.$vlidator = {};
       const input = this.$data || {};
       Object.assign(defaults, { input, rules: {} });
-      Vue.util.defineReactive(
-        this.$options,
-        '$vlidator',
-        new Validator(defaults)
-      );
+      Vue.util.defineReactive(this.$options, '$vlidator', new Validator(defaults));
       if (!this.$options.computed) {
         this.$options.computed = {};
       }
@@ -691,6 +688,7 @@ export function install(Vue, options = {}) {
     methods: {
       validate(payload = {}) {
         const this_ = this;
+        const { langDir } = defaults;
         let locale = this_.$options.$vlidator.getDefaultLang();
         if (this_.$i18n) {
           locale = this_.$i18n.locale;
@@ -700,7 +698,7 @@ export function install(Vue, options = {}) {
         const input = getData({ rules, data: this_.$data });
         Object.assign(defaults, { locale, ...vlidator, input });
         const validator = new Validator(defaults);
-        const lang = require('@/lang/' + locale);
+        const lang = require(`@/${langDir}${locale}`);
         const { attributes = {}, messages = {} } = lang.default
           ? lang.default
           : lang;

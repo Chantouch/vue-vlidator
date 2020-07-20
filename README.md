@@ -92,7 +92,7 @@ Put it on top of `nuxt-i18n`
 import Vue from 'vue';
 import Validator from 'vue-vlidator';
 
-const options = { locale: 'km', customAttributes: {}, customMessages: {} }
+const options = { locale: 'km', customAttributes: {}, customMessages: {}, langDir: 'lang/' }
 
 Vue.use(Validator, options);
 ```
