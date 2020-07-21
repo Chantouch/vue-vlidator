@@ -30,6 +30,62 @@ export const replacements = {
   },
 
   /**
+   * Greater than replacement
+   * @param {string} template
+   * @param {Rules} rule
+   * @return {string}
+   */
+  gt(template, rule) {
+    const parameters = rule.getParameters();
+
+    return this._replacePlaceholders(rule, template, {
+      value: this._getAttributeName(parameters[0]),
+    });
+  },
+
+  /**
+   * Greater than or equal replacement
+   * @param {string} template
+   * @param {Rules} rule
+   * @return {string}
+   */
+  gte(template, rule) {
+    const parameters = rule.getParameters();
+
+    return this._replacePlaceholders(rule, template, {
+      value: this._getAttributeName(parameters[0]),
+    });
+  },
+
+  /**
+   * Less than replacement
+   * @param {string} template
+   * @param {Rules} rule
+   * @return {string}
+   */
+  lt(template, rule) {
+    const parameters = rule.getParameters();
+
+    return this._replacePlaceholders(rule, template, {
+      value: this._getAttributeName(parameters[0]),
+    });
+  },
+
+  /**
+   * Less than or equal replacement
+   * @param {string} template
+   * @param {Rules} rule
+   * @return {string}
+   */
+  lte(template, rule) {
+    const parameters = rule.getParameters();
+
+    return this._replacePlaceholders(rule, template, {
+      value: this._getAttributeName(parameters[0]),
+    });
+  },
+
+  /**
    * Required_if replacement.
    *
    * @param  {string} template
