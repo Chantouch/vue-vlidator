@@ -1,4 +1,4 @@
-import { isNaN } from 'lodash';
+import isNaN from 'lodash/isNaN';
 
 const flatten = (obj) => {
   const flattened = {};
