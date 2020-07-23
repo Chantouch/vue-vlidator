@@ -29,7 +29,6 @@ module.exports = function nuxtVueVlidatorModule (moduleOptions = {}) {
     fileName: 'vue-vlidator-plugin.js',
     options: options
   });
-  this.options.build.transpile.push(/^escape-string-regexp/);
 };
 
 // required by nuxt

@@ -22,8 +22,6 @@
   ],
   "optionalDependencies": {
     "@chantouchsek/validatorjs": "^0.0.1-0",
-    "date-fns": "2.0.1",
-    "escape-string-regexp": "^4.0.0",
     "vue": "^2.6.11"
   },
   "devDependencies": {
