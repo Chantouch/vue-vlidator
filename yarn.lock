@@ -811,9 +811,9 @@
     to-fast-properties "^2.0.0"
 
 "@chantouchsek/validatorjs@^0.0.1-0":
-  version "0.0.1-beta.3"
-  resolved "https://registry.yarnpkg.com/@chantouchsek/validatorjs/-/validatorjs-0.0.1-beta.3.tgz#9bd81a9c4cbfb84570909e8b821cd87cd6b94812"
-  integrity sha512-5+bb0pw6UeMk2d8xJAaJj/pKglJlbA6Zxesn1GeBMJIv3yJkQ+0hSVhzCEu77Zue0bPKTpHOVJObbTIP0uUfig==
+  version "0.0.1-beta.4"
+  resolved "https://registry.yarnpkg.com/@chantouchsek/validatorjs/-/validatorjs-0.0.1-beta.4.tgz#4284c38b91d1f5d64e6ad98fd837f4839d0482aa"
+  integrity sha512-LU+ZxuaDisJEC+kWSHK9te5gj8FEneSPiwrNdyF8dL8Z0qHDMAqqmy/7zsXXW+F0D1kmZiMTM0vcdYjkuQpIyw==
   optionalDependencies:
     date-fns "^2.15.0"
     lodash.isboolean "^3.0.3"
