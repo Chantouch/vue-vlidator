@@ -782,6 +782,12 @@ messages.required = 'Whoops, :attribute field is required.';
 Validator.setMessages('en', messages);
 ```
 
+### Note validator must be called `new Validator()`
+
+```js
+const validator = new Validator()
+```
+
 ### License
 
 Copyright &copy; 2020 Chantouch Sek
