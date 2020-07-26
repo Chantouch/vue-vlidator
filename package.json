@@ -4,7 +4,8 @@
   "description": "Validation library inspired by Laravel's Validator",
   "author": "Chantouch Sek <chantouchsek.cs83@gmail.com>",
   "scripts": {
-    "build": "rimraf dist/* && babel src/lib -d dist",
+    "clean": "rimraf dist",
+    "build": "yarn clean && babel src/lib -d dist",
     "test:unit": "vue-cli-service test:unit",
     "lint": "eslint \"./src/**/*.js\"",
     "build:demo": "vue-cli-service build --dest demo",
@@ -20,9 +21,9 @@
     "types",
     "nuxt"
   ],
-  "optionalDependencies": {
-    "@chantouchsek/validatorjs": "^0.0.1-0",
-    "vue": "^2.6.11"
+  "dependencies": {
+    "@chantouchsek/validatorjs": "^0.0.1-beta.6",
+    "vue": "latest"
   },
   "devDependencies": {
     "@babel/core": "^7.10.3",

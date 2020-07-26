@@ -5,9 +5,9 @@ This library was inspired by the [Laravel framework's Validator](http://laravel.
 [ValidatorJs](https://github.com/skaterdav85/validatorjs)
 
 [![Latest Version on NPM](https://img.shields.io/npm/v/vue-vlidator.svg?style=flat-square)](https://npmjs.com/package/vue-vlidator)
-  [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-  [![npm](https://img.shields.io/npm/dt/vue-vlidator.svg?style=flat-square)](https://npmjs.com/package/vue-vlidator)
-  [![npm](https://img.shields.io/npm/dm/vue-vlidator.svg?style=flat-square)](https://npmjs.com/package/vue-vlidator)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![npm](https://img.shields.io/npm/dt/vue-vlidator.svg?style=flat-square)](https://npmjs.com/package/vue-vlidator)
+[![npm](https://img.shields.io/npm/dm/vue-vlidator.svg?style=flat-square)](https://npmjs.com/package/vue-vlidator)
 
 ## Why use vue-vlidator?
 
@@ -30,48 +30,7 @@ npm install vue-vlidator
 yarn add vue-vlidator
 ```
 
-### Browser
-
-```html
-<script src="vue-vlidator.js"></script>
-```
-
-### Node.js / Browserify
-
-```js
-// ES5
-let Validator = require('vue-vlidator');
-```
-
-```js
-// ES6
-import Validator from 'vue-vlidator';
-```
-
-### Basic Usage
-
-```js
-let options = {
-  input: {},
-  rules: {},
-  locale: 'km',
-  customMessages: {},
-  customAttributes: {}
-}
-let validation = new Validator(options);
-```
-
-__data__ {Object} - The data you want to validate
-
-__rules__ {Object} - Validation rules
-
-__locale__ {string} - Validation locale
-
-__customMessages__ {Object} - Optional custom error messages to return
-
-__customAttributes__ {Object} - Optional custom error attributes to return
-
-## Nuxt Support
+## Use with NuxtJS
 
 Put it on top of `nuxt-i18n`
 
@@ -92,7 +51,7 @@ Put it on top of `nuxt-i18n`
 import Vue from 'vue';
 import Validator from 'vue-vlidator';
 
-const options = { locale: 'km', customAttributes: {}, customMessages: {}, langDir: 'lang/' }
+const options = { locale: 'km', customAttributes: {}, customMessages: {} }
 
 Vue.use(Validator, options);
 ```
@@ -100,6 +59,7 @@ Vue.use(Validator, options);
 #### Available options
 1. locale {string}
 2. customMessages {Object}
+3. customAttributes {Object}
 
 #### Example in Vue component
 ```vue

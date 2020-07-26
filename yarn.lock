@@ -810,10 +810,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@chantouchsek/validatorjs@^0.0.1-0":
-  version "0.0.1-beta.4"
-  resolved "https://registry.yarnpkg.com/@chantouchsek/validatorjs/-/validatorjs-0.0.1-beta.4.tgz#4284c38b91d1f5d64e6ad98fd837f4839d0482aa"
-  integrity sha512-LU+ZxuaDisJEC+kWSHK9te5gj8FEneSPiwrNdyF8dL8Z0qHDMAqqmy/7zsXXW+F0D1kmZiMTM0vcdYjkuQpIyw==
+"@chantouchsek/validatorjs@^0.0.1-beta.6":
+  version "0.0.1-beta.6"
+  resolved "https://registry.yarnpkg.com/@chantouchsek/validatorjs/-/validatorjs-0.0.1-beta.6.tgz#975ebceb85b1944880eae6f1e78d1d0ce261453f"
+  integrity sha512-YSvx0oqhQ54kcAfSWFsIN5T9kOxhnu9sr4bemWtMHaZBBHCPS8wyQzxLywlPZ6vh/81cYfP+WZapZAGSLkVaHQ==
   optionalDependencies:
     date-fns "^2.15.0"
     lodash.isboolean "^3.0.3"
@@ -10735,7 +10735,7 @@ vue-template-es2015-compiler@^1.6.0, vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
 
-vue@^2.6.11:
+vue@^2.6.11, vue@latest:
   version "2.6.11"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
   integrity sha512-VfPwgcGABbGAue9+sfrD4PuwFar7gPb1yl1UK1MwXoQPAw0BKSqWfoYCT/ThFrdEVWoI51dBuyCoiNU9bZDZxQ==
