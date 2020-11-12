@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Validator from '../lib';
+import Validator from '../../lib';
 
 const customAttributes = {
   form: {

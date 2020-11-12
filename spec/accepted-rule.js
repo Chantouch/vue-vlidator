@@ -1,7 +1,7 @@
 let Validator;
 let expect;
 if (typeof require !== 'undefined') {
-  Validator = require('../src/lib/validator.js');
+  Validator = require('../lib/validator.js');
   expect = require('chai').expect;
 } else {
   Validator = window.Validator;

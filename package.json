@@ -5,7 +5,7 @@
   "author": "Chantouch Sek <chantouchsek.cs83@gmail.com>",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "yarn clean && babel src/lib -d dist",
+    "build": "yarn clean && babel lib -d dist",
     "test:unit": "vue-cli-service test:unit",
     "lint": "eslint \"./src/**/*.js\"",
     "build:demo": "vue-cli-service build --dest demo",
