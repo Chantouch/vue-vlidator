@@ -1,5 +1,3 @@
-import Validator from '../nuxt';
-
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
@@ -32,7 +30,7 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
-    Validator,
+    'vue-vlidator/nuxt',
     'nuxt-i18n',
   ],
 
