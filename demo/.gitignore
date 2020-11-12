@@ -1,0 +1,14 @@
+.DS_Store
+.idea/
+.npm-debug.log
+.vscode/
+coverage/
+node_modules/
+NOTES.md
+npm-debug.log
+RELEASE.md
+sandbox/
+spec/checklist.md
+dist/
+yarn-error.log
+.nuxt

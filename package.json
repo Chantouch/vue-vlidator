@@ -1,6 +1,6 @@
 {
   "name": "vue-vlidator",
-  "version": "0.0.2-beta.17",
+  "version": "0.0.2-beta.19",
   "description": "Validation library inspired by Laravel's Validator",
   "author": "Chantouch Sek <chantouchsek.cs83@gmail.com>",
   "scripts": {
@@ -9,10 +9,13 @@
     "test:unit": "vue-cli-service test:unit",
     "lint": "eslint \"./src/**/*.js\"",
     "build:demo": "vue-cli-service build --dest demo",
-    "dev": "vue-cli-service serve",
     "lint:fix": "eslint \"./src/**/*.js\" --fix",
     "prepublish": "yarn build",
-    "test": "jest"
+    "test": "jest",
+    "dev": "nuxt demo",
+    "build:nuxt": "nuxt build",
+    "generate": "nuxt generate",
+    "start": "nuxt start"
   },
   "main": "dist/index.js",
   "types": "types/index.d.ts",
@@ -22,10 +25,14 @@
     "nuxt"
   ],
   "dependencies": {
-    "@chantouchsek/validatorjs": "^0.0.1-beta.6",
-    "vue": "latest"
+    "@chantouchsek/validatorjs": "^0.0.5",
+    "@nuxtjs/axios": "^5.12.2",
+    "@nuxtjs/pwa": "^3.2.2",
+    "nuxt": "^2.14.7",
+    "nuxt-i18n": "^6.15.4"
   },
   "devDependencies": {
+    "vue-vlidator": "^0.0.2-beta.18",
     "@babel/core": "^7.10.3",
     "@babel/preset-env": "^7.10.3",
     "@vue/cli-plugin-unit-jest": "~4.4.0",
@@ -39,15 +46,13 @@
     "babel-preset-minify": "^0.5.1",
     "babelify": "^10.0.0",
     "bootstrap": "^4.5.0",
-    "bootstrap-vue": "^2.15.0",
+    "bootstrap-vue": "^2.19.0",
     "eslint": "5.8.0",
     "laravel-vue-form-validator": "^0.0.20-beta-14",
     "lodash": "^4.17.15",
     "node-sass": "^4.14.1",
     "rimraf": "3.0.2",
-    "sass-loader": "^8.0.2",
-    "vue-router": "^3.3.4",
-    "vue-template-compiler": "^2.6.11"
+    "sass-loader": "^8.0.2"
   },
   "bugs": {
     "url": "https://github.com/Chantouch/vue-vlidator/issues?labels=bug&milestone=1&page=1&state=open"

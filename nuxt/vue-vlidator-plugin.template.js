@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Validator from 'vue-vlidator';
+import ValidatorJs, { Validator } from 'vue-vlidator';
 
 export default async (context) => {
     // inject options from module
@@ -7,7 +7,7 @@ export default async (context) => {
     const i18n = app.i18n;
     const [pluginOptions] = [<%= serialize(options) %>]
     if (i18n && i18n.locale && !pluginOptions.locale) {
-        const module = await import(/* webpackChunkName: "lang-[request]" */ '~/<%= options.langDir %>' + i18n.locale)
+        const module = await import(/* webpackChunkName: "lang-[request]" */ '~/<%= options.langDir %>/' + i18n.locale)
         const lang = module.default ? module.default : module
         const result = typeof lang === 'function' ? await Promise.resolve(lang(context, i18n.locale)) : lang
         const { attributes = {}, messages = {} } = result
@@ -19,6 +19,6 @@ export default async (context) => {
     } else if (pluginOptions.locale) {
         Object.assign(pluginOptions, { locale: pluginOptions.locale })
     }
-    Vue.use(Validator, pluginOptions); // add vue-vlidator as Vue plugin
+    Vue.use(ValidatorJs, pluginOptions); // add vue-vlidator as Vue plugin
     app.$vlidator = new Validator(pluginOptions);
 }
