@@ -6,10 +6,17 @@
         label="Enter your name"
         label-for="input-1"
         valid-feedback="Thank you!"
-        :invalid-feedback="invalidFeedback"
-        :state="state"
+        :invalid-feedback="$vlidator.errors.first(['name'])"
+        :state="$vlidator.errors.has(['name'])"
+        name="name"
     >
-      <b-form-input id="input-1" v-model="name" :state="state" trim></b-form-input>
+      <b-form-input
+          id="input-1"
+          v-model="name"
+          :state="!$vlidator.errors.has(['name'])"
+          trim
+          @keypress="$vlidator.errors.clear(['name'])"
+      />
     </b-form-group>
     <b-button type="submit" variant="primary">{{ $t('actions.submit') }}</b-button>
     <b-button type="reset" variant="danger">Reset</b-button>
@@ -19,10 +26,10 @@
 <script>
 export default {
   computed: {
-    state() {
+    state () {
       return this.name.length >= 4
     },
-    invalidFeedback() {
+    invalidFeedback () {
       if (this.name.length > 0) {
         return 'Enter at least 4 characters.'
       }
@@ -32,13 +39,13 @@ export default {
   vlidator: {
     rules: { name: 'required' }
   },
-  data() {
+  data () {
     return {
       name: ''
     }
   },
   methods: {
-    submit() {
+    submit () {
       if (!this.validate()) return
       console.log('submitted')
     }
