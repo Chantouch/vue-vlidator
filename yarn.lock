@@ -13708,16 +13708,12 @@ vue-template-es2015-compiler@^1.6.0, vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
 
-vue-vlidator@^0.0.2-beta.19:
-  version "0.0.2-beta.19"
-  resolved "https://registry.yarnpkg.com/vue-vlidator/-/vue-vlidator-0.0.2-beta.19.tgz#60dc1cc4c4d9da2b1e6e3eb3f3fd401e4874f469"
-  integrity sha512-squIW0gJAyZtzOfybitV45Nm2JVZKgJgiV+awJIKKX+n8B7QRETHwtV45WIUxBlfXDITVg9T1igqavfCnD+gZg==
+vue-vlidator@^0.0.2-beta.20:
+  version "0.0.2-beta.20"
+  resolved "https://registry.yarnpkg.com/vue-vlidator/-/vue-vlidator-0.0.2-beta.20.tgz#ae7d04bcab6281d42e40663e80e50d1b665fb753"
+  integrity sha512-YDHD8nuMM6bRY5WRf1x6/Y0Etsw7Sa1VKSbQkxganXITKDPk6eSrCUgWEEl5v0ljxBw0lkd0WOHbWKPgFjSBKg==
   dependencies:
     "@chantouchsek/validatorjs" "^0.0.5"
-    "@nuxtjs/axios" "^5.12.2"
-    "@nuxtjs/pwa" "^3.2.2"
-    nuxt "^2.14.7"
-    nuxt-i18n "^6.15.4"
 
 vue@^2.6.11:
   version "2.6.11"

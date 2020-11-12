@@ -1,6 +1,6 @@
 {
   "name": "vue-vlidator",
-  "version": "0.0.2-beta.20",
+  "version": "0.0.3",
   "description": "Validation library inspired by Laravel's Validator",
   "author": "Chantouch Sek <chantouchsek.cs83@gmail.com>",
   "scripts": {
@@ -52,7 +52,7 @@
     "nuxt-i18n": "^6.15.4",
     "rimraf": "3.0.2",
     "sass-loader": "^8.0.2",
-    "vue-vlidator": "^0.0.2-beta.19"
+    "vue-vlidator": "^0.0.3"
   },
   "bugs": {
     "url": "https://github.com/Chantouch/vue-vlidator/issues?labels=bug&milestone=1&page=1&state=open"
