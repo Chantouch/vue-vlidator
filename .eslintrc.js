@@ -5,13 +5,10 @@ module.exports = {
     jest: true
   },
   extends: 'eslint:recommended',
+  parser: 'babel-eslint',
   parserOptions: {
     sourceType: "module",
-    allowImportExportEverywhere: true,
-    ecmaVersion: 2018,
-    ecmaFeatures: {
-      modules: true
-    }
+    allowImportExportEverywhere: true
   },
   rules: {
     'no-empty': 'off',
