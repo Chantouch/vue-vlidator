@@ -12,3 +12,4 @@ spec/checklist.md
 dist/
 yarn-error.log
 .nuxt
+.env

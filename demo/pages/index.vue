@@ -37,7 +37,10 @@ export default {
     }
   },
   vlidator: {
-    rules: { name: 'required' }
+    rules: { name: 'required' },
+    messages: {
+      required: 'THIS FIELD IS REQUIRED'
+    }
   },
   data () {
     return {
