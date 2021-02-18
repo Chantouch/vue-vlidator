@@ -12066,7 +12066,7 @@ vue-template-es2015-compiler@^1.6.0, vue-template-es2015-compiler@^1.9.0:
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
 
 "vue-vlidator@file:.":
-  version "0.0.5"
+  version "0.0.7"
   dependencies:
     "@chantouchsek/validatorjs" "^0.0.5"
 
