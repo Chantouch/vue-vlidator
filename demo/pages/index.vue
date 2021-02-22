@@ -48,13 +48,9 @@ export default {
     }
   },
   methods: {
-    async submit () {
-      try {
-        const { data } = await this.validate()
-        console.log('submitted:', data)
-      } catch (e) {
-        console.warn(e)
-      }
+    submit () {
+      if (!this.validate()) return
+      console.log('submitted:', this.name)
     }
   },
 }
