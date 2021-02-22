@@ -140,14 +140,9 @@ Vue.use(Validator, options);
       }
     },
     methods: {
-      async onSubmit () {
-          try {
-            const { data } = await this.validate()
-            console.log(data)
-            alert(JSON.stringify(this.form))
-          } catch (e) {
-            console.log(e)
-          }
+      onSubmit () {
+        if (!this.validate()) return
+        alert(JSON.stringify(this.form))
       }
     },
   }
