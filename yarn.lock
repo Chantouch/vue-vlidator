@@ -12065,8 +12065,10 @@ vue-template-es2015-compiler@^1.6.0, vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
 
-"vue-vlidator@file:.":
-  version "0.0.7"
+vue-vlidator@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/vue-vlidator/-/vue-vlidator-0.0.9.tgz#3169d3884bd3c0ae6b505912af999bec9d9a2e3d"
+  integrity sha512-Uyeka/3r1GyGNxdJ0WocuZpY6mDhiYaYIf8CTuyjmE+97beV0GrzNrVNHSDltemoBVlRvlyuuk03lwPzXqlZ+Q==
   dependencies:
     "@chantouchsek/validatorjs" "^0.0.5"
 
