@@ -7,7 +7,7 @@ module.exports = {
   extends: 'eslint:recommended',
   parser: 'babel-eslint',
   parserOptions: {
-    sourceType: "module",
+    sourceType: 'module',
     allowImportExportEverywhere: true
   },
   rules: {
