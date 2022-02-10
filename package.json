@@ -41,7 +41,7 @@
     "eslint": "5.8.0",
     "laravel-vue-form-validator": "^0.0.20-beta-14",
     "lodash": "^4.17.15",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "nuxt": "^2.14.7",
     "nuxt-i18n": "^6.15.4",
     "rimraf": "3.0.2",
